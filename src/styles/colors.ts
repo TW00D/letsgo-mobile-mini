@@ -13,4 +13,6 @@ export const colors = {
     primary: '#AB23F6',
 
     notification: '#0195F7',
+
+    white: '#FFFFFF',
 }
