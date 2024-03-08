@@ -1,0 +1,47 @@
+import styled from "styled-components/native"
+import { PaddingView } from "../utils/PaddingView";
+import React, { useState } from "react";
+import { StyleSheet, View } from "react-native";
+import { Text, TextInput } from "react-native-paper";
+
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import { Sae } from 'react-native-textinput-effects';
+import { colors } from "../styles/colors";
+
+export const LetsgoTextInput = () => {
+    const [isFocused, setFocused] = useState(false)
+
+    const styles = StyleSheet.create({
+        textInput: {
+            borderBottomWidth: 2,
+            borderBlockColor: isFocused ? colors.text_gray_900 : colors.line_gray_100,
+            padding: 14,
+        },
+        label: {
+            marginBottom: 14,
+            color: isFocused ? colors.text_gray_900 : colors.hint_gray_300
+        },
+        text: {
+            fontSize: 20,
+            color: colors.text_gray_900
+        }
+    })
+
+    return (
+        <PaddingView>
+            <Sae
+                style={styles.textInput}
+                label={'이름'}
+                labelStyle={styles.label}
+                inputStyle={styles.text}
+                iconClass={FontAwesomeIcon}
+                inputPadding={10}
+                labelHeight={20}
+                // TextInput props
+                autoCapitalize={'none'}
+                autoCorrect={false}
+                onFocus={() => {setFocused(true)}}
+            />
+        </PaddingView>
+    );
+}

@@ -6,8 +6,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { WriteScreen } from './screens/WriteScreen';
 import { ProfileScreen } from './screens/ProfileScreen';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { LoginScreen } from './screens/LoginScreen';
 import { StartScreen } from './screens/StartScreen';
+import { LoginScreen } from './screens/LoginScreen';
 import { BottomNavigationContainerScreen } from './screens/BottomNavigationContainerScreen';
 
 const Stack = createNativeStackNavigator();
@@ -25,7 +25,6 @@ const App = () => {
             headerShown: false
           }}
           initialRouteName="Start">
-
           <Stack.Screen name="Start" component={StartScreen} />
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="BottomNavigationContainer" component={BottomNavigationContainerScreen} />
