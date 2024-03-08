@@ -1,5 +1,6 @@
-import { View } from "react-native";
 import styled from "styled-components/native"
+import { PaddingView } from "../utils/PaddingView";
+import { colors } from "../styles/colors";
 
 type LetsgoButtonType = {
     title: string,
@@ -16,11 +17,6 @@ export const LetsgoButton = (props: LetsgoButtonType) => {
     );
 }
 
-const PaddingView = styled.View`
-    padding-left: 16;
-    padding-right: 16;
-`;
-
 const LetsgoButtonFrame = styled.TouchableOpacity`
     align-items: center;
     justify-content: center;
@@ -31,14 +27,12 @@ const LetsgoButtonFrame = styled.TouchableOpacity`
     font-size: 14px;
     font-weight: bold;
     font-family: 'Pretendard';
-    color: #FFFFFF;
+    color: ${colors.white};
 `;
 
 const ButtonText = styled.Text`
     font-size: 18px;
     font-weight: 700;
     font-family: 'Pretendard';
-    color: #FFFFFF;
+    color: ${colors.white};
 `;
-
-
