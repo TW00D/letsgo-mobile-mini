@@ -8,7 +8,11 @@ import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import { Sae } from 'react-native-textinput-effects';
 import { colors } from "../styles/colors";
 
-export const LetsgoTextInput = () => {
+type LetsgoTextInputType = {
+    label: string
+}
+
+export const LetsgoTextInput = (props: LetsgoTextInputType) => {
     const [isFocused, setFocused] = useState(false)
 
     const styles = StyleSheet.create({
@@ -31,7 +35,7 @@ export const LetsgoTextInput = () => {
         <PaddingView>
             <Sae
                 style={styles.textInput}
-                label={'이름'}
+                label={props.label}
                 labelStyle={styles.label}
                 inputStyle={styles.text}
                 iconClass={FontAwesomeIcon}
@@ -41,6 +45,7 @@ export const LetsgoTextInput = () => {
                 autoCapitalize={'none'}
                 autoCorrect={false}
                 onFocus={() => {setFocused(true)}}
+                onBlur={() => {setFocused(false)}}
             />
         </PaddingView>
     );
