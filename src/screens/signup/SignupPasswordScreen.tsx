@@ -20,7 +20,7 @@ const SignupPasswordScreen: React.FC<SignupPasswordScreenProps> = ({navigation})
             <Title>희망하는 비밀번호를 입력해주세요</Title>
             <LetsgoTextInput label="비밀번호" value={pwd}/>
             <Spacer/>
-            <LetsgoButton title="다음" isAbled={isAbled} onPress={() => {navigation.navigate('')}}/>
+            <LetsgoButton title="다음" isAbled={isAbled} onPress={() => {navigation.navigate('SignupName')}}/>
         </Background>
     );
 }
