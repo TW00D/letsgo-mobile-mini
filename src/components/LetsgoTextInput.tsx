@@ -1,8 +1,7 @@
 import styled from "styled-components/native"
 import { PaddingView } from "../utils/PaddingView";
 import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
-import { Text, TextInput } from "react-native-paper";
+import { StyleSheet } from "react-native";
 
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import { Sae } from 'react-native-textinput-effects';
