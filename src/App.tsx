@@ -9,6 +9,14 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StartScreen } from './screens/StartScreen';
 import { LoginScreen } from './screens/LoginScreen';
 import { BottomNavigationContainerScreen } from './screens/BottomNavigationContainerScreen';
+import SignupIdScreen from './screens/signup/SignupIdScreen';
+import SignupPasswordScreen from './screens/signup/SignupPasswordScreen';
+import SignupNameScreen from './screens/signup/SignupNameScreen';
+import SignupMCScreen from './screens/signup/SignupMCScreen';
+import SignupRRNScreen from './screens/signup/SignupRRNScreen';
+import SignupNumberScreen from './screens/signup/SignupNumberScreen';
+import SignupCheckScreen from './screens/signup/SignupCheckScreen';
+import SignupVerificationScreen from './screens/signup/SignupVerificationScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +34,14 @@ const App = () => {
           }}
           initialRouteName="Start">
           <Stack.Screen name="Start" component={StartScreen} />
+          <Stack.Screen name="SignupId" component={SignupIdScreen} />
+          <Stack.Screen name="SignupPassword" component={SignupPasswordScreen} />
+          <Stack.Screen name="SignupName" component={SignupNameScreen} />
+          <Stack.Screen name="SignupMC" component={SignupMCScreen} />
+          <Stack.Screen name="SignupRRN" component={SignupRRNScreen} />
+          <Stack.Screen name="SignupNumber" component={SignupNumberScreen} />
+          <Stack.Screen name="SignupCheck" component={SignupCheckScreen} />
+          <Stack.Screen name="SignupVerification" component={SignupVerificationScreen} />
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="BottomNavigationContainer" component={BottomNavigationContainerScreen} />
 

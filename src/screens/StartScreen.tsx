@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import { View } from "react-native"
 import styled from "styled-components/native"
 import { LetsgoButton } from "../components/LetsgoButton"
@@ -12,14 +12,12 @@ interface StartScreenProps {
 }
 
 export const StartScreen : React.FC<StartScreenProps> = ({navigation}) => {
-    const [name, setName] = useState('')
 
     return (
         <Background>
             <LetsgoTopBar title="로그인" onPress={() => {navigation.goBack()}}/>
-            <LetsgoButton title="로그인" onPress={() => {navigation.navigate("Login")}}/>
+            <LetsgoButton title="시작하기" isAbled={true} onPress={() => {navigation.navigate("SignupId")}}/>
             <View style={{height: 30}}/>
-            <LetsgoTextInput></LetsgoTextInput>
         </Background>
     );
 }

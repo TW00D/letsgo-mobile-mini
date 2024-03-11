@@ -1,14 +1,18 @@
 import styled from "styled-components/native"
 import { PaddingView } from "../utils/PaddingView";
 import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
-import { Text, TextInput } from "react-native-paper";
+import { StyleSheet } from "react-native";
 
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import { Sae } from 'react-native-textinput-effects';
 import { colors } from "../styles/colors";
 
-export const LetsgoTextInput = () => {
+type LetsgoTextInputType = {
+    label: string,
+    value: string,
+}
+
+export const LetsgoTextInput = (props: LetsgoTextInputType) => {
     const [isFocused, setFocused] = useState(false)
 
     const styles = StyleSheet.create({
@@ -31,16 +35,18 @@ export const LetsgoTextInput = () => {
         <PaddingView>
             <Sae
                 style={styles.textInput}
-                label={'이름'}
+                label={props.label}
                 labelStyle={styles.label}
                 inputStyle={styles.text}
                 iconClass={FontAwesomeIcon}
                 inputPadding={10}
                 labelHeight={20}
+                value={props.value}
                 // TextInput props
                 autoCapitalize={'none'}
                 autoCorrect={false}
                 onFocus={() => {setFocused(true)}}
+                onBlur={() => {setFocused(false)}}
             />
         </PaddingView>
     );
