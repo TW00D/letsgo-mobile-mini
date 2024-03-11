@@ -11,6 +11,7 @@ export const colors = {
     line_gray_50 : '#F1F1F3',
 
     primary: '#AB23F6',
+    primary_disabled: '#E9CFFB',
 
     notification: '#0195F7',
 
