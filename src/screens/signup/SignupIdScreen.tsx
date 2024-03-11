@@ -12,7 +12,7 @@ interface SignupIdScreenProps {
 
 const SignupIdScreen: React.FC<SignupIdScreenProps> = ({navigation}) => {
     const [ isAbled, setAbled ] = useState(true) // 임시
-    const [ id, setId ] = useState('아이디')
+    const [ id, setId ] = useState('')
 
     // if (id.length > 0) {
     //     console.log("길어");
@@ -25,7 +25,7 @@ const SignupIdScreen: React.FC<SignupIdScreenProps> = ({navigation}) => {
             <Title>희망하는 아이디를 입력해주세요</Title>
             <LetsgoTextInput label="아이디" value={id}/>
             <Spacer/>
-            <LetsgoButton title="다음" isAbled={isAbled} onPress={() => {navigation}}/>
+            <LetsgoButton title="다음" isAbled={isAbled} onPress={() => {navigation.navigate('SignupPassword')}}/>
         </Background>
     );
 }
