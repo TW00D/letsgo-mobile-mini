@@ -10,6 +10,7 @@ import { StartScreen } from './screens/StartScreen';
 import { LoginScreen } from './screens/LoginScreen';
 import { BottomNavigationContainerScreen } from './screens/BottomNavigationContainerScreen';
 import SignupIdScreen from './screens/signup/SignupIdScreen';
+import SignupPasswordScreen from './screens/signup/SignupPasswordScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -28,6 +29,7 @@ const App = () => {
           initialRouteName="Start">
           <Stack.Screen name="Start" component={StartScreen} />
           <Stack.Screen name="SignupId" component={SignupIdScreen} />
+          <Stack.Screen name="SignupPassword" component={SignupPasswordScreen} />
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="BottomNavigationContainer" component={BottomNavigationContainerScreen} />
 
