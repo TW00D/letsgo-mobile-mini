@@ -9,7 +9,8 @@ import { Sae } from 'react-native-textinput-effects';
 import { colors } from "../styles/colors";
 
 type LetsgoTextInputType = {
-    label: string
+    label: string,
+    value: string,
 }
 
 export const LetsgoTextInput = (props: LetsgoTextInputType) => {
@@ -41,6 +42,7 @@ export const LetsgoTextInput = (props: LetsgoTextInputType) => {
                 iconClass={FontAwesomeIcon}
                 inputPadding={10}
                 labelHeight={20}
+                value={props.value}
                 // TextInput props
                 autoCapitalize={'none'}
                 autoCorrect={false}
