@@ -7,13 +7,15 @@ import { CommunityScreen } from './CommunityScreen';
 import { WriteScreen } from './WriteScreen';
 import { ProfileScreen } from './ProfileScreen';
 
-const Tab = createBottomTabNavigator();
 
 const Container = styled.View`
   flex: 1;
 `;  
 
 export const BottomNavigationContainerScreen = () => {
+  
+const Tab = createBottomTabNavigator();
+
   return (
     <Container>
         <Tab.Navigator 

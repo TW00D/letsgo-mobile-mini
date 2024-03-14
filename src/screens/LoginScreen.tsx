@@ -16,10 +16,8 @@ export const LoginScreen : React.FC<LoginScreenProps> = ({navigation}) => {
         height: 10%;
     `
 
-
     return (
         <View>
-
             <WelcomeText>This is LoginScreen Screen</WelcomeText>
 
             <NextButton title="시작하기" onPress={() => {navigation.navigate("BottomNavigationContainer")}}></NextButton>
