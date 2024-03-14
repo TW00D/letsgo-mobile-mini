@@ -9,30 +9,38 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { LoginScreen } from './screens/LoginScreen';
 import { StartScreen } from './screens/StartScreen';
 import { BottomNavigationContainerScreen } from './screens/BottomNavigationContainerScreen';
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
+import { createStackNavigator } from '@react-navigation/stack';
 
-const Stack = createNativeStackNavigator();
 
 const Container = styled.View`
   flex: 1;
 `;
 
 const App = () => {
+  
+  const Stack = createNativeStackNavigator();
+
   return (
-    <Container>
-      <NavigationContainer>
-        <Stack.Navigator 
-          screenOptions={{
-            headerShown: false
-          }}
-          initialRouteName="Start">
+    <Provider store={store}>
+      <Container>
+        <NavigationContainer>
+          <Stack.Navigator 
+            screenOptions={{
+              headerShown: false
+            }}
+            initialRouteName="Start">
 
-          <Stack.Screen name="Start" component={StartScreen} />
-          <Stack.Screen name="Login" component={LoginScreen} />
-          <Stack.Screen name="BottomNavigationContainer" component={BottomNavigationContainerScreen} />
+            <Stack.Screen name="Start" component={StartScreen} />
+            <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen name="BottomNavigationContainer" component={BottomNavigationContainerScreen} />
 
-        </Stack.Navigator>
-      </NavigationContainer>
-    </Container>
+          </Stack.Navigator>
+        </NavigationContainer>
+      </Container>
+    </Provider>
+
   );
 };
 
