@@ -10,8 +10,8 @@ export const colors = {
     line_gray_100 : '#D3D2DA',
     line_gray_50 : '#F1F1F3',
 
-    primary: '#AB23F6',
-    primary_disabled: '#E9CFFB',
+    primary: '#8232F2',
+    primary_disabled: '#EDE6FB',
 
     notification: '#0195F7',
 
