@@ -14,7 +14,7 @@ export const LetsgoButton = (props: LetsgoButtonType) => {
     const LetsgoButtonFrame = styled.TouchableOpacity`
         align-items: center;
         justify-content: center;
-        margin-bottom: 16;
+        margin-bottom: 16px;
         width: 100%;
         height: 56px;
         border-radius: 10px;
