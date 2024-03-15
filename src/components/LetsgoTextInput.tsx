@@ -10,10 +10,15 @@ import { colors } from "../styles/colors";
 type LetsgoTextInputType = {
     label: string,
     value: string,
+    setValue: any
 }
 
 export const LetsgoTextInput = (props: LetsgoTextInputType) => {
     const [isFocused, setFocused] = useState(false)
+
+    const onChangeText = (inputText: string) => {
+        props.setValue(inputText)
+    }
 
     const styles = StyleSheet.create({
         textInput: {
@@ -42,6 +47,7 @@ export const LetsgoTextInput = (props: LetsgoTextInputType) => {
                 inputPadding={10}
                 labelHeight={20}
                 value={props.value}
+                onChangeText={onChangeText}
                 // TextInput props
                 autoCapitalize={'none'}
                 autoCorrect={false}
