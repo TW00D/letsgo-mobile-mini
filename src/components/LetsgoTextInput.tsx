@@ -3,17 +3,22 @@ import { PaddingView } from "../utils/PaddingView";
 import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 
-import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+// import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import { Sae } from 'react-native-textinput-effects';
 import { colors } from "../styles/colors";
 
 type LetsgoTextInputType = {
     label: string,
     value: string,
+    setValue: any
 }
 
 export const LetsgoTextInput = (props: LetsgoTextInputType) => {
     const [isFocused, setFocused] = useState(false)
+
+    const onChangeText = (inputText: string) => {
+        props.setValue(inputText)
+    }
 
     const styles = StyleSheet.create({
         textInput: {
@@ -31,6 +36,8 @@ export const LetsgoTextInput = (props: LetsgoTextInputType) => {
         }
     })
 
+    const anyIcon: any = ''
+
     return (
         <PaddingView>
             <Sae
@@ -38,10 +45,11 @@ export const LetsgoTextInput = (props: LetsgoTextInputType) => {
                 label={props.label}
                 labelStyle={styles.label}
                 inputStyle={styles.text}
-                iconClass={FontAwesomeIcon}
+                iconClass={anyIcon}
                 inputPadding={10}
                 labelHeight={20}
                 value={props.value}
+                onChangeText={onChangeText}
                 // TextInput props
                 autoCapitalize={'none'}
                 autoCorrect={false}
