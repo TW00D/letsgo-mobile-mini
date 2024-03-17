@@ -54,7 +54,7 @@ const Spacer = styled.View`
 const ClickFrame = styled.TouchableOpacity`
     flex-direction: row;
     justify-content: center;
-    margin-bottom: 16;
+    margin-bottom: 16px;
 `
 
 const SubText = styled.Text`

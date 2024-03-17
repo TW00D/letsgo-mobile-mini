@@ -33,8 +33,8 @@ const Frame = styled.View`
     border-radius: 10px;
     background: ${colors.white};
     flex-direction: row;
-    padding-left: 16;
-    padding-right: 16;
+    padding-left: 16px;
+    padding-right: 16px;
 `;
 
 const Title = styled.Text`
