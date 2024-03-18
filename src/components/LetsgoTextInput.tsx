@@ -12,6 +12,7 @@ type LetsgoTextInputType = {
     value: string,
     setValue: any,
     isSecure: boolean,
+    onChange: () => void
 }
 
 export const LetsgoTextInput = (props: LetsgoTextInputType) => {
@@ -49,6 +50,7 @@ export const LetsgoTextInput = (props: LetsgoTextInputType) => {
                 labelHeight={20}
                 value={props.value}
                 onChangeText={onChangeText}
+                onChange={props.onChange}
                 // TextInput props
                 autoCapitalize={'none'}
                 autoCorrect={false}
