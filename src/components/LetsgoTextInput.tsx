@@ -24,12 +24,12 @@ export const LetsgoTextInput = (props: LetsgoTextInputType) => {
     const styles = StyleSheet.create({
         textInput: {
             borderBottomWidth: 2,
-            borderBlockColor: isFocused ? colors.text_gray_900 : colors.line_gray_100,
+            borderBlockColor: isFocused ? colors.primary : colors.line_gray_100,
             padding: 14,
         },
         label: {
             marginBottom: 14,
-            color: isFocused ? colors.text_gray_900 : colors.hint_gray_300
+            color: isFocused ? colors.primary : colors.hint_gray_300
         },
         text: {
             fontSize: 20,
