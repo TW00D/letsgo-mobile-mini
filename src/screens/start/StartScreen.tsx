@@ -1,4 +1,5 @@
 import React from "react"
+import axios from 'axios'
 import { Image, View } from "react-native"
 import styled from "styled-components/native"
 import { LetsgoButton } from "../../components/LetsgoButton"
@@ -6,6 +7,8 @@ import { LetsgoTextInput } from "../../components/LetsgoTextInput"
 import { colors } from "../../styles/colors"
 import { PaddingView } from "../../utils/PaddingView"
 import LetsgoTopBar from "../../components/LetsgoTopBar"
+import { BASE } from "../../services/urls"
+import { login } from "../../services/AuthApi"
 
 interface StartScreenProps {
     navigation : any
@@ -28,7 +31,9 @@ export const StartScreen : React.FC<StartScreenProps> = ({navigation}) => {
                 />
             </IconBackground>
             <Spacer/>
-            <LetsgoButton title="시작하기" isAbled={true} onPress={() => {navigation.navigate("SignupId")}}/>
+            <LetsgoButton title="시작하기" isAbled={true} onPress={() => {
+                navigation.navigate("SignupId")
+                }}/>
             <ClickFrame onPress={() => {navigation.navigate('Login')}}>
                 <SubText>이미 계정이 있나요?</SubText>
                 <MainSubText>로그인</MainSubText>

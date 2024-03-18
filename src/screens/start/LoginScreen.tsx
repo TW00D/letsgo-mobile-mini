@@ -6,6 +6,7 @@ import LetsgoTopBar from "../../components/LetsgoTopBar"
 import { colors } from "../../styles/colors"
 import { LetsgoTextInput } from "../../components/LetsgoTextInput"
 import { LetsgoButton } from "../../components/LetsgoButton"
+import { login } from "../../services/AuthApi"
 
 interface LoginScreenProps {
     navigation : any
@@ -24,7 +25,10 @@ export const LoginScreen : React.FC<LoginScreenProps> = ({navigation}) => {
             <View style={{height: 35}}/>
             <LetsgoTextInput label="비밀번호" value={pwd} setValue={setPwd}/>
             <Spacer/>
-            <LetsgoButton title="레츠고!" isAbled={isAbled} onPress={() => {}}/>
+            <LetsgoButton title="레츠고!" isAbled={isAbled} onPress={() => {
+                // login({username: 'rnwkgus', password: 'zh060311*'})
+                login({username: id, password: pwd})
+            }}/>
         </Background>
     );
 }
