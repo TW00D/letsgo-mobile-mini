@@ -26,6 +26,7 @@ export const LoginScreen : React.FC<LoginScreenProps> = ({navigation}) => {
             <LetsgoTextInput label="비밀번호" value={pwd} setValue={setPwd} isSecure={true}/>
             <Spacer/>
             <LetsgoButton title="레츠고!" isAbled={isAbled} onPress={() => {
+                // login({username: 'rnwkgus', password: 'zh060311*'})
                 login({username: id, password: pwd}, navigation)
                 }}/>
         </Background>
