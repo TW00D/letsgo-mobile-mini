@@ -6,12 +6,14 @@ import { colors } from "../../styles/colors"
 import { LetsgoTextInput } from "../../components/LetsgoTextInput"
 import { LetsgoButton } from "../../components/LetsgoButton"
 import { Background } from "../../utils/UtilViews"
+import { register } from "../../services/AuthApi"
 
 interface SignupPasswordScreenProps {
+    route: any,
     navigation : any
 }
 
-const SignupPasswordScreen: React.FC<SignupPasswordScreenProps> = ({navigation}) => {
+const SignupPasswordScreen: React.FC<SignupPasswordScreenProps> = ({route, navigation}) => {
     const [ isAbled, setAbled ] = useState(true) // 임시
     const [ pwd, setPwd ] = useState('')
 
@@ -21,7 +23,9 @@ const SignupPasswordScreen: React.FC<SignupPasswordScreenProps> = ({navigation})
             <Title>희망하는 비밀번호를 입력해주세요</Title>
             <LetsgoTextInput label="비밀번호" value={pwd} setValue={setPwd} isSecure={false}/>
             <Spacer/>
-            <LetsgoButton title="로그인" isAbled={isAbled} onPress={() => {navigation.navigate('SignupName')}}/>
+            <LetsgoButton title="회원가입" isAbled={isAbled} onPress={() => {
+                register({username: route.params.id, password: pwd, image: ''}, navigation)
+                }}/>
         </Background>
     );
 }

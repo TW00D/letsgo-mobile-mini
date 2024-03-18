@@ -7,7 +7,7 @@ import { LetsgoButton } from "../../components/LetsgoButton"
 import { Background, Spacer } from "../../utils/UtilViews"
 
 interface SignupIdScreenProps {
-    navigation : any
+    navigation: any
 }
 
 const SignupIdScreen: React.FC<SignupIdScreenProps> = ({navigation}) => {
@@ -25,7 +25,7 @@ const SignupIdScreen: React.FC<SignupIdScreenProps> = ({navigation}) => {
             <Title>희망하는 아이디를 입력해주세요</Title>
             <LetsgoTextInput label="아이디" value={id} setValue={setId} isSecure={false}/>
             <Spacer/>
-            <LetsgoButton title="다음" isAbled={isAbled} onPress={() => {navigation.navigate('SignupPassword')}}/>
+            <LetsgoButton title="다음" isAbled={isAbled} onPress={() => {navigation.navigate('SignupPassword', {id: id})}}/>
         </Background>
     );
 }
