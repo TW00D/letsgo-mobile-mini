@@ -30,10 +30,10 @@ export const LoginScreen : React.FC<LoginScreenProps> = ({navigation}) => {
 }
 
 const Title = styled.Text`
-    margin-top: 26;
-    margin-bottom: 40;
-    margin-left: 16;
-    font-size: 26;
+    margin-top: 26px;
+    margin-bottom: 40px;
+    margin-left: 16px;
+    font-size: 26px;
     font-weight: 500;
     font-family: 'Pretendard';
     color: ${colors.text_gray_900};

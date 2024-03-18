@@ -24,7 +24,7 @@ const Stack = createStackNavigator()
 
 const App = () => {
   return (
-    <Provider store={store}>as
+    <Provider store={store}>
       <Container>
         <NavigationContainer>
           <Stack.Navigator 
