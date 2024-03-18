@@ -21,9 +21,19 @@ export const LoginScreen : React.FC<LoginScreenProps> = ({navigation}) => {
         <Background>
             <LetsgoTopBar title="" onPress={() => {navigation.goBack()}}/>
             <Title>로그인해주세요</Title>
-            <LetsgoTextInput label="아이디" value={id} setValue={setId} isSecure={false}/>
+            <LetsgoTextInput 
+                label="아이디" 
+                value={id} 
+                setValue={setId} 
+                isSecure={false} 
+                onChange={()=>{}}/>
             <View style={{height: 35}}/>
-            <LetsgoTextInput label="비밀번호" value={pwd} setValue={setPwd} isSecure={true}/>
+            <LetsgoTextInput 
+                label="비밀번호" 
+                value={pwd} 
+                setValue={setPwd} 
+                isSecure={true}
+                onChange={()=>{}}/>
             <Spacer/>
             <LetsgoButton title="레츠고!" isAbled={isAbled} onPress={() => {
                 // login({username: 'rnwkgus', password: 'zh060311*'})
