@@ -11,6 +11,10 @@ import com.facebook.react.defaults.DefaultReactHost.getDefaultReactHost
 import com.facebook.react.defaults.DefaultReactNativeHost
 import com.facebook.react.flipper.ReactNativeFlipper
 import com.facebook.soloader.SoLoader
+//import com.facebook.react.bridge.JSIModulePackage;
+//import com.facebook.react.bridge.ReactContext;
+//import com.facebook.react.ReactInstanceManager;
+//import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 
 class MainApplication : Application(), ReactApplication {
 
@@ -42,4 +46,12 @@ class MainApplication : Application(), ReactApplication {
     }
     ReactNativeFlipper.initializeFlipper(this, reactNativeHost.reactInstanceManager)
   }
+
+
+
+
+  //override fun getJSIModulePackage(): JSIModulePackage {
+  //  return RNGestureHandlerPackage()
+  //}
+
 }

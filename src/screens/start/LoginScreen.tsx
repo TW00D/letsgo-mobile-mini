@@ -24,7 +24,7 @@ export const LoginScreen : React.FC<LoginScreenProps> = ({navigation}) => {
             <View style={{height: 35}}/>
             <LetsgoTextInput label="비밀번호" value={pwd} setValue={setPwd}/>
             <Spacer/>
-            <LetsgoButton title="레츠고!" isAbled={isAbled} onPress={() => {}}/>
+            <LetsgoButton title="레츠고!" isAbled={isAbled} onPress={() => {navigation.navigate('BottomNavigationContainer')}}/>
         </Background>
     );
 }

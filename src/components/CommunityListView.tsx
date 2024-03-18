@@ -1,21 +1,16 @@
 import { FlatList, Image, ListRenderItem, Text, View } from "react-native"
 import { colors } from "../assets/colors";
+import { CommunityItemData } from "../types/CommunityItemData";
+import React from "react";
 
-export const CommunityListView = () => {
+interface CommunityListViewProps {
+    dataList : Array<CommunityItemData>,
+    communityType : string
+}
+
+export const CommunityListView : React.FC<CommunityListViewProps>= ({dataList, communityType}) => {
 
     const heartImg = (isSelected : boolean) => isSelected ? require('../assets/icon_heart_filled.png') : require('../assets/icon_heart.png');
-
-    type ItemData = {
-        id : number,
-        title : string,
-        content : string,
-        views : number,
-        comments : number,
-        likes : number,
-        author : string,
-        isLiked : boolean,
-        imageUrl : string
-    }
 
     let sampleList = [];
 
@@ -35,7 +30,7 @@ export const CommunityListView = () => {
         )
     }
 
-    const Item : ListRenderItem<ItemData> = ({ item }) => (
+    const Item : ListRenderItem<CommunityItemData> = ({ item }) => (
         <View style = {{
             justifyContent:'space-between',
             alignContent : "center", 
@@ -70,7 +65,7 @@ export const CommunityListView = () => {
                     <Text style={{fontFamily:'pretendard_medium', fontSize:14, marginStart:2, color:colors.primary}}>[{item.comments}]</Text>
                 </View>
                 <View style={{flexDirection:'row', marginTop:1 }}>
-                    <Text style={{fontFamily:'pretendard_light', fontSize:12, color:colors.gray_300}}>통합</Text>
+                    <Text style={{fontFamily:'pretendard_light', fontSize:12, color:colors.gray_300}}>{communityType}</Text>
                     <Text style={{fontFamily:'pretendard_light', fontSize:12, color:colors.gray_300}}>  |  </Text>
                     <Text style={{fontFamily:'pretendard_light', fontSize:12, color:colors.gray_300}}>{item.author}</Text>
                 </View>
@@ -90,7 +85,7 @@ export const CommunityListView = () => {
     )
 
     return (
-        <FlatList style={{flex : 1}}data={sampleList} renderItem={Item} >
+        <FlatList style={{flex : 1}}data={dataList} renderItem={Item} >
 
         </FlatList>
     )

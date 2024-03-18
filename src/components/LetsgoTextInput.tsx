@@ -1,7 +1,7 @@
 import styled from "styled-components/native"
 import { PaddingView } from "../utils/PaddingView";
-import React, { useState } from "react";
-import { StyleSheet } from "react-native";
+import React, { Component, useState } from "react";
+import { Image, StyleSheet } from "react-native";
 
 // import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import { Sae } from 'react-native-textinput-effects';
@@ -38,6 +38,12 @@ export const LetsgoTextInput = (props: LetsgoTextInputType) => {
 
     const anyIcon: any = ''
 
+    class MyIconComponent extends Component {
+        render() {
+            return <Image source={require('../assets/button_fashion.png')} />;
+        }
+      };
+
     return (
         <PaddingView>
             <Sae
@@ -45,7 +51,7 @@ export const LetsgoTextInput = (props: LetsgoTextInputType) => {
                 label={props.label}
                 labelStyle={styles.label}
                 inputStyle={styles.text}
-                iconClass={anyIcon}
+                iconClass={MyIconComponent}
                 inputPadding={10}
                 labelHeight={20}
                 value={props.value}
