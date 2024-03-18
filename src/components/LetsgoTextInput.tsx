@@ -10,7 +10,8 @@ import { colors } from "../styles/colors";
 type LetsgoTextInputType = {
     label: string,
     value: string,
-    setValue: any
+    setValue: any,
+    isSecure: boolean,
 }
 
 export const LetsgoTextInput = (props: LetsgoTextInputType) => {
@@ -36,14 +37,6 @@ export const LetsgoTextInput = (props: LetsgoTextInputType) => {
         }
     })
 
-    // const anyIcon: any = ''
-
-    // class MyIconComponent extends Component {
-    //     render() {
-    //         return <Image source={require('../assets/button_fashion.png')} />;
-    //     }
-    //   };
-
     return (
         <PaddingView>
             <Sae
@@ -61,6 +54,7 @@ export const LetsgoTextInput = (props: LetsgoTextInputType) => {
                 autoCorrect={false}
                 onFocus={() => {setFocused(true)}}
                 onBlur={() => {setFocused(false)}}
+                secureTextEntry={props.isSecure}
             />
         </PaddingView>
     );

@@ -23,7 +23,7 @@ const SignupIdScreen: React.FC<SignupIdScreenProps> = ({navigation}) => {
         <Background>
             <LetsgoTopBar title="" onPress={() => {navigation.goBack()}}/>
             <Title>희망하는 아이디를 입력해주세요</Title>
-            <LetsgoTextInput label="아이디" value={id} setValue={setId}/>
+            <LetsgoTextInput label="아이디" value={id} setValue={setId} isSecure={false}/>
             <Spacer/>
             <LetsgoButton title="다음" isAbled={isAbled} onPress={() => {navigation.navigate('SignupPassword')}}/>
         </Background>
