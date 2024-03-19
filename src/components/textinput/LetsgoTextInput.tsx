@@ -1,21 +1,21 @@
 import styled from "styled-components/native"
-import { PaddingView } from "../utils/PaddingView";
+import { PaddingView } from "../../utils/PaddingView";
 import React, { Component, useState } from "react";
 import { Image, StyleSheet } from "react-native";
 
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import { Sae } from 'react-native-textinput-effects';
-import { colors } from "../styles/colors";
+import { colors } from "../../styles/colors";
 
 type LetsgoTextInputType = {
     label: string,
     value: string,
     setValue: any,
-    isSecure: boolean,
+    isSecure?: boolean,
     onChange: (text: string) => void
 }
 
-export const LetsgoTextInput = (props: LetsgoTextInputType) => {
+export const LetsgoTextInput = ({isSecure = false, ...props}: LetsgoTextInputType) => {
     const [isFocused, setFocused] = useState(false)
 
     const onChangeText = (inputText: string) => {
@@ -55,7 +55,7 @@ export const LetsgoTextInput = (props: LetsgoTextInputType) => {
                 autoCorrect={false}
                 onFocus={() => {setFocused(true)}}
                 onBlur={() => {setFocused(false)}}
-                secureTextEntry={props.isSecure}
+                secureTextEntry={isSecure}
             />
         </PaddingView>
     );

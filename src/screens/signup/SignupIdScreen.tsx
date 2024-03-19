@@ -1,9 +1,9 @@
 import React, { useState } from "react"
 import styled from "styled-components/native"
-import LetsgoTopBar from "../../components/LetsgoTopBar"
+import LetsgoTopBar from "../../components/topbar/LetsgoTopBar"
 import { colors } from "../../styles/colors"
-import { LetsgoTextInput } from "../../components/LetsgoTextInput"
-import { LetsgoButton } from "../../components/LetsgoButton"
+import { LetsgoTextInput } from "../../components/textinput/LetsgoTextInput"
+import { LetsgoButton } from "../../components/button/LetsgoButton"
 import { Background, Spacer } from "../../utils/UtilViews"
 import CheckPoint from "../../components/CheckPoint"
 import { View } from "react-native"
@@ -23,8 +23,7 @@ const SignupIdScreen: React.FC<SignupIdScreenProps> = ({navigation}) => {
             <LetsgoTextInput 
                 label="아이디" 
                 value={id} 
-                setValue={setId} 
-                isSecure={false}
+                setValue={setId}
                 onChange={text => {
                     if (text.length >= 8 && text.length <= 20) setOkay(true)
                     else setOkay(false)

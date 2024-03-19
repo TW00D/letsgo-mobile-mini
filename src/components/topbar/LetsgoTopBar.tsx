@@ -1,6 +1,6 @@
 import styled from "styled-components/native"
-import { PaddingView } from "../utils/PaddingView";
-import { colors } from "../styles/colors";
+import { PaddingView } from "../../utils/PaddingView";
+import { colors } from "../../styles/colors";
 import { Image, TouchableOpacity } from "react-native";
 
 type LetsgoTopBarType = {
@@ -9,11 +9,13 @@ type LetsgoTopBarType = {
 }
 
 const LetsgoTopBar = (props: LetsgoTopBarType) => {
+    const arrowLeftIcon = '../../assets/images/arrow-left.png'
+
     return (
         <Frame>
             <TouchableOpacity onPress={props.onPress}>
                 <Image
-                    source={require('../assets/images/arrow-left.png')}
+                    source={require(arrowLeftIcon)}
                     style={{ width: 25, height: 25}}
                 />
             </TouchableOpacity>

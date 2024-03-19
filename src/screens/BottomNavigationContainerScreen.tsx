@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { CommunityScreen } from './CommunityScreen';
 import { WriteScreen } from './WriteScreen';
 import { ProfileScreen } from './ProfileScreen';
+import PostModal from './PostModal';
 
 
 const Container = styled.View`
@@ -25,7 +26,13 @@ const Tab = createBottomTabNavigator();
           initialRouteName="Community">
 
           <Tab.Screen name="Community" component={CommunityScreen} />
-          <Tab.Screen name="Write" component={WriteScreen} />
+          <Tab.Screen name="Write" component={WriteScreen} 
+            listeners={({ navigation }) => ({
+              tabPress: event => {
+                event.preventDefault();
+                navigation.navigate('PostModal')
+              }
+            })}/>
           <Tab.Screen name="Profile" component={ProfileScreen} />
 
         </Tab.Navigator>

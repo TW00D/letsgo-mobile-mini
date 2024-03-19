@@ -1,10 +1,10 @@
 import React, { useState } from "react"
 import { SafeAreaView, View } from "react-native"
 import styled from "styled-components/native"
-import LetsgoTopBar from "../../components/LetsgoTopBar"
+import LetsgoTopBar from "../../components/topbar/LetsgoTopBar"
 import { colors } from "../../styles/colors"
-import { LetsgoTextInput } from "../../components/LetsgoTextInput"
-import { LetsgoButton } from "../../components/LetsgoButton"
+import { LetsgoTextInput } from "../../components/textinput/LetsgoTextInput"
+import { LetsgoButton } from "../../components/button/LetsgoButton"
 import { Background } from "../../utils/UtilViews"
 import { register } from "../../services/AuthApi"
 import CheckPoint from "../../components/CheckPoint"
@@ -25,8 +25,7 @@ const SignupPasswordScreen: React.FC<SignupPasswordScreenProps> = ({route, navig
             <LetsgoTextInput 
                 label="비밀번호" 
                 value={pwd} 
-                setValue={setPwd} 
-                isSecure={false} 
+                setValue={setPwd}
                 onChange={text => {
                     if (text.length >= 8 && text.length <= 32) setOkay(true)
                     else setOkay(false)

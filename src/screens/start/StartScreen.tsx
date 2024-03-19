@@ -1,11 +1,8 @@
 import React from "react"
-import { Image, View } from "react-native"
+import { Image } from "react-native"
 import styled from "styled-components/native"
-import { LetsgoButton } from "../../components/LetsgoButton"
-import { LetsgoTextInput } from "../../components/LetsgoTextInput"
+import { LetsgoButton } from "../../components/button/LetsgoButton"
 import { colors } from "../../styles/colors"
-import { PaddingView } from "../../utils/PaddingView"
-import LetsgoTopBar from "../../components/LetsgoTopBar"
 
 interface StartScreenProps {
     navigation : any
