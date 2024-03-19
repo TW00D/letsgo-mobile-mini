@@ -43,8 +43,8 @@ export const LoginScreen : React.FC<LoginScreenProps> = ({navigation}) => {
                 }}/>
             <Spacer/>
             <LetsgoButton title="레츠고!" isAbled={isIdFilled && isPwdFilled} onPress={() => {
-                // login({username: 'rnwkgus', password: 'zh060311*'})
-                login({username: id, password: pwd}, navigation)
+                login({username: 'jakkikki', password: 'asdfqwer1234'}, navigation)
+                // login({username: id, password: pwd}, navigation)
                 }}/>
         </Background>
     );
