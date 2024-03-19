@@ -27,8 +27,8 @@ const SignupPasswordScreen: React.FC<SignupPasswordScreenProps> = ({route, navig
                 value={pwd} 
                 setValue={setPwd} 
                 isSecure={false} 
-                onChange={() => {
-                    if (pwd.length >= 8 && pwd.length <= 32) setOkay(true)
+                onChange={text => {
+                    if (text.length >= 8 && text.length <= 32) setOkay(true)
                     else setOkay(false)
                 }}/>
                 <View style={{height: 8}}/>

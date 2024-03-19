@@ -13,7 +13,8 @@ interface LoginScreenProps {
 }
 
 export const LoginScreen : React.FC<LoginScreenProps> = ({navigation}) => {
-    const [ isAbled, setAbled ] = useState(true) // 임시
+    const [ isIdFilled, setIsIdFilled ] = useState(false) // 임시
+    const [ isPwdFilled, setIsPwdFilled ] = useState(false) // 임시
     const [ id, setId ] = useState('')
     const [ pwd, setPwd ] = useState('')
 
@@ -26,16 +27,22 @@ export const LoginScreen : React.FC<LoginScreenProps> = ({navigation}) => {
                 value={id} 
                 setValue={setId} 
                 isSecure={false} 
-                onChange={()=>{}}/>
+                onChange={text => {
+                    if (text.length > 0) setIsIdFilled(true)
+                    else setIsIdFilled(false)
+                }}/>
             <View style={{height: 35}}/>
             <LetsgoTextInput 
                 label="비밀번호" 
                 value={pwd} 
                 setValue={setPwd} 
                 isSecure={true}
-                onChange={()=>{}}/>
+                onChange={text => {
+                    if (text.length > 0) setIsPwdFilled(true)
+                    else setIsPwdFilled(false)
+                }}/>
             <Spacer/>
-            <LetsgoButton title="레츠고!" isAbled={isAbled} onPress={() => {
+            <LetsgoButton title="레츠고!" isAbled={isIdFilled && isPwdFilled} onPress={() => {
                 // login({username: 'rnwkgus', password: 'zh060311*'})
                 login({username: id, password: pwd}, navigation)
                 }}/>

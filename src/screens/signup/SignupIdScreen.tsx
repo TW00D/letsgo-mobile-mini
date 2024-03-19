@@ -16,11 +16,6 @@ const SignupIdScreen: React.FC<SignupIdScreenProps> = ({navigation}) => {
     const [ isOkay, setOkay ] = useState(false)
     const [ id, setId ] = useState('')
 
-    // if (id.length > 0) {
-    //     console.log("길어");
-    //     () => setAbled(true)
-    // }
-
     return (
         <Background>
             <LetsgoTopBar title="" onPress={() => {navigation.goBack()}}/>
@@ -29,15 +24,20 @@ const SignupIdScreen: React.FC<SignupIdScreenProps> = ({navigation}) => {
                 label="아이디" 
                 value={id} 
                 setValue={setId} 
-                isSecure={false} 
-                onChange={() => {
-                    if (id.length >= 8 && id.length <= 20) setOkay(true)
+                isSecure={false}
+                onChange={text => {
+                    if (text.length >= 8 && text.length <= 20) setOkay(true)
                     else setOkay(false)
                 }}/>
             <View style={{height: 8}}/>
             <CheckPoint title="8 ~ 20 자리" isOkay={isOkay}/>
             <Spacer/>
-            <LetsgoButton title="다음" isAbled={isOkay} onPress={() => {navigation.navigate('SignupPassword', {id: id})}}/>
+            <LetsgoButton 
+                title="다음" 
+                isAbled={isOkay} 
+                onPress={() => {
+                    navigation.navigate('SignupPassword', {id: id})
+                }}/>
         </Background>
     );
 }

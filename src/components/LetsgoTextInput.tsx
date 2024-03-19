@@ -12,7 +12,7 @@ type LetsgoTextInputType = {
     value: string,
     setValue: any,
     isSecure: boolean,
-    onChange: () => void
+    onChange: (text: string) => void
 }
 
 export const LetsgoTextInput = (props: LetsgoTextInputType) => {
@@ -20,6 +20,7 @@ export const LetsgoTextInput = (props: LetsgoTextInputType) => {
 
     const onChangeText = (inputText: string) => {
         props.setValue(inputText)
+        props.onChange(inputText)
     }
 
     const styles = StyleSheet.create({
@@ -50,8 +51,6 @@ export const LetsgoTextInput = (props: LetsgoTextInputType) => {
                 labelHeight={20}
                 value={props.value}
                 onChangeText={onChangeText}
-                onChange={props.onChange}
-                // TextInput props
                 autoCapitalize={'none'}
                 autoCorrect={false}
                 onFocus={() => {setFocused(true)}}
