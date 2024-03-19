@@ -14,6 +14,7 @@ import { store } from './redux/store';
 import { createStackNavigator } from '@react-navigation/stack';
 import SignupIdScreen from './screens/signup/SignupIdScreen';
 import SignupPasswordScreen from './screens/signup/SignupPasswordScreen';
+import PostModal from './screens/PostModal';
 
 
 const Container = styled.View`
@@ -38,6 +39,7 @@ const App = () => {
             <Stack.Screen name="SignupPassword" component={SignupPasswordScreen} />
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="BottomNavigationContainer" component={BottomNavigationContainerScreen} />
+            <Stack.Screen name="PostModal" component={PostModal} options={{ presentation: 'modal' }}/>
           </Stack.Navigator>
         </NavigationContainer>
       </Container>
