@@ -1,7 +1,7 @@
 import { View } from "react-native";
 import { Text } from "react-native-svg";
 import styled from "styled-components/native";
-import ModalTopBar from "../components/ModalTopBar";
+import ModalTopBar from "../components/topbar/ModalTopBar";
 import { colors } from "../styles/colors";
 import { useNavigation } from "@react-navigation/native";
 

@@ -1,5 +1,5 @@
 import styled from "styled-components/native"
-import { CommunityTopbar } from "../components/CommuntyTopBar"
+import { CommunityTopbar } from "../components/topbar/CommuntyTopBar"
 import { Modal, Text, TouchableOpacity, View } from "react-native"
 import { useEffect, useState } from "react"
 import { colors } from "../assets/colors"

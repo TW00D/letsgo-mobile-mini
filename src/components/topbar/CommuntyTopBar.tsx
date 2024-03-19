@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Text, View, Dimensions, StyleSheet, TouchableOpacity, Image, Button } from "react-native"
 import styled from "styled-components/native"
-import { colors } from "../assets/colors";
-import { TopBarButton } from "./TopBarButton";
-import { ThemeSelector } from "./ThemeSelector";
+import { colors } from "../../assets/colors";
+import { TopBarButton } from "../button/TopBarButton";
+import { ThemeSelector } from "../ThemeSelector";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../redux/store";
-import { setCommunityType } from "../redux/slices/CommunityTypeSlice";
+import { RootState } from "../../redux/store";
+import { setCommunityType } from "../../redux/slices/CommunityTypeSlice";
 
 const TopBar = styled.View`
     flex-direction: column;

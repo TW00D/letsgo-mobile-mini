@@ -1,6 +1,6 @@
 import styled from "styled-components/native"
-import { PaddingView } from "../utils/PaddingView";
-import { colors } from "../styles/colors";
+import { PaddingView } from "../../utils/PaddingView";
+import { colors } from "../../styles/colors";
 import { Image, TouchableOpacity } from "react-native";
 
 type LetsgoTopBarType = {

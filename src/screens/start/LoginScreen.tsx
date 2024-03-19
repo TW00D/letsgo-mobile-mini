@@ -2,10 +2,10 @@ import React, { useState } from "react"
 import { View } from "react-native"
 import styled from "styled-components/native"
 import { Background, Spacer } from "../../utils/UtilViews"
-import LetsgoTopBar from "../../components/LetsgoTopBar"
+import LetsgoTopBar from "../../components/topbar/LetsgoTopBar"
 import { colors } from "../../styles/colors"
 import { LetsgoTextInput } from "../../components/LetsgoTextInput"
-import { LetsgoButton } from "../../components/LetsgoButton"
+import { LetsgoButton } from "../../components/button/LetsgoButton"
 import { login } from "../../services/AuthApi"
 
 interface LoginScreenProps {

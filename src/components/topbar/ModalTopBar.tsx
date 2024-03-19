@@ -1,7 +1,7 @@
 import styled from "styled-components/native"
-import { Spacer } from "../utils/UtilViews";
+import { Spacer } from "../../utils/UtilViews";
 import { TouchableOpacity, View } from "react-native";
-import { colors } from "../styles/colors";
+import { colors } from "../../styles/colors";
 import { useNavigation } from "@react-navigation/native";
 
 
