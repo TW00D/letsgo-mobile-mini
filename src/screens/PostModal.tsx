@@ -4,11 +4,19 @@ import styled from "styled-components/native";
 import ModalTopBar from "../components/topbar/ModalTopBar";
 import { colors } from "../styles/colors";
 import { useNavigation } from "@react-navigation/native";
+import PostButton from "../components/button/PostButton";
+import { Spacer } from "../utils/UtilViews";
 
 const PostModal = () => {
     return (
         <Background>
             <ModalTopBar/>
+            <Spacer/>
+            <ButtonFrame>
+                <Spacer/>
+                <PostButton isPostabled={false}/>
+            </ButtonFrame>
+            
         </Background>
     );
 }
@@ -23,6 +31,13 @@ const Title = styled.Text`
     flex: 1;
     align-items: center;
     justify-content: center;
+`
+
+const ButtonFrame = styled.View`
+    flex-direction: row;
+    height: 72px;
+    justify-content: center;
+    margin-right: 16px;
 `
 
 export default PostModal;
