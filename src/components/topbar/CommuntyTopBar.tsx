@@ -18,6 +18,7 @@ const TopBar = styled.View`
 `
 
 export const CommunityTopbar = () => {
+    const switchIcon = '../../assets/switch.png'
 
     const communityType = useSelector((state : RootState) => state.communityTypeSlice.communityType)
     const dispatch = useDispatch();
@@ -43,7 +44,7 @@ export const CommunityTopbar = () => {
                 <TouchableOpacity style={{flexDirection:"row", alignItems:"center"}} onPress={() => {onPress()}} >
                     <Text style={{fontSize:16, fontFamily:"pretendard_semibold", color:colors.text_gray_900}}>{getText()}</Text>
                     <Image 
-                        source={require('../assets/switch.png')}
+                        source={require(switchIcon)}
                         style={{
                             height:12,
                             width:12,

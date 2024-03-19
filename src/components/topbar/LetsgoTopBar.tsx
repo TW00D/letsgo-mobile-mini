@@ -9,11 +9,13 @@ type LetsgoTopBarType = {
 }
 
 const LetsgoTopBar = (props: LetsgoTopBarType) => {
+    const arrowLeftIcon = '../../assets/images/arrow-left.png'
+
     return (
         <Frame>
             <TouchableOpacity onPress={props.onPress}>
                 <Image
-                    source={require('../assets/images/arrow-left.png')}
+                    source={require(arrowLeftIcon)}
                     style={{ width: 25, height: 25}}
                 />
             </TouchableOpacity>
