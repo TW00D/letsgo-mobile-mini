@@ -1,10 +1,10 @@
 import React, { useState } from "react"
 import { View } from "react-native"
 import styled from "styled-components/native"
-import { Background, Spacer } from "../../utils/UtilViews"
+import { Background, Row, Spacer } from "../../utils/UtilViews"
 import LetsgoTopBar from "../../components/topbar/LetsgoTopBar"
 import { colors } from "../../styles/colors"
-import { LetsgoTextInput } from "../../components/LetsgoTextInput"
+import { LetsgoTextInput } from "../../components/textinput/LetsgoTextInput"
 import { LetsgoButton } from "../../components/button/LetsgoButton"
 import { login } from "../../services/AuthApi"
 
@@ -20,13 +20,13 @@ export const LoginScreen : React.FC<LoginScreenProps> = ({navigation}) => {
 
     return (
         <Background>
+            {/* <Row></Row> */}
             <LetsgoTopBar title="" onPress={() => {navigation.goBack()}}/>
             <Title>로그인해주세요</Title>
             <LetsgoTextInput 
                 label="아이디" 
                 value={id} 
                 setValue={setId} 
-                isSecure={false} 
                 onChange={text => {
                     if (text.length > 0) setIsIdFilled(true)
                     else setIsIdFilled(false)
@@ -43,7 +43,8 @@ export const LoginScreen : React.FC<LoginScreenProps> = ({navigation}) => {
                 }}/>
             <Spacer/>
             <LetsgoButton title="레츠고!" isAbled={isIdFilled && isPwdFilled} onPress={() => {
-                login({username: 'jakkikki', password: 'asdfqwer1234'}, navigation)
+                navigation.navigate('BottomNavigationContainer')
+                // login({username: 'jakkikki', password: 'asdfqwer1234'}, navigation)
                 // login({username: id, password: pwd}, navigation)
                 }}/>
         </Background>
