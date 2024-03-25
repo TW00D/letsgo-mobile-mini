@@ -11,7 +11,7 @@ export const login = (data: any, navigation: any) => {
             navigation.navigate('BottomNavigationContainer')
         })
         .catch(error => {
-            console.error("Error sending data: ", error);
+            console.error("Error sending data: ", error.response.data);
 
             if (error.response.status == 400) {
                 Alert.alert('아이디나 비밀번호를 다시 확인해주세요')
@@ -28,7 +28,7 @@ export const register = (data: any, navigation: any) => {
             navigation.navigate('Login' as never)
         })
         .catch(error => {
-            console.error("Error sending data: ", error);
+            console.error("Error sending data: ", error.response.data);
 
             if (error.response.status == 400) {
                 Alert.alert('아이디가 중복되었는지 확인해주세요')
