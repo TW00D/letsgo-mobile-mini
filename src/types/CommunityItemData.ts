@@ -1,3 +1,5 @@
+import { CommentItemData } from "./CommentItemData"
+
 export type CommunityItemData = {
     id : number,
     title : string,
@@ -7,5 +9,6 @@ export type CommunityItemData = {
     likes : number,
     author : string,
     isLiked : boolean,
-    imageUrl : string
+    imageUrl : string,
+    commentList : CommentItemData[]
 }

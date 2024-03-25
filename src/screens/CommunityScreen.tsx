@@ -1,17 +1,21 @@
 import styled from "styled-components/native"
 import { CommunityTopbar } from "../components/CommuntyTopBar"
 import { Modal, Text, TouchableOpacity, View } from "react-native"
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { colors } from "../assets/colors"
 import { useSelector } from "react-redux"
 import { RootState } from "../redux/store"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { NavigationContainer } from "@react-navigation/native"
 import { CommunityListView } from "../components/CommunityListView"
-import { getSampleList } from "../services/getSamplelist"
+import { getSampleList } from "../services/getSampleList"
 import { CommunityItemData } from "../types/CommunityItemData"
 
-export const CommunityScreen = () => {
+interface CommunityScreenProps {
+    navigation : any
+}
+
+export const CommunityScreen : React.FC<CommunityScreenProps>= ({navigation}) => {
 
     // const Stack = createNativeStackNavigator();
 
@@ -19,13 +23,13 @@ export const CommunityScreen = () => {
     const viewType = useSelector((state : RootState ) => state.viewTypeSlice.viewType)
     const theme = useSelector((state : RootState ) => state.themeSlice.theme)
 
-    const [listViewState, setListViewState] = useState("Loading")
+    const [listViewState, setListViewState] = useState("Loading");
     const [dataList, setDataList] = useState<CommunityItemData[]>([]) // dataList 상태 추가
 
     useEffect(() => {
-
-        setListViewState("Loading")
-
+        
+        setListViewState(() => "Loading")
+        
         getSampleList(getCommunityType(), viewType)
             .then((dataList) => {
                 setDataList(dataList);
@@ -36,8 +40,10 @@ export const CommunityScreen = () => {
                 setListViewState("Error"); 
             });
 
-    }, [communityType, viewType, theme]); 
-    
+        console.log("after load data")
+
+    }, [communityType, viewType, theme]);
+
     const Background = styled.View`
         background-color: #AAA;
         flex : 1;
@@ -76,7 +82,7 @@ export const CommunityScreen = () => {
                     (<View>
                         <Text>Loading....</Text>
                     </View>) : 
-                    (<CommunityListView dataList={dataList} communityType={getCommunityType()}/>)
+                    (<CommunityListView navigation={navigation} dataList={dataList} communityType={getCommunityType()}/>)
                 }
             </Container>
         </Background> 
