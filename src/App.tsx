@@ -15,6 +15,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import SignupIdScreen from './screens/signup/SignupIdScreen';
 import SignupPasswordScreen from './screens/signup/SignupPasswordScreen';
 import PostModal from './screens/PostModal';
+import EncryptedStorage from 'react-native-encrypted-storage';
 
 
 const Container = styled.View`
@@ -24,6 +25,8 @@ const Container = styled.View`
 const Stack = createStackNavigator()
 
 const App = () => {
+  const accessToken = EncryptedStorage.getItem('accessToken');
+
   return (
     <Provider store={store}>
       <Container>
@@ -32,8 +35,7 @@ const App = () => {
             screenOptions={{
               headerShown: false
             }}
-            initialRouteName="Start">
-
+            initialRouteName={accessToken != null ? "BottomNavigationContainer" : "Start"}>
             <Stack.Screen name="Start" component={StartScreen} />
             <Stack.Screen name="SignupId" component={SignupIdScreen} />
             <Stack.Screen name="SignupPassword" component={SignupPasswordScreen} />

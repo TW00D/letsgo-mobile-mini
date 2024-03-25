@@ -2,12 +2,15 @@ import axios from 'axios';
 import { BASE_URL } from './urls';
 import { Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import EncryptedStorage from 'react-native-encrypted-storage';
 
-export const login = (data: any, navigation: any) => {
+export const login = (data: loginType, navigation: any) => {
     axios.post(`${BASE_URL}/auth/login`, data)
         .then(response => {
             console.log(response.data);
-            // TODO : 토큰 저장하기
+            EncryptedStorage.setItem('accessToken', response.data.data.access_token);
+            EncryptedStorage.setItem('refreshToken', response.data.data.refresh_token);
+
             navigation.navigate('BottomNavigationContainer')
         })
         .catch(error => {
@@ -21,7 +24,12 @@ export const login = (data: any, navigation: any) => {
         });
 }
 
-export const register = (data: any, navigation: any) => {
+type loginType = {
+  username: string,
+  password: string,
+}
+
+export const register = (data: registerType, navigation: any) => {
     axios.post(`${BASE_URL}/auth/register`, data)
         .then(response => {
             console.log(response.data);
@@ -36,4 +44,11 @@ export const register = (data: any, navigation: any) => {
                 Alert.alert('서버 연결이 원활하지 않습니다.')
             }
         });
+}
+
+type registerType = {
+  username: string,
+  nickname: string,
+  password: string,
+  image: string
 }
