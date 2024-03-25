@@ -1,31 +1,42 @@
 import React, { useState } from "react"
 import styled from "styled-components/native"
-import LetsgoTopBar from "../../components/LetsgoTopBar"
+import LetsgoTopBar from "../../components/topbar/LetsgoTopBar"
 import { colors } from "../../styles/colors"
-import { LetsgoTextInput } from "../../components/LetsgoTextInput"
-import { LetsgoButton } from "../../components/LetsgoButton"
+import { LetsgoTextInput } from "../../components/textinput/LetsgoTextInput"
+import { LetsgoButton } from "../../components/button/LetsgoButton"
 import { Background, Spacer } from "../../utils/UtilViews"
+import CheckPoint from "../../components/CheckPoint"
+import { View } from "react-native"
 
 interface SignupIdScreenProps {
-    navigation : any
+    navigation: any
 }
 
 const SignupIdScreen: React.FC<SignupIdScreenProps> = ({navigation}) => {
-    const [ isAbled, setAbled ] = useState(true) // 임시
+    const [ isOkay, setOkay ] = useState(false)
     const [ id, setId ] = useState('')
-
-    // if (id.length > 0) {
-    //     console.log("길어");
-    //     () => setAbled(true)
-    // }
 
     return (
         <Background>
             <LetsgoTopBar title="" onPress={() => {navigation.goBack()}}/>
             <Title>희망하는 아이디를 입력해주세요</Title>
-            <LetsgoTextInput label="아이디" value={id} setValue={setId}/>
+            <LetsgoTextInput 
+                label="아이디" 
+                value={id} 
+                setValue={setId}
+                onChange={text => {
+                    if (text.length >= 8 && text.length <= 20) setOkay(true)
+                    else setOkay(false)
+                }}/>
+            <View style={{height: 8}}/>
+            <CheckPoint title="8 ~ 20 자리" isOkay={isOkay}/>
             <Spacer/>
-            <LetsgoButton title="다음" isAbled={isAbled} onPress={() => {navigation.navigate('SignupPassword')}}/>
+            <LetsgoButton 
+                title="다음" 
+                isAbled={isOkay} 
+                onPress={() => {
+                    navigation.navigate('SignupPassword', {id: id})
+                }}/>
         </Background>
     );
 }

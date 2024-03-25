@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Text, View, Dimensions, StyleSheet, TouchableOpacity, Image, Button } from "react-native"
 import styled from "styled-components/native"
-import { colors } from "../assets/colors";
-import { TopBarButton } from "./TopBarButton";
-import { ThemeSelector } from "./ThemeSelector";
+import { colors } from "../../assets/colors";
+import { TopBarButton } from "../button/TopBarButton";
+import { ThemeSelector } from "../ThemeSelector";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../redux/store";
-import { setCommunityType } from "../redux/slices/CommunityTypeSlice";
+import { RootState } from "../../redux/store";
+import { setCommunityType } from "../../redux/slices/CommunityTypeSlice";
 
 const TopBar = styled.View`
     flex-direction: column;
@@ -18,6 +18,7 @@ const TopBar = styled.View`
 `
 
 export const CommunityTopbar = () => {
+    const switchIcon = '../../assets/switch.png'
 
     const communityType = useSelector((state : RootState) => state.communityTypeSlice.communityType)
     const dispatch = useDispatch();
@@ -43,7 +44,7 @@ export const CommunityTopbar = () => {
                 <TouchableOpacity style={{flexDirection:"row", alignItems:"center"}} onPress={() => {onPress()}} >
                     <Text style={{fontSize:16, fontFamily:"pretendard_semibold", color:colors.text_gray_900}}>{getText()}</Text>
                     <Image 
-                        source={require('../assets/switch.png')}
+                        source={require(switchIcon)}
                         style={{
                             height:12,
                             width:12,

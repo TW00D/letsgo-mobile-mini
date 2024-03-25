@@ -1,10 +1,10 @@
 import { Text, TouchableOpacity, View } from "react-native"
-import { colors } from "../assets/colors"
+import { colors } from "../../assets/colors"
 import styled from "styled-components/native"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { RootState } from "../redux/store"
-import { setViewType } from "../redux/slices/ViewTypeSlice"
+import { RootState } from "../../redux/store"
+import { setViewType } from "../../redux/slices/ViewTypeSlice"
 
 interface SelectButtonProps {
     type : string

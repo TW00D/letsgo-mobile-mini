@@ -1,48 +1,43 @@
 import styled from "styled-components/native"
-import { PaddingView } from "../utils/PaddingView";
+import { PaddingView } from "../../utils/PaddingView";
 import React, { Component, useState } from "react";
 import { Image, StyleSheet } from "react-native";
 
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import { Sae } from 'react-native-textinput-effects';
-import { colors } from "../styles/colors";
+import { colors } from "../../styles/colors";
 
 type LetsgoTextInputType = {
     label: string,
     value: string,
-    setValue: any
+    setValue: any,
+    isSecure?: boolean,
+    onChange: (text: string) => void
 }
 
-export const LetsgoTextInput = (props: LetsgoTextInputType) => {
+export const LetsgoTextInput = ({isSecure = false, ...props}: LetsgoTextInputType) => {
     const [isFocused, setFocused] = useState(false)
 
     const onChangeText = (inputText: string) => {
         props.setValue(inputText)
+        props.onChange(inputText)
     }
 
     const styles = StyleSheet.create({
         textInput: {
             borderBottomWidth: 2,
-            borderBlockColor: isFocused ? colors.text_gray_900 : colors.line_gray_100,
+            borderBlockColor: isFocused ? colors.primary : colors.line_gray_100,
             padding: 14,
         },
         label: {
             marginBottom: 14,
-            color: isFocused ? colors.text_gray_900 : colors.hint_gray_300
+            color: isFocused ? colors.primary : colors.hint_gray_300
         },
         text: {
             fontSize: 20,
             color: colors.text_gray_900
         }
     })
-
-    // const anyIcon: any = ''
-
-    // class MyIconComponent extends Component {
-    //     render() {
-    //         return <Image source={require('../assets/button_fashion.png')} />;
-    //     }
-    //   };
 
     return (
         <PaddingView>
@@ -56,11 +51,11 @@ export const LetsgoTextInput = (props: LetsgoTextInputType) => {
                 labelHeight={20}
                 value={props.value}
                 onChangeText={onChangeText}
-                // TextInput props
                 autoCapitalize={'none'}
                 autoCorrect={false}
                 onFocus={() => {setFocused(true)}}
                 onBlur={() => {setFocused(false)}}
+                secureTextEntry={isSecure}
             />
         </PaddingView>
     );

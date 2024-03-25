@@ -1,27 +1,43 @@
 import React, { useState } from "react"
-import { SafeAreaView } from "react-native"
+import { SafeAreaView, View } from "react-native"
 import styled from "styled-components/native"
-import LetsgoTopBar from "../../components/LetsgoTopBar"
+import LetsgoTopBar from "../../components/topbar/LetsgoTopBar"
 import { colors } from "../../styles/colors"
-import { LetsgoTextInput } from "../../components/LetsgoTextInput"
-import { LetsgoButton } from "../../components/LetsgoButton"
+import { LetsgoTextInput } from "../../components/textinput/LetsgoTextInput"
+import { LetsgoButton } from "../../components/button/LetsgoButton"
 import { Background } from "../../utils/UtilViews"
+import { register } from "../../services/AuthApi"
+import CheckPoint from "../../components/CheckPoint"
 
 interface SignupPasswordScreenProps {
+    route: any,
     navigation : any
 }
 
-const SignupPasswordScreen: React.FC<SignupPasswordScreenProps> = ({navigation}) => {
-    const [ isAbled, setAbled ] = useState(true) // 임시
+const SignupPasswordScreen: React.FC<SignupPasswordScreenProps> = ({route, navigation}) => {
+    const [ isOkay, setOkay ] = useState(false)
     const [ pwd, setPwd ] = useState('')
 
     return (
         <Background>
             <LetsgoTopBar title="" onPress={() => {navigation.goBack()}}/>
             <Title>희망하는 비밀번호를 입력해주세요</Title>
-            <LetsgoTextInput label="비밀번호" value={pwd} setValue={setPwd}/>
+            <LetsgoTextInput 
+                label="비밀번호" 
+                value={pwd} 
+                setValue={setPwd}
+                onChange={text => {
+                    if (text.length >= 8 && text.length <= 32) setOkay(true)
+                    else setOkay(false)
+                }}/>
+                <View style={{height: 8}}/>
+                <CheckPoint title="8 ~ 32 자리" isOkay={isOkay}/>
+                {/* <View style={{height: 4}}/>
+                <CheckPoint title="대문자, 특수문자 1개 이상" isOkay={isOkay}/> */}
             <Spacer/>
-            <LetsgoButton title="로그인" isAbled={isAbled} onPress={() => {navigation.navigate('SignupName')}}/>
+            <LetsgoButton title="회원가입" isAbled={isOkay} onPress={() => {
+                register({username: route.params.id, password: pwd, image: ''}, navigation)
+                }}/>
         </Background>
     );
 }

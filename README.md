@@ -1,27 +1,3 @@
-# Commit Convention
-### main
-- feat : 새로운 기능 추가
-- fix : 버그 수정
-- design : UI 디자인 추가 및 수정
-
-### code style
-- style : 코드 스타일 관련 변경(코드 포매팅, 세미콜론 누락 등)
-- refactor : 코드 리팩토링 ('결과의 변경 없이 코드의 구조를 재조정함')
-
-### file edit / remove
-- rename : 이름 수정
-- remove : 파일 삭제
-
-### chores
-- add : 권한이나 종속성 추가
-- commant : 주석달기
-- update : 버전 업데이트, 라이브러리나 어플리케이션 업데이트
-- test : 테스트 코드, 리팩토링 테스트 코드 추가
-- docs : 문서 수정 및 추가 (readme.md)
-- chore : 빌드 task 수정, 패키지 매니저 수정(.gitignore 수정 같은 경우)
-
----
-
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 # Getting Started
