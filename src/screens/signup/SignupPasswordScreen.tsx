@@ -36,7 +36,7 @@ const SignupPasswordScreen: React.FC<SignupPasswordScreenProps> = ({route, navig
                 <CheckPoint title="대문자, 특수문자 1개 이상" isOkay={isOkay}/> */}
             <Spacer/>
             <LetsgoButton title="회원가입" isAbled={isOkay} onPress={() => {
-                register({username: route.params.id, password: pwd, image: ''}, navigation)
+                register({username: route.params.id, nickname: route.params.id, password: pwd, image: ''}, navigation)
                 }}/>
         </Background>
     );
