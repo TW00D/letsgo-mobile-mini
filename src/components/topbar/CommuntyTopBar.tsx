@@ -54,7 +54,7 @@ export const CommunityTopbar = () => {
                 </TouchableOpacity>
                     
                 <Image 
-                    source={require('../assets/icon_search.png')}
+                    source={require('../../assets/icon_search.png')}
                     style={{
                         height:20,
                         width:20
