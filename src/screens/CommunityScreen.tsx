@@ -32,11 +32,8 @@ export const CommunityScreen = () => {
                 setListViewState("Loaded"); 
             })
             .catch((error) => {
-                console.error("Error fetching data:", error);
                 setListViewState("Error"); 
             });
-
-        console.log("after load data")
 
     }, [communityType, viewType, theme]);
 
@@ -64,7 +61,6 @@ export const CommunityScreen = () => {
                 default : return "오류"
             }
         }
-
 
     }
 

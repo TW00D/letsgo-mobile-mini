@@ -28,8 +28,6 @@ export const DetailPostScreen = () => {
     Image.getSize(selectedItem.imageUrl, (width, height) => {
         setImageWidth(width)
         setImageHeight(height)
-        console.log(imageWidth)
-        console.log(imageHeight)
     }) 
 
     return (
