@@ -4,8 +4,11 @@ import { TouchableOpacity, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { colors } from "../../assets/colors/colors";
 
+type ModalTopBarType = {
+    title: string
+}
 
-const ModalTopBar = () => {
+const ModalTopBar = ({title}: ModalTopBarType) => {
     const navigation = useNavigation();
 
     return (
@@ -15,7 +18,7 @@ const ModalTopBar = () => {
                     <SubButtonText>취소</SubButtonText>
                 </TouchableOpacity>
                 <Spacer/>
-                <Title>게시물 작성</Title>
+                <Title>{title}</Title>
                 <Spacer/>
                 <SubButtonText style={{color: colors.white}}>취소</SubButtonText>
             </Background>
