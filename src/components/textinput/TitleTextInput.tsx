@@ -6,7 +6,7 @@ import { colors } from "../../assets/colors/colors";
 type TitleTextInputType = {
     value: string,
     setValue: Dispatch<SetStateAction<string>>,
-    placeholder: string
+    placeholder: string,
 }
 
 const TitleTextInput = ({value, setValue, placeholder}: TitleTextInputType) => {
@@ -18,13 +18,13 @@ const TitleTextInput = ({value, setValue, placeholder}: TitleTextInputType) => {
     return (
         <View>
             <TextInput
+                autoCorrect={false}
+                spellCheck={false}
+                autoFocus={true}
                 value={value}
                 onChangeText={onChangeText}
                 placeholder={placeholder}/>
-            
         </View>
-        
-        
     );
 }
 

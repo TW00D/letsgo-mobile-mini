@@ -6,7 +6,7 @@ import { colors } from "../../assets/colors/colors";
 type ContentTextInputType = {
     value: string,
     setValue: Dispatch<SetStateAction<string>>,
-    placeholder: string
+    placeholder: string,
 }
 
 const ContentTextInput = ({value, setValue, placeholder}: ContentTextInputType) => {
@@ -18,6 +18,8 @@ const ContentTextInput = ({value, setValue, placeholder}: ContentTextInputType) 
     return (
         <View style={{}}>
             <TextInput
+                autoCorrect={false}
+                spellCheck={false}
                 multiline = {true}  
                 value={value}
                 onChangeText={onChangeText}
