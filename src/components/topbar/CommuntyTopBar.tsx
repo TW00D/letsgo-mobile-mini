@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Text, View, Dimensions, StyleSheet, TouchableOpacity, Image, Button } from "react-native"
 import styled from "styled-components/native"
-import { colors } from "../../assets/colors";
+import { colors } from "../../assets/colors/colors";
 import { TopBarButton } from "../button/TopBarButton";
 import { ThemeSelector } from "../ThemeSelector";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,9 +16,8 @@ const TopBar = styled.View`
     padding-right: 4%;
     z-index: 1;
 `
-
 export const CommunityTopbar = () => {
-    const switchIcon = '../../assets/switch.png'
+    const switchIcon = "../../assets/images/switch.svg"
 
     const communityType = useSelector((state : RootState) => state.communityTypeSlice.communityType)
     const dispatch = useDispatch();
