@@ -47,14 +47,7 @@ export const getSampleList = async (type: string, viewType: string): Promise<Com
                 }
             )
         }
-
         
-        console.log("before delay")
-
-        delay(2000)
-        
-        console.log("after delay")
-
         resolve(sampleList);
     });
 }
