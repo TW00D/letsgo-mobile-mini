@@ -4,44 +4,26 @@ import { Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import EncryptedStorage from 'react-native-encrypted-storage';
 
-export const login = (data: loginType, navigation: any) => {
-    axios.post(`${BASE_URL}/auth/login`, data)
-        .then(response => {
-            console.log(response.data);
-            EncryptedStorage.setItem('accessToken', response.data.data.access_token);
-            EncryptedStorage.setItem('refreshToken', response.data.data.refresh_token);
-
-            navigation.navigate('BottomNavigationContainer')
-        })
-        .catch(error => {
-            console.error("Error sending data: ", error.response.data);
-            const errorStatus = error.response.status
-
-            if (errorStatus == 400) {
-                Alert.alert('아이디나 비밀번호를 다시 확인해주세요')
-            } else if (errorStatus == 404) {
-                Alert.alert('아이디를 다시 확인해주세요')
-            } else {
-                Alert.alert('서버 연결이 원활하지 않습니다.')
-            }
-        });
+export const login = async (data: loginType, navigation: any) => {
+    try {
+        const response = await axios.post(`${BASE_URL}/auth/login`, data);
+        const { access_token, refresh_token } = response.data.data;
+        EncryptedStorage.setItem('accessToken', access_token);
+        EncryptedStorage.setItem('refreshToken', refresh_token);
+        navigation.navigate('BottomNavigationContainer');
+    } catch (error) {
+        handleApiError(error);
+    }
 }
 
-export const register = (data: registerType, navigation: any) => {
-    axios.post(`${BASE_URL}/auth/register`, data)
-        .then(response => {
-            console.log(response.data);
-            navigation.navigate('Login' as never)
-        })
-        .catch(error => {
-            console.error("Error sending data: ", error.response.data);
-
-            if (error.response.status == 400) {
-                Alert.alert('아이디가 중복되었는지 확인해주세요')
-            } else {
-                Alert.alert('서버 연결이 원활하지 않습니다.')
-            }
-        });
+export const register = async (data: registerType, navigation: any) => {
+    try {
+        const response = await axios.post(`${BASE_URL}/auth/register`, data);
+        console.log(response.data);
+        navigation.navigate('Login' as never)
+    } catch (error) {
+        handleApiError(error)
+    }
 }
 
 // TODO : intercepter를 통해 토큰이 없다는 것을 알아내고, 없다면 refresh 함수를 실행시켜, accessToken을 다시 받아온다.
@@ -58,6 +40,23 @@ export const refresh = (data: refreshType) => {
             console.error("Error sending data: ", error.response.data);
             if (error.response.status == 400) { }
         });
+}
+
+const handleApiError = (error: any) => {
+    console.error("Error sending data: ", error.response?.data);
+    const errorStatus = error.response?.status || 500;
+
+    switch (errorStatus) {
+        case 400:
+            Alert.alert('아이디나 비밀번호를 다시 확인해주세요');
+            break;
+        case 404:
+            Alert.alert('아이디를 다시 확인해주세요');
+            break;
+        default:
+            Alert.alert('서버 연결이 원활하지 않습니다.');
+            break;
+    }
 }
 
 type loginType = {
