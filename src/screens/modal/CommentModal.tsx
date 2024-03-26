@@ -8,7 +8,7 @@ import { Spacer } from "../../utils/UtilViews";
 import TitleTextInput from "../../components/textinput/TitleTextInput";
 import ContentTextInput from "../../components/textinput/ContentTextInput";
 import PostingThemeList from "../../components/PostingThemeList";
-import { Text, View } from "react-native";
+import { KeyboardAvoidingView, Platform, ScrollView, Text, View } from "react-native";
 
 const CommentModal = () => {
     const profileImagePath = '../../assets/images/img_profile.png'
@@ -16,28 +16,33 @@ const CommentModal = () => {
 
     return (
         <Background>
-            <ModalTopBar title="댓글 작성"/>
-            <View style={{marginTop: 16, marginStart: 16, marginEnd: 16, flexDirection: 'row'}}>
-                <ProfileImage source={require(profileImagePath)}/>
-                <TextContainer>
-                    <UserNick>장충동왕족발보쌈</UserNick>
-                    <View style={{height: 8}}/>
-                    <ContentTextInput
-                        value={content}
-                        setValue={setContent} 
-                        placeholder="욕설, 비방 등 상대방을 불쾌하게 하는 댓글은 작성하지 말아주세요. 신고를 당하면 커뮤니티 이용이 제한될 수 있어요."/>
-                </TextContainer>
-            </View>
+            <KeyboardAvoidingView
+                behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+                style={{flex: 1}}>
+                <ModalTopBar title="댓글 작성"/>
             
+                <ScrollView>
+                    <View style={{marginTop: 16, marginStart: 16, marginEnd: 16, flexDirection: 'row'}}>
+                        <ProfileImage source={require(profileImagePath)}/>
+                        <TextContainer>
+                            <UserNick>장충동왕족발보쌈</UserNick>
+                            <View style={{height: 8}}/>
+                            <ContentTextInput
+                                value={content}
+                                setValue={setContent} 
+                                placeholder="욕설, 비방 등 상대방을 불쾌하게 하는 댓글은 작성하지 말아주세요. 신고를 당하면 커뮤니티 이용이 제한될 수 있어요."
+                                isComment={true}/>
+                        </TextContainer>
+                    </View>
+                </ScrollView>
 
-            <Spacer/>
-            
-            <ButtonFrame>
                 <Spacer/>
-                <PostButton isPostabled={(content.length > 0)}/>
-            </ButtonFrame>
-
-            
+                
+                <ButtonFrame style={{marginBottom: 50}}>
+                    <Spacer/>
+                    <PostButton isPostabled={(content.length > 0)}/>
+                </ButtonFrame>
+            </KeyboardAvoidingView>
         </Background>
     );
 }
