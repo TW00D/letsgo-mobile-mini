@@ -2,43 +2,34 @@ import { FlatList, Image, ListRenderItem, Text, View } from "react-native"
 import { colors } from "../assets/colors";
 import { CommunityItemData } from "../types/CommunityItemData";
 import React from "react";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { NavigationParamList } from "../navigation/NavigationParamList";
 
 interface CommunityListViewProps {
     dataList : Array<CommunityItemData>,
     communityType : string
 }
 
-export const CommunityListView : React.FC<CommunityListViewProps>= ({dataList, communityType}) => {
+export const CommunityListView = (props : CommunityListViewProps) => {
+
+    const navigation = useNavigation<StackNavigationProp<NavigationParamList>>();
 
     const heartImg = (isSelected : boolean) => isSelected ? require('../assets/icon_heart_filled.png') : require('../assets/icon_heart.png');
 
-    let sampleList = [];
-
-    for (let i = 0;i<100;i++){
-        sampleList.push(
-            {
-                id : i,
-                title : `게시물 ${i}`,
-                content : `내용 ${i}`,
-                views : i*10,
-                comments : i*2,
-                likes : i*1003,
-                author : `사용자 ${i}`,
-                isLiked : i % 2 === 0? true : false,
-                imageUrl : 'https://img1.yna.co.kr/photo/etc/gt/2023/05/20/PGT20230520246201009_P4.jpg'
-            }
-        )
-    }
-
     const Item : ListRenderItem<CommunityItemData> = ({ item }) => (
-        <View style = {{
-            justifyContent:'space-between',
-            alignContent : "center", 
-            backgroundColor:"#fff", 
-            height:"auto", width:'100%',
-            paddingVertical : 10,
-            flexDirection:"row",
-            paddingHorizontal : '4%'
+
+        <TouchableOpacity 
+            onPress={() => { navigation.navigate("DetailPost", {selectedItem : item, communityType : props.communityType}) }}
+            style = {{
+                justifyContent:'space-between',
+                alignContent : "center", 
+                backgroundColor:"#fff", 
+                height:"auto", width:'100%',
+                paddingVertical : 10,
+                flexDirection:"row",
+                paddingHorizontal : '4%'
             }}>
 
             <View style={{
@@ -65,7 +56,7 @@ export const CommunityListView : React.FC<CommunityListViewProps>= ({dataList, c
                     <Text style={{fontFamily:'pretendard_medium', fontSize:14, marginStart:2, color:colors.primary}}>[{item.comments}]</Text>
                 </View>
                 <View style={{flexDirection:'row', marginTop:1 }}>
-                    <Text style={{fontFamily:'pretendard_light', fontSize:12, color:colors.gray_300}}>{communityType}</Text>
+                    <Text style={{fontFamily:'pretendard_light', fontSize:12, color:colors.gray_300}}>{props.communityType}</Text>
                     <Text style={{fontFamily:'pretendard_light', fontSize:12, color:colors.gray_300}}>  |  </Text>
                     <Text style={{fontFamily:'pretendard_light', fontSize:12, color:colors.gray_300}}>{item.author}</Text>
                 </View>
@@ -78,14 +69,13 @@ export const CommunityListView : React.FC<CommunityListViewProps>= ({dataList, c
                     marginBottom:4,
                     borderRadius:5
                 }}
-                
             />
             
-        </View>
+        </TouchableOpacity>
     )
 
     return (
-        <FlatList style={{flex : 1}}data={dataList} renderItem={Item} >
+        <FlatList style={{flex : 1}}data={props.dataList} renderItem={Item} >
 
         </FlatList>
     )
