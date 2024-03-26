@@ -8,7 +8,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from "@react-navigation/core"
 
 export const StartScreen = () => {
-    const navigation = useNavigation(); // 풀 받은 뒤, 아래로 변경할 예정
+    const navigation = useNavigation(); // TODO : 풀 받은 뒤, 아래로 변경할 예정
     // const navigation = useNavigation<StackNavigationProp<RootStackParamList>>(); 
 
     useEffect(() => {
