@@ -52,7 +52,13 @@ export const CommunityTopbar = () => {
                     />
                 </TouchableOpacity>
                     
-                <Text style={{fontFamily:"pretendard_black"}}>알림</Text>
+                <Image 
+                    source={require('../../assets/icon_search.png')}
+                    style={{
+                        height:20,
+                        width:20
+                    }}
+                />
 
             </View>
 
