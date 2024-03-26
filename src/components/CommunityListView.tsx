@@ -1,5 +1,5 @@
 import { FlatList, Image, ListRenderItem, Text, View } from "react-native"
-import { colors } from "../assets/colors";
+import { colors } from "../assets/colors/colors";
 import { CommunityItemData } from "../types/CommunityItemData";
 import React from "react";
 
@@ -10,7 +10,7 @@ interface CommunityListViewProps {
 
 export const CommunityListView : React.FC<CommunityListViewProps>= ({dataList, communityType}) => {
 
-    const heartImg = (isSelected : boolean) => isSelected ? require('../assets/icon_heart_filled.png') : require('../assets/icon_heart.png');
+    const heartImg = (isSelected : boolean) => isSelected ? require('../assets/images/icon_heart_filled.png') : require('../assets/images/icon_heart.png');
 
     let sampleList = [];
 
@@ -65,9 +65,9 @@ export const CommunityListView : React.FC<CommunityListViewProps>= ({dataList, c
                     <Text style={{fontFamily:'pretendard_medium', fontSize:14, marginStart:2, color:colors.primary}}>[{item.comments}]</Text>
                 </View>
                 <View style={{flexDirection:'row', marginTop:1 }}>
-                    <Text style={{fontFamily:'pretendard_light', fontSize:12, color:colors.gray_300}}>{communityType}</Text>
-                    <Text style={{fontFamily:'pretendard_light', fontSize:12, color:colors.gray_300}}>  |  </Text>
-                    <Text style={{fontFamily:'pretendard_light', fontSize:12, color:colors.gray_300}}>{item.author}</Text>
+                    <Text style={{fontFamily:'pretendard_light', fontSize:12, color:colors.hint_gray_300}}>{communityType}</Text>
+                    <Text style={{fontFamily:'pretendard_light', fontSize:12, color:colors.hint_gray_300}}>  |  </Text>
+                    <Text style={{fontFamily:'pretendard_light', fontSize:12, color:colors.hint_gray_300}}>{item.author}</Text>
                 </View>
             </View>
             <Image 
