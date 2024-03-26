@@ -15,9 +15,12 @@ export const login = (data: loginType, navigation: any) => {
         })
         .catch(error => {
             console.error("Error sending data: ", error.response.data);
+            const errorStatus = error.response.status
 
-            if (error.response.status == 400) {
+            if (errorStatus == 400) {
                 Alert.alert('아이디나 비밀번호를 다시 확인해주세요')
+            } else if (errorStatus == 404) {
+                Alert.alert('아이디를 다시 확인해주세요')
             } else {
                 Alert.alert('서버 연결이 원활하지 않습니다.')
             }
