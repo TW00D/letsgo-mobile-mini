@@ -16,7 +16,7 @@ const PostModal = () => {
 
     return (
         <Background>
-            <ModalTopBar/>
+            <ModalTopBar title="게시물 작성"/>
             <PostingThemeList selected={theme} setSelect={setTheme}/>
             <TitleTextInput 
                 value={title} 
