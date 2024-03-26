@@ -10,8 +10,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import SignupIdScreen from './screens/signup/SignupIdScreen';
 import SignupPasswordScreen from './screens/signup/SignupPasswordScreen';
 import { DetailPostScreen } from './screens/DetailPostScreen';
-import PostModal from './screens/PostModal';
-import CommentModal from './screens/CommentModal';
+import PostModal from './screens/modal/PostModal';
+import CommentModal from './screens/modal/CommentModal';
 
 
 const Container = styled.View`

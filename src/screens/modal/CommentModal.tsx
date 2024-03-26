@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components/native";
-import ModalTopBar from "../components/topbar/ModalTopBar";
-import { colors } from "../assets/colors/colors";
+import ModalTopBar from "../../components/topbar/ModalTopBar";
+import { colors } from "../../assets/colors/colors";
 import { useNavigation } from "@react-navigation/native";
-import PostButton from "../components/button/PostButton";
-import { Spacer } from "../utils/UtilViews";
-import TitleTextInput from "../components/textinput/TitleTextInput";
-import ContentTextInput from "../components/textinput/ContentTextInput";
-import PostingThemeList from "../components/PostingThemeList";
+import PostButton from "../../components/button/PostButton";
+import { Spacer } from "../../utils/UtilViews";
+import TitleTextInput from "../../components/textinput/TitleTextInput";
+import ContentTextInput from "../../components/textinput/ContentTextInput";
+import PostingThemeList from "../../components/PostingThemeList";
 
 const CommentModal = () => {
     const [ title, setTitle ] = useState('')
