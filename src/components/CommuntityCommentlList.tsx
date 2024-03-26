@@ -5,6 +5,11 @@ import React, { useState } from "react"
 import { colors } from "../assets/colors/colors"
 import StyleSheet from "styled-components/dist/sheet/Sheet"
 import styled from "styled-components/native"
+import { PaddingView } from "../utils/PaddingView"
+import CommentTextInput from "./textinput/CommentTextInput"
+import { useNavigation } from "@react-navigation/native"
+import { StackNavigationProp } from "@react-navigation/stack"
+import { NavigationParamList } from "../navigation/NavigationParamList"
 
 interface CommunityCommentListProps {
     commentList : CommentItemData[],
@@ -12,6 +17,7 @@ interface CommunityCommentListProps {
 }
 
 export const CommunityCommentList = (props : CommunityCommentListProps) => {
+    const navigation = useNavigation<StackNavigationProp<NavigationParamList>>(); 
 
     interface CommentItemProps {
         item : CommentItemData
@@ -94,19 +100,7 @@ export const CommunityCommentList = (props : CommunityCommentListProps) => {
 
             </View>
 
-            <View style={{flexDirection:'row', width:'94%', marginBottom:16, backgroundColor:colors.line_gray_50, borderRadius:10, alignItems:'center'}}>
-                <Image 
-                    source={ require('../assets/icon_comment.png') }
-                    style={{
-                        height:20,
-                        width:20,
-                        marginStart:16,
-                        marginEnd:4
-                    }}
-                />
-                <TextInput placeholderTextColor={colors.hint_gray_300} style={{width:'94%', fontFamily:'pretendard_regular', fontSize:16, color:colors.text_gray_900}} value={inputText} placeholder="댓글을 입력하세요" onChangeText={(text) => {setInputText(text)}}/>
-            </View>
-                
+            <CommentTextInput onPress={() => {navigation.navigate('CommentModal')}}/>
 
             <ScrollView style={{height:"auto",width : '94%'}}>
                 {
@@ -117,7 +111,6 @@ export const CommunityCommentList = (props : CommunityCommentListProps) => {
             </ScrollView> 
 
         </View>
-            
-        
     )
 }
+
