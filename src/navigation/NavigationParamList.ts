@@ -1,10 +1,12 @@
 import { CommunityItemData } from "../types/CommunityItemData"
 
 export type NavigationParamList = {
-    StartScreen : undefined
-    LoginScreen : undefined
-    DetailPost : {selectedItem : CommunityItemData, communityType : string}
-    SignupId : undefined
-    SignupPassword : undefined
-    Community : undefined
+    StartScreen: undefined
+    Login: undefined
+    DetailPost: {selectedItem : CommunityItemData, communityType : string}
+    SignupId: undefined
+    SignupPassword: undefined
+    Community: undefined
+    BottomNavigationContainer: undefined
+    CommentModal: undefined
 }
