@@ -19,15 +19,15 @@ export const CommunityCommentList = (props : CommunityCommentListProps) => {
 
     const [inputText, setInputText] = useState<string>("")
 
-    const CommentItem : React.FC<CommentItemProps> = ({item}) => {
+    const CommentItem = (itemProps : CommentItemProps) => {
 
         const [isLike, setLike] = useState(false)
         
-        const data = item
+        const data = itemProps.item
 
         return <View style={{flex:1,flexDirection:'row', paddingVertical:10}}>
             <Image 
-                source={{uri : item.profileUrl}}
+                source={{uri : data.profileUrl}}
                 style={{
                     width:37,
                     height:37,
