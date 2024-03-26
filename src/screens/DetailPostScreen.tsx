@@ -4,15 +4,17 @@ import { CommunityItemData } from "../types/CommunityItemData";
 import { colors } from "../assets/colors";
 import { CommunityCommentList } from "../components/CommuntityCommentlList";
 import { ScrollView } from "react-native-gesture-handler";
-
-interface DetailPostScreenProps {
-    navigation : any,
-    route : any
-}
+import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
+import { NavigationParamList } from "../navigation/NavigationParamList";
+import { StackNavigationProp } from "@react-navigation/stack";
 
 const deviceWidth = Dimensions.get('window').width;
 
-export const DetailPostScreen : React.FC<DetailPostScreenProps> = ({route, navigation}) => {
+export const DetailPostScreen = () => {
+
+    const navigation = useNavigation<StackNavigationProp<NavigationParamList>>()
+
+    const route = useRoute<RouteProp<NavigationParamList, "DetailPost">>()
 
     const data = route.params
     const selectedItem : CommunityItemData = data.selectedItem

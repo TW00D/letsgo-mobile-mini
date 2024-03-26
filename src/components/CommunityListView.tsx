@@ -3,21 +3,25 @@ import { colors } from "../assets/colors";
 import { CommunityItemData } from "../types/CommunityItemData";
 import React from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { NavigationParamList } from "../navigation/NavigationParamList";
 
 interface CommunityListViewProps {
     dataList : Array<CommunityItemData>,
-    communityType : string,
-    navigation : any
+    communityType : string
 }
 
-export const CommunityListView : React.FC<CommunityListViewProps>= ({dataList, communityType, navigation}) => {
+export const CommunityListView = (props : CommunityListViewProps) => {
+
+    const navigation = useNavigation<StackNavigationProp<NavigationParamList>>();
 
     const heartImg = (isSelected : boolean) => isSelected ? require('../assets/icon_heart_filled.png') : require('../assets/icon_heart.png');
 
     const Item : ListRenderItem<CommunityItemData> = ({ item }) => (
 
         <TouchableOpacity 
-            onPress={() => {navigation.navigate("DetailPost", {selectedItem : item, communityType : communityType})}}
+            onPress={() => { navigation.navigate("DetailPost", {selectedItem : item, communityType : props.communityType}) }}
             style = {{
                 justifyContent:'space-between',
                 alignContent : "center", 
@@ -52,7 +56,7 @@ export const CommunityListView : React.FC<CommunityListViewProps>= ({dataList, c
                     <Text style={{fontFamily:'pretendard_medium', fontSize:14, marginStart:2, color:colors.primary}}>[{item.comments}]</Text>
                 </View>
                 <View style={{flexDirection:'row', marginTop:1 }}>
-                    <Text style={{fontFamily:'pretendard_light', fontSize:12, color:colors.gray_300}}>{communityType}</Text>
+                    <Text style={{fontFamily:'pretendard_light', fontSize:12, color:colors.gray_300}}>{props.communityType}</Text>
                     <Text style={{fontFamily:'pretendard_light', fontSize:12, color:colors.gray_300}}>  |  </Text>
                     <Text style={{fontFamily:'pretendard_light', fontSize:12, color:colors.gray_300}}>{item.author}</Text>
                 </View>
@@ -71,7 +75,7 @@ export const CommunityListView : React.FC<CommunityListViewProps>= ({dataList, c
     )
 
     return (
-        <FlatList style={{flex : 1}}data={dataList} renderItem={Item} >
+        <FlatList style={{flex : 1}}data={props.dataList} renderItem={Item} >
 
         </FlatList>
     )

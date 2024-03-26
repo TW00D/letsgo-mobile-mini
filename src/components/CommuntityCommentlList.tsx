@@ -11,7 +11,7 @@ interface CommunityCommentListProps {
     onLikeClick : () => void,
 }
 
-export const CommunityCommentList : React.FC<CommunityCommentListProps> = ({commentList, onLikeClick}) => {
+export const CommunityCommentList = (props : CommunityCommentListProps) => {
 
     interface CommentItemProps {
         item : CommentItemData
@@ -55,7 +55,7 @@ export const CommunityCommentList : React.FC<CommunityCommentListProps> = ({comm
                 <Text style={{fontFamily:'pretendard_regular', fontSize:14, color:colors.text_gray_900}}>댓글 내용</Text>
                 <TouchableOpacity onPress={() => {
                     setLike(!isLike)
-                    onLikeClick()
+                    props.onLikeClick()
                 }} style={{flexDirection:'row', marginTop:14}}>
                     <Image 
                         source={ isLike ? require('../assets/icon_heart_filled.png') : require('../assets/icon_heart.png')}
@@ -115,7 +115,7 @@ export const CommunityCommentList : React.FC<CommunityCommentListProps> = ({comm
 
             <ScrollView style={{height:"auto",width : '94%'}}>
                 {
-                    commentList.map((item) => (
+                    props.commentList.map((item) => (
                         <CommentItem item={item}/>
                     ))
                 }

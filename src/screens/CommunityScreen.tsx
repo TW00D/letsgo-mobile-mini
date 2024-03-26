@@ -6,18 +6,14 @@ import { colors } from "../assets/colors"
 import { useSelector } from "react-redux"
 import { RootState } from "../redux/store"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
-import { NavigationContainer } from "@react-navigation/native"
+import { NavigationContainer, useNavigation } from "@react-navigation/native"
 import { CommunityListView } from "../components/CommunityListView"
 import { getSampleList } from "../services/getSampleList"
 import { CommunityItemData } from "../types/CommunityItemData"
+import { StackNavigationProp } from "@react-navigation/stack"
+import { NavigationParamList } from "../navigation/NavigationParamList"
 
-interface CommunityScreenProps {
-    navigation : any
-}
-
-export const CommunityScreen : React.FC<CommunityScreenProps>= ({navigation}) => {
-
-    // const Stack = createNativeStackNavigator();
+export const CommunityScreen = () => {
 
     const communityType = useSelector((state : RootState ) => state.communityTypeSlice.communityType)
     const viewType = useSelector((state : RootState ) => state.viewTypeSlice.viewType)
@@ -82,7 +78,7 @@ export const CommunityScreen : React.FC<CommunityScreenProps>= ({navigation}) =>
                     (<View>
                         <Text>Loading....</Text>
                     </View>) : 
-                    (<CommunityListView navigation={navigation} dataList={dataList} communityType={getCommunityType()}/>)
+                    (<CommunityListView dataList={dataList} communityType={getCommunityType()}/>)
                 }
             </Container>
         </Background> 
