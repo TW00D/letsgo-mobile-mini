@@ -16,24 +16,20 @@ const ContentTextInput = ({value, setValue, placeholder}: ContentTextInputType) 
     }
 
     return (
-        <View>
+        <View style={{}}>
             <TextInput
                 multiline = {true}  
                 value={value}
                 onChangeText={onChangeText}
                 placeholder={placeholder}/>
         </View>
-        
-        
     );
 }
 
 const TextInput = styled.TextInput`
     color: ${colors.text_gray_900};
     font-size: 16px;
-    margin-left: 16px;
-    margin-top: 16px;
-    margin-right: 16px;
 `
+
 
 export default ContentTextInput;
