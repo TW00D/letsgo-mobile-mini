@@ -2,8 +2,14 @@ import { Image, SafeAreaView, TouchableOpacity } from "react-native"
 import styled from "styled-components/native"
 import { Background, Spacer } from "../utils/UtilViews"
 import { colors } from "../assets/colors/colors"
+import { useNavigation } from "@react-navigation/native"
+import { StackNavigationProp } from "@react-navigation/stack"
+import { NavigationParamList } from "../navigation/NavigationParamList"
+import EncryptedStorage from "react-native-encrypted-storage"
 
 export const ProfileScreen = () => {
+    const navigation = useNavigation<StackNavigationProp<NavigationParamList>>(); 
+
     const profileImagePath = '../assets/images/img_profile.png'
     const cautionIconPath = '../assets/images/img_caution.png'
 
@@ -12,7 +18,9 @@ export const ProfileScreen = () => {
             <TopbarContainer>
                 <Spacer/>
                 <LoginoutButton onPress={() => {
-                    console.log("asdf");
+                    EncryptedStorage.removeItem('accessToken')
+                    EncryptedStorage.removeItem('refreshToken')
+                    navigation.navigate('Start')
                 }}/>
             </TopbarContainer>
             <ProfileContainer>
