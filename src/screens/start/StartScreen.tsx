@@ -6,16 +6,16 @@ import EncryptedStorage from "react-native-encrypted-storage"
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from "@react-navigation/core"
 import { colors } from "../../assets/colors/colors"
+import { NavigationParamList } from "../../navigation/NavigationParamList"
 
 export const StartScreen = () => {
-    const navigation = useNavigation(); // TODO : 풀 받은 뒤, 아래로 변경할 예정
-    // const navigation = useNavigation<StackNavigationProp<RootStackParamList>>(); 
+    const navigation = useNavigation<StackNavigationProp<NavigationParamList>>(); 
 
     useEffect(() => {
         EncryptedStorage.getItem('accessToken')
             .then(_accessToken => {
                 if (_accessToken != null) {
-                    navigation.navigate('BottomNavigationContainer' as never)
+                    navigation.navigate('BottomNavigationContainer')
                 }
             })
     }, []);
@@ -26,10 +26,10 @@ export const StartScreen = () => {
                 <MainIcon/>
             <Spacer/>
             <LetsgoButton title="시작하기" isAbled={true} onPress={() => {
-                navigation.navigate("SignupId" as never)
+                navigation.navigate("SignupId")
                 
                 }}/>
-            <ClickFrame onPress={() => {navigation.navigate('Login' as never)}}>
+            <ClickFrame onPress={() => {navigation.navigate('Login')}}>
                 <SubText>이미 계정이 있나요?</SubText>
                 <MainSubText>로그인</MainSubText>
             </ClickFrame>
