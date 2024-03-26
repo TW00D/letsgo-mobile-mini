@@ -8,6 +8,8 @@ import { Spacer } from "../../utils/UtilViews";
 import TitleTextInput from "../../components/textinput/TitleTextInput";
 import ContentTextInput from "../../components/textinput/ContentTextInput";
 import PostingThemeList from "../../components/PostingThemeList";
+import { PaddingView } from "../../utils/PaddingView";
+import { View } from "react-native";
 
 const PostModal = () => {
     const [ theme, setTheme ] = useState('패션')
@@ -23,11 +25,15 @@ const PostModal = () => {
                 setValue={setTitle} 
                 placeholder={`(${theme}) 제목을 입력하세요`}/>
             <Line/>
-            <ContentTextInput 
-                value={content}
-                setValue={setContent} 
-                placeholder="욕설, 비방 등 상대방을 불쾌하게 하는 게시물은 게시하지 말아주세요. 신고를 당하면 커뮤니티 이용이 제한될 수 있어요."/>
+            <View style={{height: 8}}/>
+            <PaddingView>
+                <ContentTextInput 
+                    value={content}
+                    setValue={setContent} 
+                    placeholder="욕설, 비방 등 상대방을 불쾌하게 하는 게시물은 게시하지 말아주세요. 신고를 당하면 커뮤니티 이용이 제한될 수 있어요."/>
 
+            </PaddingView>
+            
             <Spacer/>
             
             <ButtonFrame>
