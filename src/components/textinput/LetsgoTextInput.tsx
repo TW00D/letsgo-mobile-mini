@@ -5,7 +5,7 @@ import { Image, StyleSheet } from "react-native";
 
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import { Sae } from 'react-native-textinput-effects';
-import { colors } from "../../styles/colors";
+import { colors } from "../../assets/colors/colors";
 
 type LetsgoTextInputType = {
     label: string,

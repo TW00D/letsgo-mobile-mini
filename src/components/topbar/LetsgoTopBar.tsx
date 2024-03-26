@@ -1,7 +1,7 @@
 import styled from "styled-components/native"
 import { PaddingView } from "../../utils/PaddingView";
-import { colors } from "../../styles/colors";
 import { Image, TouchableOpacity } from "react-native";
+import { colors } from "../../assets/colors/colors";
 
 type LetsgoTopBarType = {
     title: string,

@@ -8,10 +8,10 @@ import { RootState } from "../redux/store"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { NavigationContainer, useNavigation } from "@react-navigation/native"
 import { CommunityListView } from "../components/CommunityListView"
-import { getSampleList } from "../services/getSampleList"
 import { CommunityItemData } from "../types/CommunityItemData"
 import { StackNavigationProp } from "@react-navigation/stack"
 import { NavigationParamList } from "../navigation/NavigationParamList"
+import { getSampleList } from "../services/getSamplelist"
 
 export const CommunityScreen = () => {
 

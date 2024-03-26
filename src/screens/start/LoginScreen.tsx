@@ -3,7 +3,7 @@ import { View } from "react-native"
 import styled from "styled-components/native"
 import { Background, Row, Spacer } from "../../utils/UtilViews"
 import LetsgoTopBar from "../../components/topbar/LetsgoTopBar"
-import { colors } from "../../styles/colors"
+import { colors } from "../../assets/colors/colors";
 import { LetsgoTextInput } from "../../components/textinput/LetsgoTextInput"
 import { LetsgoButton } from "../../components/button/LetsgoButton"
 import { login } from "../../services/AuthApi"

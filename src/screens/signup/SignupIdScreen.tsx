@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import styled from "styled-components/native"
 import LetsgoTopBar from "../../components/topbar/LetsgoTopBar"
-import { colors } from "../../styles/colors"
+import { colors } from "../../assets/colors/colors";
 import { LetsgoTextInput } from "../../components/textinput/LetsgoTextInput"
 import { LetsgoButton } from "../../components/button/LetsgoButton"
 import { Background, Spacer } from "../../utils/UtilViews"

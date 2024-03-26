@@ -2,10 +2,10 @@ import React, { useEffect } from "react"
 import { Image } from "react-native"
 import styled from "styled-components/native"
 import { LetsgoButton } from "../../components/button/LetsgoButton"
-import { colors } from "../../styles/colors"
 import EncryptedStorage from "react-native-encrypted-storage"
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from "@react-navigation/core"
+import { colors } from "../../assets/colors/colors"
 
 export const StartScreen = () => {
     const navigation = useNavigation(); // TODO : 풀 받은 뒤, 아래로 변경할 예정

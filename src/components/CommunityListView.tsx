@@ -57,7 +57,7 @@ export const CommunityListView = (props : CommunityListViewProps) => {
                     <Text style={{fontFamily:'pretendard_medium', fontSize:14, marginStart:2, color:colors.primary}}>[{item.comments}]</Text>
                 </View>
                 <View style={{flexDirection:'row', marginTop:1 }}>
-                    <Text style={{fontFamily:'pretendard_light', fontSize:12, color:colors.hint_gray_300}}>{communityType}</Text>
+                    <Text style={{fontFamily:'pretendard_light', fontSize:12, color:colors.hint_gray_300}}>{props.communityType}</Text>
                     <Text style={{fontFamily:'pretendard_light', fontSize:12, color:colors.hint_gray_300}}>  |  </Text>
                     <Text style={{fontFamily:'pretendard_light', fontSize:12, color:colors.hint_gray_300}}>{item.author}</Text>
                 </View>

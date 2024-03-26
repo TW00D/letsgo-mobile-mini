@@ -2,7 +2,7 @@ import { Image, ListRenderItem, Text, TouchableOpacity, View } from "react-nativ
 import { CommentItemData } from "../types/CommentItemData"
 import { FlatList, ScrollView, TextInput } from "react-native-gesture-handler"
 import React, { useState } from "react"
-import { colors } from "../assets/colors"
+import { colors } from "../assets/colors/colors"
 import StyleSheet from "styled-components/dist/sheet/Sheet"
 import styled from "styled-components/native"
 
@@ -38,7 +38,7 @@ export const CommunityCommentList = (props : CommunityCommentListProps) => {
                 <View style={{flexDirection:'row', justifyContent:'space-between'}}>
                     <Text style={{fontFamily:'pretendard_semibold', fontSize:16, color:colors.text_gray_900}}>작성자 </Text>
                     <View style={{flexDirection:'row', alignItems:'center'}}>
-                        <Text style={{fontFamily:'pretendard_light', fontSize:12, color:colors.gray_300, marginEnd: 10}}>1분</Text>
+                        <Text style={{fontFamily:'pretendard_light', fontSize:12, color:colors.hint_gray_300, marginEnd: 10}}>1분</Text>
                         <TouchableOpacity onPress={() => {}}> 
                             <Image 
                                 source={ require('../assets/icon_three_dot.png') }
@@ -58,7 +58,7 @@ export const CommunityCommentList = (props : CommunityCommentListProps) => {
                     props.onLikeClick()
                 }} style={{flexDirection:'row', marginTop:14}}>
                     <Image 
-                        source={ isLike ? require('../assets/icon_heart_filled.png') : require('../assets/icon_heart.png')}
+                        source={ isLike ? require('../assets/images/icon_heart_filled.png') : require('../assets/images/icon_heart.png')}
                         style={{
                             height:20,
                             width:20
@@ -89,12 +89,12 @@ export const CommunityCommentList = (props : CommunityCommentListProps) => {
                             marginEnd:4
                         }}
                     />
-                    <Text style = {{fontFamily:'pretendard_medium', fontSize:12, color:colors.gray_300}}>새로고침</Text>
+                    <Text style = {{fontFamily:'pretendard_medium', fontSize:12, color:colors.hint_gray_300}}>새로고침</Text>
                 </TouchableOpacity>
 
             </View>
 
-            <View style={{flexDirection:'row', width:'94%', marginBottom:16, backgroundColor:colors.gray_50, borderRadius:10, alignItems:'center'}}>
+            <View style={{flexDirection:'row', width:'94%', marginBottom:16, backgroundColor:colors.line_gray_50, borderRadius:10, alignItems:'center'}}>
                 <Image 
                     source={ require('../assets/icon_comment.png') }
                     style={{
@@ -104,7 +104,7 @@ export const CommunityCommentList = (props : CommunityCommentListProps) => {
                         marginEnd:4
                     }}
                 />
-                <TextInput placeholderTextColor={colors.gray_300} style={{width:'94%', fontFamily:'pretendard_regular', fontSize:16, color:colors.text_gray_900}} value={inputText} placeholder="댓글을 입력하세요" onChangeText={(text) => {setInputText(text)}}/>
+                <TextInput placeholderTextColor={colors.hint_gray_300} style={{width:'94%', fontFamily:'pretendard_regular', fontSize:16, color:colors.text_gray_900}} value={inputText} placeholder="댓글을 입력하세요" onChangeText={(text) => {setInputText(text)}}/>
             </View>
                 
 

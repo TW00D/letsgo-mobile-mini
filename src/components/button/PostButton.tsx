@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
-import { colors } from "../../styles/colors";
 import { TouchableOpacity } from "react-native";
+import { colors } from "../../assets/colors/colors";
 
 type PostButtonType = {
     isPostabled: boolean

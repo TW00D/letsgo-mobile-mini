@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 import styled from "styled-components/native";
-import { colors } from "../../styles/colors";
 import { View } from "react-native";
+import { colors } from "../../assets/colors/colors";
 
 type TitleTextInputType = {
     value: string,
