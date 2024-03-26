@@ -70,11 +70,6 @@ export const CommunityCommentList = (props : CommunityCommentListProps) => {
         </View>
     }   
 
-    const CommentContainer = styled.View`
-        background-color: ${colors.gray_50};
-
-    `
-
     return (
 
         <View style={{backgroundColor:colors.white, marginVertical:10, alignItems:'center'}}>
@@ -116,7 +111,7 @@ export const CommunityCommentList = (props : CommunityCommentListProps) => {
             <ScrollView style={{height:"auto",width : '94%'}}>
                 {
                     props.commentList.map((item) => (
-                        <CommentItem item={item}/>
+                        <CommentItem key={item.id} item={item}/>
                     ))
                 }
             </ScrollView> 

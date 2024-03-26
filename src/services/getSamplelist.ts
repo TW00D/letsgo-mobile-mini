@@ -22,6 +22,7 @@ export const getSampleList = async (type: string, viewType: string): Promise<Com
 
             for (let j = 0 ; j < 10; j++){
                 commentList.push({
+                    id : j,
                     author : `사용자 ${j}`,
                     content : `내용 ${j}`,
                     like : j * 12,
@@ -47,7 +48,7 @@ export const getSampleList = async (type: string, viewType: string): Promise<Com
                 }
             )
         }
-        
+
         resolve(sampleList);
     });
 }
