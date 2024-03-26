@@ -29,17 +29,15 @@ export const register = async (data: registerType, navigation: any) => {
 // TODO : intercepter를 통해 토큰이 없다는 것을 알아내고, 없다면 refresh 함수를 실행시켜, accessToken을 다시 받아온다.
 // TODO : 일단 만들어 놓고, 희건이가 서버 연동 시작하면, 그때 테스트하기
 
-export const refresh = (data: refreshType) => {
-    axios.post(`${BASE_URL}/auth/token/refresh`, {}, { headers: {Authorization: data.token}})
-        .then(response => {
-            console.log(response.data);
-            EncryptedStorage.setItem('accessToken', response.data.data.access_token);
-            EncryptedStorage.setItem('refreshToken', response.data.data.refresh_token);
-        })
-        .catch(error => {
-            console.error("Error sending data: ", error.response.data);
-            if (error.response.status == 400) { }
-        });
+export const refresh = async (data: refreshType) => {
+    try {
+        const response = await axios.post(`${BASE_URL}/auth/token/refresh`, {}, { headers: {Authorization: data.token}});
+        const { access_token, refresh_token } = response.data.data;
+        EncryptedStorage.setItem('accessToken', access_token);
+        EncryptedStorage.setItem('refreshToken', refresh_token);
+    } catch (error) {
+        // 실패시 에러핸들링
+    }
 }
 
 const handleApiError = (error: any) => {
