@@ -10,7 +10,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import SignupIdScreen from './screens/signup/SignupIdScreen';
 import SignupPasswordScreen from './screens/signup/SignupPasswordScreen';
 import { DetailPostScreen } from './screens/DetailPostScreen';
-import PostModal from './screens/PostModal';
+import PostModal from './screens/modal/PostModal';
+import CommentModal from './screens/modal/CommentModal';
 
 
 const Container = styled.View`
@@ -37,6 +38,7 @@ const App = () => {
             <Stack.Screen name="BottomNavigationContainer" component={BottomNavigationContainerScreen} />
             <Stack.Screen name="DetailPost" component={DetailPostScreen} />
             <Stack.Screen name="PostModal" component={PostModal} options={{ presentation: 'modal' }}/>
+            <Stack.Screen name="CommentModal" component={CommentModal} options={{ presentation: 'modal' }}/>
           </Stack.Navigator>
         </NavigationContainer>
       </Container>

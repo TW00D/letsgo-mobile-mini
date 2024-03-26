@@ -6,7 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { CommunityScreen } from './CommunityScreen';
 import { WriteScreen } from './WriteScreen';
 import { ProfileScreen } from './ProfileScreen';
-import PostModal from './PostModal';
+import PostModal from './modal/PostModal';
 
 
 const Container = styled.View`
