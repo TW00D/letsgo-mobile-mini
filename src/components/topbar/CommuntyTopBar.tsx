@@ -3,10 +3,10 @@ import { Text, View, Dimensions, StyleSheet, TouchableOpacity, Image, Button } f
 import styled from "styled-components/native"
 import { colors } from "../../assets/colors/colors";
 import { TopBarButton } from "../button/TopBarButton";
-import { ThemeSelector } from "../ThemeSelector";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { setCommunityType } from "../../redux/slices/CommunityTypeSlice";
+import { CategorySelector } from "../CategorySelector";
 
 const TopBar = styled.View`
     flex-direction: column;
@@ -62,7 +62,7 @@ export const CommunityTopbar = () => {
 
             </View>
 
-            {communityType === "Theme" ? <ThemeSelector/> : null}
+            {communityType === "Theme" ? <CategorySelector/> : null}
 
             <TopBarButton/>          
 
