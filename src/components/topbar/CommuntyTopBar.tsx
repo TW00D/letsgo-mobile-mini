@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Text, View, Dimensions, StyleSheet, TouchableOpacity, Image, Button } from "react-native"
 import styled from "styled-components/native"
 import { colors } from "../../assets/colors/colors";
@@ -6,7 +6,8 @@ import { TopBarButton } from "../button/TopBarButton";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { setCommunityType } from "../../redux/slices/CommunityTypeSlice";
-import { CategorySelector } from "../CategorySelector";
+import { CategoryButtonType, CategorySelector } from "../CategorySelector";
+import { CategoryType, getCategoryList } from "../../services/CommunityApi";
 
 const TopBar = styled.View`
     flex-direction: column;
@@ -16,8 +17,17 @@ const TopBar = styled.View`
     padding-right: 4%;
     z-index: 1;
 `
-export const CommunityTopbar = () => {
+
+
+
+interface CommunityTopbarProps {
+    categoryList : CategoryButtonType[]
+} 
+
+export const CommunityTopbar = (props : CommunityTopbarProps) => {
     const switchIcon = "../../assets/images/switch.svg"
+
+    
 
     const communityType = useSelector((state : RootState) => state.communityTypeSlice.communityType)
     const dispatch = useDispatch();
@@ -62,7 +72,7 @@ export const CommunityTopbar = () => {
 
             </View>
 
-            {communityType === "Theme" ? <CategorySelector/> : null}
+            {communityType === "Theme" ? <CategorySelector categoryList={props.categoryList} /> : null}
 
             <TopBarButton/>          
 

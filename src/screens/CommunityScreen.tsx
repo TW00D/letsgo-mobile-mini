@@ -12,7 +12,35 @@ import { StackNavigationProp } from "@react-navigation/stack"
 import { NavigationParamList } from "../navigation/NavigationParamList"
 import { RootState } from "../redux/store"
 import { getSampleList } from "../services/getSampleList"
-import { getCategoryList } from "../services/CommunityApi"
+import { CategoryType, getCategoryList } from "../services/CommunityApi"
+import { CategoryButtonType } from "../components/CategorySelector"
+
+function getImage(isSelected: boolean, name : string) {
+    if (name === "패션") {
+        if (isSelected) return require('../assets/images/button_fashion_selected.png')
+        else return require('../assets/images/button_fashion.png')
+    }
+    else if (name === "애니") {
+        if (isSelected) return require('../assets/images/button_animation_selected.png')
+        else return require('../assets/images/button_animation.png')
+    }
+    else if (name === "게임") {
+        if (isSelected) return require('../assets/images/button_game_selected.png')
+        else return require('../assets/images/button_game.png')
+    }
+    else if (name === "사랑") {
+        if (isSelected) return require('../assets/images/button_relationship_selected.png')
+        else return require('../assets/images/button_relationship.png')
+    }
+    else if (name === "운동") {
+        if (isSelected) return require('../assets/images/button_sports_selected.png')
+        else return require('../assets/images/button_sports.png')
+    }
+    else{
+        if (isSelected) return require('../assets/images/button_sports_selected.png')
+        else return require('../assets/images/button_sports.png')
+    }
+}
 
 export const CommunityScreen = () => {
 
@@ -23,7 +51,30 @@ export const CommunityScreen = () => {
     const [listViewState, setListViewState] = useState("Loading");
     const [dataList, setDataList] = useState<CommunityItemData[]>([]) // dataList 상태 추가
 
-    const [categoryList, setCategoryList] = useState(getCategoryList);
+    const [categoryButtonList, setCategoryButtonList] = useState<CategoryButtonType[]>([])
+
+    useEffect(() => {getCategoryList().then((data : CategoryType[]) => {
+
+        console.log(data)
+
+        let tempList : CategoryButtonType[] = []
+
+        data.map((item) => {
+            tempList.push({
+                id : item.id,
+                name : item.name,
+                image : getImage(false,item.name),
+                selectedImage : getImage(true,item.name)
+            })
+        })
+
+        console.log(tempList)
+
+        setCategoryButtonList(tempList)
+
+    }).catch((error : any) => {
+        console.log(error)
+    })}, [])
 
     useEffect(() => {
         
@@ -55,21 +106,14 @@ export const CommunityScreen = () => {
 
         if (communityType === "Total") return "통합"
         else {
-            switch(category){
-                case "fashion" : return "패션"
-                case "animation" : return "애니"
-                case "game" : return "게임"
-                case "relationship" : return "연애"
-                case "sports" : return "스포츠" 
-                default : return "오류"
-            }
+            return category.name
         }
 
     }
 
     return (
         <Background>
-            <CommunityTopbar/>
+            <CommunityTopbar categoryList={categoryButtonList}/>
 
             <Container>
 
