@@ -18,7 +18,7 @@ export const CommunityScreen = () => {
 
     const communityType = useSelector((state : RootState ) => state.communityTypeSlice.communityType)
     const viewType = useSelector((state : RootState ) => state.viewTypeSlice.viewType)
-    const theme = useSelector((state : RootState ) => state.themeSlice.theme)
+    const category = useSelector((state : RootState ) => state.categorySlice.category)
 
     const [listViewState, setListViewState] = useState("Loading");
     const [dataList, setDataList] = useState<CommunityItemData[]>([]) // dataList 상태 추가
@@ -38,7 +38,7 @@ export const CommunityScreen = () => {
                 setListViewState("Error"); 
             });
 
-    }, [communityType, viewType, theme]);
+    }, [communityType, viewType, category]);
 
     const Background = styled.View`
         background-color: #AAA;
@@ -55,7 +55,7 @@ export const CommunityScreen = () => {
 
         if (communityType === "Total") return "통합"
         else {
-            switch(theme){
+            switch(category){
                 case "fashion" : return "패션"
                 case "animation" : return "애니"
                 case "game" : return "게임"

@@ -1,12 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import ViewTypeSlice, { viewTypeSlice } from "./slices/ViewTypeSlice";
-import ThemeSlice from "./slices/ThemeSlice";
 import CommunityTypeSlice from "./slices/CommunityTypeSlice";
+import CategorySlice from "./slices/CategorySlice";
 
 export const store = configureStore({
     reducer : {
         viewTypeSlice : ViewTypeSlice,
-        themeSlice : ThemeSlice,
+        categorySlice : CategorySlice,
         communityTypeSlice : CommunityTypeSlice
     },
 })
