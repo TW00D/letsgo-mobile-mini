@@ -4,14 +4,15 @@ import { Modal, Text, TouchableOpacity, View } from "react-native"
 import { colors } from "../assets/colors/colors"
 import React, { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
-import { RootState } from "../redux/store"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { NavigationContainer, useNavigation } from "@react-navigation/native"
 import { CommunityListView } from "../components/CommunityListView"
 import { CommunityItemData } from "../types/CommunityItemData"
 import { StackNavigationProp } from "@react-navigation/stack"
 import { NavigationParamList } from "../navigation/NavigationParamList"
-import { getSampleList } from "../services/getSamplelist"
+import { RootState } from "../redux/store"
+import { getSampleList } from "../services/getSampleList"
+import { getCategoryList } from "../services/CommunityApi"
 
 export const CommunityScreen = () => {
 
@@ -21,6 +22,8 @@ export const CommunityScreen = () => {
 
     const [listViewState, setListViewState] = useState("Loading");
     const [dataList, setDataList] = useState<CommunityItemData[]>([]) // dataList 상태 추가
+
+    const [categoryList, setCategoryList] = useState(getCategoryList);
 
     useEffect(() => {
         

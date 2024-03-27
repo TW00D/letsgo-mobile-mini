@@ -15,6 +15,7 @@ const themeList = [
     { value : "sports", text : "스포츠", image : require('../assets/images/button_sports.png'), selected : require('../assets/images/button_sports_selected.png')  },
 ]
 
+
 export const ThemeSelector = () => {
     
     const theme = useSelector((state : RootState) => state.themeSlice.theme)
