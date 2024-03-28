@@ -12,7 +12,7 @@ import { StackNavigationProp } from "@react-navigation/stack"
 import { NavigationParamList } from "../navigation/NavigationParamList"
 import { RootState } from "../redux/store"
 import { getSampleList } from "../services/getSampleList"
-import { CategoryType, getCategoryList } from "../services/CommunityApi"
+import { CategoryType, PostType, getCategoryList, getPostList } from "../services/CommunityApi"
 import { CategoryButtonType } from "../components/CategorySelector"
 
 function getImage(isSelected: boolean, name : string) {
@@ -49,47 +49,67 @@ export const CommunityScreen = () => {
     const category = useSelector((state : RootState ) => state.categorySlice.category)
 
     const [listViewState, setListViewState] = useState("Loading");
-    const [dataList, setDataList] = useState<CommunityItemData[]>([]) // dataList 상태 추가
+    const [dataList, setDataList] = useState<PostType[]>([]) // dataList 상태 추가
 
     const [categoryButtonList, setCategoryButtonList] = useState<CategoryButtonType[]>([])
 
-    useEffect(() => {getCategoryList().then((data : CategoryType[]) => {
-
-        console.log(data)
-
-        let tempList : CategoryButtonType[] = []
-
-        data.map((item) => {
-            tempList.push({
-                id : item.id,
-                name : item.name,
-                image : getImage(false,item.name),
-                selectedImage : getImage(true,item.name)
-            })
-        })
-
-        console.log(tempList)
-
-        setCategoryButtonList(tempList)
-
-    }).catch((error : any) => {
-        console.log(error)
-    })}, [])
-
     useEffect(() => {
         
-        setListViewState(() => "Loading")
-        
-        getSampleList(getCommunityType(), viewType)
-            .then((dataList) => {
-                setDataList(dataList);
-                setListViewState("Loaded"); 
-            })
-            .catch((error) => {
-                setListViewState("Error"); 
-            });
+        getCategoryList().then((data : CategoryType[]) => {
 
-    }, [communityType, viewType, category]);
+            console.log(data)
+
+            let tempList : CategoryButtonType[] = []
+
+            data.map((item) => {
+                tempList.push({
+                    id : item.id,
+                    name : item.name,
+                    image : getImage(false,item.name),
+                    selectedImage : getImage(true,item.name)
+                })
+            })
+
+            console.log(tempList)
+
+            setCategoryButtonList(tempList)
+
+        }).catch((error : any) => {
+            console.log(error)
+        })
+    }, [])
+
+
+
+    // useEffect(() => {
+        
+    //     setListViewState(() => "Loading")
+        
+    //     getSampleList(getCommunityType(), viewType)
+    //         .then((dataList) => {
+    //             setDataList(dataList);
+    //             setListViewState("Loaded"); 
+    //         })
+    //         .catch((error) => {
+    //             setListViewState("Error"); 
+    //         });
+
+    // }, [communityType, viewType, category]);
+
+    useEffect(() => {
+
+        setListViewState(() => "Loading")
+
+        getPostList(category.id).then((data) => {
+            setListViewState("Loaded"); 
+            setDataList(data)
+        }).catch((error) => {
+            setListViewState("Error"); 
+            console.log(error);
+            
+        })
+
+    }, [category]);
 
     const Background = styled.View`
         background-color: #AAA;

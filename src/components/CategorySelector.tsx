@@ -21,8 +21,6 @@ interface CategorySelectorProps {
 }
 
 export const CategorySelector = (props : CategorySelectorProps) => {
-
-    const [isCategoryVisible, setCategoryVisible] = useState(false)
     
     const category = useSelector((state : RootState) => state.categorySlice.category)
     const dispatch = useDispatch();

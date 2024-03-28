@@ -6,9 +6,10 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { NavigationParamList } from "../navigation/NavigationParamList";
+import { PostType } from "../services/CommunityApi";
 
 interface CommunityListViewProps {
-    dataList : Array<CommunityItemData>,
+    dataList : PostType[],
     communityType : string
 }
 
@@ -19,7 +20,7 @@ export const CommunityListView = (props : CommunityListViewProps) => {
     let sampleList = [];
     const navigation = useNavigation<StackNavigationProp<NavigationParamList>>();
 
-    const Item : ListRenderItem<CommunityItemData> = ({ item }) => (
+    const Item : ListRenderItem<PostType> = ({ item }) => (
 
         <TouchableOpacity 
             onPress={() => { navigation.navigate("DetailPost", {selectedItem : item, communityType : props.communityType}) }}
@@ -40,7 +41,7 @@ export const CommunityListView = (props : CommunityListViewProps) => {
                 width:34
             }}>
                 <Image 
-                    source={ heartImg(item.isLiked) }
+                    source={ heartImg(item.isLike) }
                     style={{
                         height:20,
                         width:20,
@@ -48,22 +49,22 @@ export const CommunityListView = (props : CommunityListViewProps) => {
                         marginBottom : 4
                     }}
                 />
-                <Text style={{color:colors.text_gray_900, fontFamily:'pretendard_light', fontSize:12}}>{item.likes}</Text>
+                <Text style={{color:colors.text_gray_900, fontFamily:'pretendard_light', fontSize:12}}>{item.liked}</Text>
             </View>
 
             <View style={{flexDirection:"column", justifyContent:'center', flex : 1, paddingStart:20, paddingEnd:10}}>
                 <View style={{flexDirection:'row',}}> 
                     <Text style={{fontFamily:'pretendard_medium', fontSize:14,color:colors.text_gray_900}}>{item.title}</Text>
-                    <Text style={{fontFamily:'pretendard_medium', fontSize:14, marginStart:2, color:colors.primary}}>[{item.comments}]</Text>
+                    <Text style={{fontFamily:'pretendard_medium', fontSize:14, marginStart:2, color:colors.primary}}>[{item.commented}]</Text>
                 </View>
                 <View style={{flexDirection:'row', marginTop:1 }}>
                     <Text style={{fontFamily:'pretendard_light', fontSize:12, color:colors.hint_gray_300}}>{props.communityType}</Text>
                     <Text style={{fontFamily:'pretendard_light', fontSize:12, color:colors.hint_gray_300}}>  |  </Text>
-                    <Text style={{fontFamily:'pretendard_light', fontSize:12, color:colors.hint_gray_300}}>{item.author}</Text>
+                    <Text style={{fontFamily:'pretendard_light', fontSize:12, color:colors.hint_gray_300}}>{item.user}</Text>
                 </View>
             </View>
             <Image 
-                source={{uri : item.imageUrl}}
+                source={{uri : item.picture}}
                 style={{
                     height:50,
                     width:50,
@@ -76,7 +77,7 @@ export const CommunityListView = (props : CommunityListViewProps) => {
     )
 
     return (
-        <FlatList style={{flex : 1}}data={props.dataList} renderItem={Item} >
+        <FlatList style={{flex : 1}} data={props.dataList} renderItem={Item} >
 
         </FlatList>
     )

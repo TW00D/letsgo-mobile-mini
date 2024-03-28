@@ -11,6 +11,9 @@ export const login = async (data: loginType, navigation: any) => {
         const { access_token, refresh_token } = response.data.data;
         EncryptedStorage.setItem('accessToken', access_token);
         EncryptedStorage.setItem('refreshToken', refresh_token);
+
+        console.log(EncryptedStorage.getItem("accessToken"))
+
         navigation.navigate('BottomNavigationContainer');
     } catch (error) {
         handleApiError(error);
