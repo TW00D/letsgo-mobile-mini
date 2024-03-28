@@ -12,7 +12,7 @@ export const login = async (data: loginType, navigation: any) => {
         EncryptedStorage.setItem('accessToken', access_token);
         EncryptedStorage.setItem('refreshToken', refresh_token);
 
-        console.log(EncryptedStorage.getItem("accessToken"))
+        // console.log(EncryptedStorage.getItem("accessToken"))
 
         navigation.navigate('BottomNavigationContainer');
     } catch (error) {

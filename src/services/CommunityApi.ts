@@ -12,7 +12,7 @@ axios.interceptors.request.use(
         // 토큰이 존재할 경우 요청 헤더에 토큰을 추가합니다.
         if (accessToken) {
           config.headers.Authorization = `Bearer ${accessToken}`;
-          console.log(accessToken)
+        //   console.log(accessToken)
         }
       } catch (error) {
         console.error("Error fetching access token:", error);
@@ -28,7 +28,7 @@ export const getCategoryList = async () : Promise<CategoryType[]> => {
     try {
         const response = await axios.get(`${BASE_URL}/category`);
         // console.log(response)
-        console.log(response.data.data)
+        // console.log(response.data.data)
 
         return response.data.data
     } catch (error) {
@@ -66,8 +66,8 @@ export const getPostList = async (category : number) : Promise<PostType[]> => {
 
         const response = await axios.get(`${BASE_URL}/post`, {params});
 
-        console.log(response)
-        console.log(response.data.data)
+        // console.log(response)
+        // console.log(response.data.data)
 
         return response.data.data
     } catch (error) {

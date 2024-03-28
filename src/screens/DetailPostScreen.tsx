@@ -30,7 +30,7 @@ export const DetailPostScreen = () => {
     const handlePress = () => {
         if (!pageDisabled) {
           // 버튼이 활성화된 경우에만 동작
-          console.log("Button pressed");
+        //   console.log("Button pressed");
           
           // 버튼을 비활성화 상태로 설정
           setPageDisabled(true);

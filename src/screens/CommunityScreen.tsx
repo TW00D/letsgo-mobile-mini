@@ -57,7 +57,7 @@ export const CommunityScreen = () => {
         
         getCategoryList().then((data : CategoryType[]) => {
 
-            console.log(data)
+            // console.log(data)
 
             let tempList : CategoryButtonType[] = []
 
@@ -70,7 +70,7 @@ export const CommunityScreen = () => {
                 })
             })
 
-            console.log(tempList)
+            // console.log(tempList)
 
             setCategoryButtonList(tempList)
 
