@@ -31,12 +31,12 @@ export const CommunityTopbar = (props : CommunityTopbarProps) => {
     const dispatch = useDispatch();
 
     const onPress = () => {
-        if (communityType === "Theme") dispatch(setCommunityType("Total"))
-        else dispatch(setCommunityType("Theme"))
+        if (communityType === "Category") dispatch(setCommunityType("Total"))
+        else dispatch(setCommunityType("Category"))
     }
 
     const getText = () => {
-        if (communityType === "Theme") return "테마 커뮤니티"
+        if (communityType === "Category") return "관심사 커뮤니티"
         else return "통합 커뮤니티"
     }
 
@@ -70,7 +70,7 @@ export const CommunityTopbar = (props : CommunityTopbarProps) => {
 
             </View>
 
-            {communityType === "Theme" ? <CategorySelector categoryList={props.categoryList} /> : null}
+            {communityType === "Category" ? <CategorySelector categoryList={props.categoryList} /> : <View/>}
 
             <TopBarButton/>          
 
