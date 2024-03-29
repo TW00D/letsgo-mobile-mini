@@ -86,7 +86,7 @@ export const getPostList = async (category : number) : Promise<PostType[]> => {
       category: 1,
       title: "UI 테스트용 게시물",
       content: "게시게시게시물",
-      picture: "",
+      picture: "https://i.namu.wiki/i/BmLUsKx6ss6BB6C9Gj2XBI9Ot88HjQFVzo8k22OPQaDM9AwllznYcKUu_-c9fpVKgp1NvXWCVQp4TS62jVGxpQ.webp",
       viewed: 5,
       liked: 3,
       commented: 2,
@@ -95,7 +95,7 @@ export const getPostList = async (category : number) : Promise<PostType[]> => {
       updatedAt: "0000-00-00 00:00:00.000"
     },
     {
-      id: 0,
+      id: 1,
       user: 2,
       category: 1,
       title: "UI 테스트용 게시물222",
@@ -109,7 +109,7 @@ export const getPostList = async (category : number) : Promise<PostType[]> => {
       updatedAt: "0000-00-00 00:00:00.000"
     },
     {
-      id: 0,
+      id: 2,
       user: 2,
       category: 1,
       title: "UI 테스트용 게시물222",
@@ -123,7 +123,7 @@ export const getPostList = async (category : number) : Promise<PostType[]> => {
       updatedAt: "0000-00-00 00:00:00.000"
     },
     {
-      id: 0,
+      id: 3,
       user: 2,
       category: 1,
       title: "UI 테스트용 게시물222",
