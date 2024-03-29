@@ -5,7 +5,6 @@ export function getDateDiff( date : string ) {
 
     const today = new Date()
     const otherDay = new Date(date)
-    // otherDay.setHours(otherDay.getHours() + 9)
 
     const millisecondsTimeDiff = today.valueOf() - otherDay.valueOf()
 
@@ -18,14 +17,6 @@ export function getDateDiff( date : string ) {
             break
         }
     }
-
-    // timeTextArray.map((data, key) => {
-
-    //     if (millisecondsTimeDiff > timeArray[key]){
-    //         returnValue = `${Math.floor(millisecondsTimeDiff/timeArray[key])}${data} 전`
-    //     }
-
-    // })
 
     return returnValue
 
