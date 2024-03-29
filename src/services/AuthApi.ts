@@ -7,9 +7,13 @@ import EncryptedStorage from 'react-native-encrypted-storage';
 export const login = async (data: loginType, navigation: any) => {
     try {
         const response = await axios.post(`${BASE_URL}/auth/login`, data);
+        // console.log(response)
         const { access_token, refresh_token } = response.data.data;
         EncryptedStorage.setItem('accessToken', access_token);
         EncryptedStorage.setItem('refreshToken', refresh_token);
+
+        // console.log(EncryptedStorage.getItem("accessToken"))
+
         navigation.navigate('BottomNavigationContainer');
     } catch (error) {
         handleApiError(error);
@@ -19,7 +23,7 @@ export const login = async (data: loginType, navigation: any) => {
 export const register = async (data: registerType, navigation: any) => {
     try {
         const response = await axios.post(`${BASE_URL}/auth/register`, data);
-        console.log(response.data);
+        // console.log(response.data);
         navigation.navigate('Login' as never)
     } catch (error) {
         handleApiError(error)

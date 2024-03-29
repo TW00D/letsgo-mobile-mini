@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Text, View, Dimensions, StyleSheet, TouchableOpacity, Image, Button } from "react-native"
 import styled from "styled-components/native"
 import { colors } from "../../assets/colors/colors";
 import { TopBarButton } from "../button/TopBarButton";
-import { ThemeSelector } from "../ThemeSelector";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { setCommunityType } from "../../redux/slices/CommunityTypeSlice";
+import { CategoryButtonType, CategorySelector } from "../CategorySelector";
+import { CategoryType, getCategoryList } from "../../services/CommunityApi";
 
 const TopBar = styled.View`
     flex-direction: column;
@@ -16,19 +17,26 @@ const TopBar = styled.View`
     padding-right: 4%;
     z-index: 1;
 `
-export const CommunityTopbar = () => {
+
+interface CommunityTopbarProps {
+    categoryList : CategoryButtonType[]
+} 
+
+export const CommunityTopbar = (props : CommunityTopbarProps) => {
     const switchIcon = "../../assets/images/switch.svg"
+
+    
 
     const communityType = useSelector((state : RootState) => state.communityTypeSlice.communityType)
     const dispatch = useDispatch();
 
     const onPress = () => {
-        if (communityType === "Theme") dispatch(setCommunityType("Total"))
-        else dispatch(setCommunityType("Theme"))
+        if (communityType === "Category") dispatch(setCommunityType("Total"))
+        else dispatch(setCommunityType("Category"))
     }
 
     const getText = () => {
-        if (communityType === "Theme") return "테마 커뮤니티"
+        if (communityType === "Category") return "관심사 커뮤니티"
         else return "통합 커뮤니티"
     }
 
@@ -62,7 +70,7 @@ export const CommunityTopbar = () => {
 
             </View>
 
-            {communityType === "Theme" ? <ThemeSelector/> : null}
+            {communityType === "Category" ? <CategorySelector categoryList={props.categoryList} /> : <View/>}
 
             <TopBarButton/>          
 
