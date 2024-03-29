@@ -10,9 +10,10 @@ import CommentTextInput from "./textinput/CommentTextInput"
 import { useNavigation } from "@react-navigation/native"
 import { StackNavigationProp } from "@react-navigation/stack"
 import { NavigationParamList } from "../navigation/NavigationParamList"
+import { CommentType } from "../services/CommunityApi"
 
 interface CommunityCommentListProps {
-    commentList : CommentItemData[],
+    commentList : CommentType[],
     onLikeClick : () => void,
 }
 
@@ -20,20 +21,20 @@ export const CommunityCommentList = (props : CommunityCommentListProps) => {
     const navigation = useNavigation<StackNavigationProp<NavigationParamList>>(); 
 
     interface CommentItemProps {
-        item : CommentItemData
+        item : CommentType
     }
 
     const [inputText, setInputText] = useState<string>("")
 
     const CommentItem = (itemProps : CommentItemProps) => {
 
-        const [isLike, setLike] = useState(false)
-        
         const data = itemProps.item
+
+        const [isLike, setLike] = useState(data.isLike)
 
         return <View style={{flex:1,flexDirection:'row', paddingVertical:10}}>
             <Image 
-                source={{uri : data.profileUrl}}
+                source={{uri : /*data.profileUrl*/"asd"}}
                 style={{
                     width:37,
                     height:37,
@@ -42,9 +43,9 @@ export const CommunityCommentList = (props : CommunityCommentListProps) => {
             />
             <View style={{flexDirection:'column',flex:1,marginStart:10}}> 
                 <View style={{flexDirection:'row', justifyContent:'space-between'}}>
-                    <Text style={{fontFamily:'pretendard_semibold', fontSize:16, color:colors.text_gray_900}}>작성자 </Text>
+                    <Text style={{fontFamily:'pretendard_semibold', fontSize:16, color:colors.text_gray_900}}>{data.user} </Text>
                     <View style={{flexDirection:'row', alignItems:'center'}}>
-                        <Text style={{fontFamily:'pretendard_light', fontSize:12, color:colors.hint_gray_300, marginEnd: 10}}>1분</Text>
+                        <Text style={{fontFamily:'pretendard_light', fontSize:12, color:colors.hint_gray_300, marginEnd: 10}}>{data.createdAt}</Text>
                         <TouchableOpacity onPress={() => {}}> 
                             <Image 
                                 source={ require('../assets/icon_three_dot.png') }
@@ -58,7 +59,7 @@ export const CommunityCommentList = (props : CommunityCommentListProps) => {
                         </TouchableOpacity>   
                     </View>
                 </View>
-                <Text style={{fontFamily:'pretendard_regular', fontSize:14, color:colors.text_gray_900}}>댓글 내용</Text>
+                <Text style={{fontFamily:'pretendard_regular', fontSize:14, color:colors.text_gray_900}}>{data.content}</Text>
                 <TouchableOpacity onPress={() => {
                     setLike(!isLike)
                     props.onLikeClick()
@@ -70,7 +71,7 @@ export const CommunityCommentList = (props : CommunityCommentListProps) => {
                             width:20
                         }}
                     />
-                    <Text style={{fontFamily:'pretendard_medium', fontSize:12, color:colors.text_gray_900, marginStart:7}}>20</Text>
+                    <Text style={{fontFamily:'pretendard_medium', fontSize:12, color:colors.text_gray_900, marginStart:7}}>{data.liked}</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -83,7 +84,7 @@ export const CommunityCommentList = (props : CommunityCommentListProps) => {
             <View style={{flexDirection:'row', width:'94%', justifyContent:'space-between', marginTop:16, marginBottom: 20}}>
                 <View style={{flexDirection:'row', alignItems:'center'}}>
                     <Text style = {{fontFamily:'pretendard_medium', fontSize:16, color:colors.text_gray_900}}>댓글</Text>
-                    <Text style = {{fontFamily:'pretendard_medium', fontSize:16, color:colors.primary, marginStart:4}}>20</Text>
+                    <Text style = {{fontFamily:'pretendard_medium', fontSize:16, color:colors.primary, marginStart:4}}>{props.commentList.length}</Text>
                 </View>
                 
                 <TouchableOpacity onPress={() => {}} style={{flexDirection:'row', alignItems:'center'}}>

@@ -12,7 +12,7 @@ import { StackNavigationProp } from "@react-navigation/stack"
 import { NavigationParamList } from "../navigation/NavigationParamList"
 import { RootState } from "../redux/store"
 import { getSampleList } from "../services/getSampleList"
-import { CategoryType, PostType, getCategoryList, getPostList } from "../services/CommunityApi"
+import { CategoryType, CommentType, PostType, getCategoryList, getPostList } from "../services/CommunityApi"
 import { CategoryButtonType } from "../components/CategorySelector"
 
 function getImage(isSelected: boolean, name : string) {
@@ -77,6 +77,9 @@ export const CommunityScreen = () => {
         }).catch((error : any) => {
             console.log(error)
         })
+
+
+
     }, [])
 
 

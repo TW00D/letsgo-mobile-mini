@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Dimensions, Image, Text, TouchableOpacity, View } from "react-native"
 import { CommunityItemData } from "../types/CommunityItemData";
 import { colors } from "../assets/colors/colors";
@@ -7,7 +7,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { NavigationParamList } from "../navigation/NavigationParamList";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { PostType } from "../services/CommunityApi";
+import { CommentType, PostType, getCommentList } from "../services/CommunityApi";
 
 const deviceWidth = Dimensions.get('window').width;
 
@@ -27,6 +27,9 @@ export const DetailPostScreen = () => {
     const [isLikeState, setLikeState] = useState(selectedItem.isLike);
     const [pageDisabled, setPageDisabled] = useState(false)
 
+    const [commentList, setCommentList] = useState<CommentType[]>([])
+
+
     const handlePress = () => {
         if (!pageDisabled) {
           // 버튼이 활성화된 경우에만 동작
@@ -45,6 +48,18 @@ export const DetailPostScreen = () => {
         setImageWidth(width)
         setImageHeight(height)
     }) 
+
+    useEffect(() => {
+        
+        getCommentList(selectedItem.id).then((data : CommentType[]) => {
+
+            // console.log(data)
+            setCommentList(data)
+
+        }).catch((error : any) => {
+            console.log(error)
+        })
+    }, [])
 
     return (
 
@@ -108,7 +123,7 @@ export const DetailPostScreen = () => {
                     </View>
                 </View>
 
-                {/* <CommunityCommentList onLikeClick={() => {}} commentList={selectedItem.commentList}></CommunityCommentList> */}
+                <CommunityCommentList onLikeClick={() => {}} commentList={commentList}></CommunityCommentList>
 
             </ScrollView>
 

@@ -24,58 +24,188 @@ axios.interceptors.request.use(
     }
   );
 
-export const getCategoryList = async () : Promise<CategoryType[]> => {
-    try {
-        const response = await axios.get(`${BASE_URL}/category`);
-        // console.log(response)
-        // console.log(response.data.data)
-
-        return response.data.data
-    } catch (error) {
-        console.error(error)
-        return []
-    }
-}
-
-// UI Test Code
 // export const getCategoryList = async () : Promise<CategoryType[]> => {
+//     try {
+//         const response = await axios.get(`${BASE_URL}/category`);
+//         // console.log(response)
+//         // console.log(response.data.data)
 
-//     console.log("entered")
-
-//     return [
-//         {created_at: "2024-03-27T02:19:19.557Z", id: 1, name: "패션", updated_at: "2024-03-27T02:19:19.557Z"}, 
-//         {created_at: "2024-03-27T02:19:25.636Z", id: 2, name: "공부", updated_at: "2024-03-27T02:19:25.636Z"}, 
-//         {created_at: "2024-03-27T02:19:28.592Z", id: 3, name: "음악", updated_at: "2024-03-27T02:19:28.592Z"}, 
-//         {created_at: "2024-03-27T02:19:32.901Z", id: 4, name: "애니", updated_at: "2024-03-27T02:19:32.901Z"}, 
-//         {created_at: "2024-03-27T02:19:35.913Z", id: 5, name: "게임", updated_at: "2024-03-27T02:19:35.913Z"}, 
-//         {created_at: "2024-03-27T02:19:58.780Z", id: 6, name: "운동", updated_at: "2024-03-27T02:19:58.780Z"}, 
-//         {created_at: "2024-03-27T02:20:22.453Z", id: 7, name: "사랑", updated_at: "2024-03-27T02:20:22.453Z"}
-//     ]
+//         return response.data.data
+//     } catch (error) {
+//         console.error(error)
+//         return []
+//     }
 // }
 
+// UI Test Code
+export const getCategoryList = async () : Promise<CategoryType[]> => {
 
-export const getPostList = async (category : number) : Promise<PostType[]> => {
+    console.log("entered")
 
-    console.log("token : " + EncryptedStorage.getItem("accessToken"))
-
-    try {
-
-        const params = {
-            category : category
-        }
-
-        const response = await axios.get(`${BASE_URL}/post`, {params});
-
-        // console.log(response)
-        // console.log(response.data.data)
-
-        return response.data.data
-    } catch (error) {
-        console.error(error)
-        return []
-    }
+    return [
+        {created_at: "2024-03-27T02:19:19.557Z", id: 1, name: "패션", updated_at: "2024-03-27T02:19:19.557Z"}, 
+        {created_at: "2024-03-27T02:19:25.636Z", id: 2, name: "공부", updated_at: "2024-03-27T02:19:25.636Z"}, 
+        {created_at: "2024-03-27T02:19:28.592Z", id: 3, name: "음악", updated_at: "2024-03-27T02:19:28.592Z"}, 
+        {created_at: "2024-03-27T02:19:32.901Z", id: 4, name: "애니", updated_at: "2024-03-27T02:19:32.901Z"}, 
+        {created_at: "2024-03-27T02:19:35.913Z", id: 5, name: "게임", updated_at: "2024-03-27T02:19:35.913Z"}, 
+        {created_at: "2024-03-27T02:19:58.780Z", id: 6, name: "운동", updated_at: "2024-03-27T02:19:58.780Z"}, 
+        {created_at: "2024-03-27T02:20:22.453Z", id: 7, name: "사랑", updated_at: "2024-03-27T02:20:22.453Z"}
+    ]
 }
 
+
+// export const getPostList = async (category : number) : Promise<PostType[]> => {
+
+//     // console.log("token : " + EncryptedStorage.getItem("accessToken"))
+
+//     try {
+
+//         const params = {
+//             category : category
+//         }
+
+//         const response = await axios.get(`${BASE_URL}/post`, {params});
+
+//         // console.log(response)
+//         // console.log(response.data.data)
+
+//         return response.data.data
+//     } catch (error) {
+//         console.error(error)
+//         return []
+//     }
+// }
+
+//UI Test Code
+export const getPostList = async (category : number) : Promise<PostType[]> => {
+
+  return [
+    {
+      id: 0,
+      user: 2,
+      category: 1,
+      title: "UI 테스트용 게시물",
+      content: "게시게시게시물",
+      picture: "",
+      viewed: 5,
+      liked: 3,
+      commented: 2,
+      isLike: true,
+      createdAt: "0000-00-00 00:00:00.000",
+      updatedAt: "0000-00-00 00:00:00.000"
+    },
+    {
+      id: 0,
+      user: 2,
+      category: 1,
+      title: "UI 테스트용 게시물222",
+      content: "게시게시게시물222",
+      picture: "https://image-cdn.hypb.st/https%3A%2F%2Fkr.hypebeast.com%2Ffiles%2F2023%2F10%2Fjimmy-butler-miami-heat-2023-1.jpg?cbr=1&q=90",
+      viewed: 100,
+      liked: 19,
+      commented: 11,
+      isLike: false,
+      createdAt: "0000-00-00 00:00:00.000",
+      updatedAt: "0000-00-00 00:00:00.000"
+    },
+    {
+      id: 0,
+      user: 2,
+      category: 1,
+      title: "UI 테스트용 게시물222",
+      content: "게시게시게시물222",
+      picture: "https://i.namu.wiki/i/BmLUsKx6ss6BB6C9Gj2XBI9Ot88HjQFVzo8k22OPQaDM9AwllznYcKUu_-c9fpVKgp1NvXWCVQp4TS62jVGxpQ.webp",
+      viewed: 100,
+      liked: 19,
+      commented: 11,
+      isLike: false,
+      createdAt: "0000-00-00 00:00:00.000",
+      updatedAt: "0000-00-00 00:00:00.000"
+    },
+    {
+      id: 0,
+      user: 2,
+      category: 1,
+      title: "UI 테스트용 게시물222",
+      content: "게시게시게시물222",
+      picture: "https://img.seoul.co.kr/img/upload/2016/01/04/SSI_20160104165944_O2.jpg",
+      viewed: 100,
+      liked: 19,
+      commented: 11,
+      isLike: false,
+      createdAt: "0000-00-00 00:00:00.000",
+      updatedAt: "0000-00-00 00:00:00.000"
+    },
+  ]
+}
+
+
+// export const getCommentList = async (postId : number) : Promise<CommentType[]> => {
+
+//   // console.log("token : " + EncryptedStorage.getItem("accessToken"))
+
+//   try {
+
+//       const params = {
+//           post : postId
+//       }
+
+//       const response = await axios.get(`${BASE_URL}/comment`, {params});
+
+//       // console.log(response)
+//       // console.log(response.data.data)
+
+//       return response.data.data
+//   } catch (error) {
+//       console.error(error)
+//       return []
+//   }
+// }
+
+// Ui Text Code
+export const getCommentList = async (postId : number) : Promise<CommentType[]> => {
+
+  // console.log("token : " + EncryptedStorage.getItem("accessToken"))
+    return [
+        {
+          id: 0,
+          user: 3,
+          post: 1,
+          comment: 0,
+          content: "This is Test Comment",
+          liked: 1,
+          commented: 0,
+          isLike: false,
+          createdAt: "0000-00-00 00:00:00.000",
+          updatedAt: "0000-00-00 00:00:00.000"
+        },
+        {
+          id: 1,
+          user: 4,
+          post: 0,
+          comment: 0,
+          content: "와 개쩐다",
+          liked: 6,
+          commented: 0,
+          isLike: true,
+          createdAt: "0000-00-00 00:00:00.000",
+          updatedAt: "0000-00-00 00:00:00.000"
+        },
+        {
+          id: 2,
+          user: 5,
+          post: 0,
+          comment: 0,
+          content: "이... 이게 뭐누",
+          liked: 12,
+          commented: 0,
+          isLike: false,
+          createdAt: "0000-00-00 00:00:00.000",
+          updatedAt: "0000-00-00 00:00:00.000"
+        },
+    ]
+
+}
 
 
 export type CategoryType = {
@@ -93,6 +223,19 @@ export type PostType = {
     content: string,
     picture: string,
     viewed: number,
+    liked: number,
+    commented: number,
+    isLike: boolean,
+    createdAt: string,
+    updatedAt: string
+}
+
+export type CommentType = {
+    id: number,
+    user: number,
+    post: number,
+    comment: number,
+    content: string,
     liked: number,
     commented: number,
     isLike: boolean,

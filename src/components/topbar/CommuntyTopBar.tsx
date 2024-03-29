@@ -18,8 +18,6 @@ const TopBar = styled.View`
     z-index: 1;
 `
 
-
-
 interface CommunityTopbarProps {
     categoryList : CategoryButtonType[]
 } 
