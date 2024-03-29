@@ -25,7 +25,7 @@ export const CategorySelector = (props : CategorySelectorProps) => {
     const category = useSelector((state : RootState) => state.categorySlice.category)
     const dispatch = useDispatch();
 
-    console.log("i'm in CategorySelector")
+    // console.log("i'm in CategorySelector")
 
     return (
         <ScrollView showsHorizontalScrollIndicator={false} style={{marginTop:10}} horizontal>
@@ -42,7 +42,7 @@ export const CategorySelector = (props : CategorySelectorProps) => {
             {
                 
             props.categoryList.map((item) => (
-                <TouchableOpacity key={item.name} onPress={() => {
+                <TouchableOpacity activeOpacity={0.05} key={item.name} onPress={() => {
                     dispatch(setCategory(
                         {name : item.name, id : item.id}
                     ))
