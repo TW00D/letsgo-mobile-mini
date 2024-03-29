@@ -176,7 +176,7 @@ export const getCommentList = async (postId : number) : Promise<CommentType[]> =
           liked: 1,
           commented: 0,
           isLike: false,
-          createdAt: "0000-00-00 00:00:00.000",
+          createdAt: "2024-03-27T02:19:19.557Z",
           updatedAt: "0000-00-00 00:00:00.000"
         },
         {
@@ -188,7 +188,7 @@ export const getCommentList = async (postId : number) : Promise<CommentType[]> =
           liked: 6,
           commented: 0,
           isLike: true,
-          createdAt: "0000-00-00 00:00:00.000",
+          createdAt: "2024-03-28T02:19:19.557Z", // 한국 11시
           updatedAt: "0000-00-00 00:00:00.000"
         },
         {
@@ -200,7 +200,7 @@ export const getCommentList = async (postId : number) : Promise<CommentType[]> =
           liked: 12,
           commented: 0,
           isLike: false,
-          createdAt: "0000-00-00 00:00:00.000",
+          createdAt: "2023-03-30T03:02:58.557Z",
           updatedAt: "0000-00-00 00:00:00.000"
         },
     ]

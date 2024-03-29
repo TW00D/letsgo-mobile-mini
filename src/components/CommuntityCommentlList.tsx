@@ -11,6 +11,7 @@ import { useNavigation } from "@react-navigation/native"
 import { StackNavigationProp } from "@react-navigation/stack"
 import { NavigationParamList } from "../navigation/NavigationParamList"
 import { CommentType } from "../services/CommunityApi"
+import { getDateDiff } from "../utils/getDateDiff"
 
 interface CommunityCommentListProps {
     commentList : CommentType[],
@@ -45,7 +46,7 @@ export const CommunityCommentList = (props : CommunityCommentListProps) => {
                 <View style={{flexDirection:'row', justifyContent:'space-between'}}>
                     <Text style={{fontFamily:'pretendard_semibold', fontSize:16, color:colors.text_gray_900}}>{data.user} </Text>
                     <View style={{flexDirection:'row', alignItems:'center'}}>
-                        <Text style={{fontFamily:'pretendard_light', fontSize:12, color:colors.hint_gray_300, marginEnd: 10}}>{data.createdAt}</Text>
+                        <Text style={{fontFamily:'pretendard_light', fontSize:12, color:colors.hint_gray_300, marginEnd: 10}}>{getDateDiff(data.createdAt)}</Text>
                         <TouchableOpacity onPress={() => {}}> 
                             <Image 
                                 source={ require('../assets/icon_three_dot.png') }
