@@ -10,6 +10,7 @@ import ContentTextInput from "../../components/textinput/ContentTextInput";
 import PostingThemeList from "../../components/PostingThemeList";
 import { PaddingView } from "../../utils/PaddingView";
 import { KeyboardAvoidingView, Platform, ScrollView, View } from "react-native";
+import { createPost } from "../../services/PostApi";
 
 const PostModal = () => {
     const [ theme, setTheme ] = useState('패션')
@@ -42,7 +43,10 @@ const PostModal = () => {
                 
                 <ButtonFrame style={{marginBottom: 50}}>
                     <Spacer/>
-                    <PostButton isPostabled={(title.length > 0) && (content.length > 0)}/>
+                    <PostButton isPostabled={(title.length > 0) && (content.length > 0)} onPress={() => {
+                        console.log("click button!");
+                        createPost({category: 1, title: "title", content: "content", picture: "picture"})
+                    }}/>
                 </ButtonFrame>
             </KeyboardAvoidingView>
         </Background>
