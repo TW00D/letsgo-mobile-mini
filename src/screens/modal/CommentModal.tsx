@@ -9,6 +9,8 @@ import TitleTextInput from "../../components/textinput/TitleTextInput";
 import ContentTextInput from "../../components/textinput/ContentTextInput";
 import PostingThemeList from "../../components/PostingThemeList";
 import { KeyboardAvoidingView, Platform, ScrollView, Text, View } from "react-native";
+import { createPost } from "../../services/PostApi";
+import { createComment } from "../../services/CommentApi";
 
 const CommentModal = () => {
     const profileImagePath = '../../assets/images/img_profile.png'
@@ -40,7 +42,9 @@ const CommentModal = () => {
                 
                 <ButtonFrame style={{marginBottom: 50}}>
                     <Spacer/>
-                    <PostButton isPostabled={(content.length > 0)}/>
+                    <PostButton isPostabled={(content.length > 0)} onPress={() => {
+                        createComment({post: 1, comment: 0, content: "hi"})
+                    }}/>
                 </ButtonFrame>
             </KeyboardAvoidingView>
         </Background>
