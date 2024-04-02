@@ -6,6 +6,7 @@ import { useNavigation } from "@react-navigation/native"
 import { StackNavigationProp } from "@react-navigation/stack"
 import { NavigationParamList } from "../navigation/NavigationParamList"
 import EncryptedStorage from "react-native-encrypted-storage"
+import { readUser } from "../services/apis/UserApi"
 
 export const ProfileScreen = () => {
     const navigation = useNavigation<StackNavigationProp<NavigationParamList>>(); 
@@ -23,7 +24,10 @@ export const ProfileScreen = () => {
             </TopbarContainer>
             <ProfileContainer>
                 <ProfileImage source={require(profileImagePath)}/>
-                <UserName>장충동왕족발보쌈</UserName>
+                <TouchableOpacity onPress={() => {readUser({username: "jakkikki"})}}>
+                    <UserName>장충동왕족발보쌈</UserName>
+                </TouchableOpacity>
+                
             </ProfileContainer>
             <CautionView>
                 <CautionIcon source={require(cautionIconPath)}/>
