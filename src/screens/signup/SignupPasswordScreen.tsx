@@ -6,7 +6,7 @@ import { colors } from "../../assets/colors/colors";
 import { LetsgoTextInput } from "../../components/textinput/LetsgoTextInput"
 import { LetsgoButton } from "../../components/button/LetsgoButton"
 import { Background } from "../../utils/UtilViews"
-import { register } from "../../services/AuthApi"
+import { register } from "../../services/apis/AuthApi"
 import CheckPoint from "../../components/CheckPoint"
 
 interface SignupPasswordScreenProps {

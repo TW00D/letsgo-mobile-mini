@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { setCommunityType } from "../../redux/slices/CommunityTypeSlice";
 import { CategoryButtonType, CategorySelector } from "../CategorySelector";
-import { CategoryType, getCategoryList } from "../../services/CommunityApi";
+import { CategoryType, getCategoryList } from "../../services/apis/CommunityApi";
 
 const TopBar = styled.View`
     flex-direction: column;
