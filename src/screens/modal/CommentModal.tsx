@@ -9,8 +9,8 @@ import TitleTextInput from "../../components/textinput/TitleTextInput";
 import ContentTextInput from "../../components/textinput/ContentTextInput";
 import PostingThemeList from "../../components/PostingThemeList";
 import { KeyboardAvoidingView, Platform, ScrollView, Text, View } from "react-native";
-import { createPost } from "../../services/PostApi";
-import { createComment } from "../../services/CommentApi";
+import { createPost } from "../../services/apis/PostApi";
+import { createComment } from "../../services/apis/CommentApi";
 
 const CommentModal = () => {
     const profileImagePath = '../../assets/images/img_profile.png'

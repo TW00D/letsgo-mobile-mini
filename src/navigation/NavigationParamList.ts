@@ -1,4 +1,4 @@
-import { PostType } from "../services/CommunityApi"
+import { PostType } from "../services/apis/CommunityApi"
 import { CommunityItemData } from "../types/CommunityItemData"
 
 export type NavigationParamList = {

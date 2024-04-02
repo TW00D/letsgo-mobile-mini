@@ -10,7 +10,7 @@ import CommentTextInput from "./textinput/CommentTextInput"
 import { useNavigation } from "@react-navigation/native"
 import { StackNavigationProp } from "@react-navigation/stack"
 import { NavigationParamList } from "../navigation/NavigationParamList"
-import { CommentType } from "../services/CommunityApi"
+import { CommentType } from "../services/apis/CommunityApi"
 import { getDateDiff } from "../utils/getDateDiff"
 
 interface CommunityCommentListProps {

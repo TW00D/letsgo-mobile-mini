@@ -6,7 +6,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { NavigationParamList } from "../navigation/NavigationParamList";
-import { PostType } from "../services/CommunityApi";
+import { PostType } from "../services/apis/CommunityApi";
 
 interface CommunityListViewProps {
     dataList : PostType[],

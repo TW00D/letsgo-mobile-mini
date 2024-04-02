@@ -7,7 +7,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { NavigationParamList } from "../navigation/NavigationParamList";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { CommentType, PostType, getCommentList } from "../services/CommunityApi";
+import { CommentType, PostType, getCommentList } from "../services/apis/CommunityApi";
 
 const deviceWidth = Dimensions.get('window').width;
 

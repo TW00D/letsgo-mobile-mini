@@ -10,7 +10,7 @@ import ContentTextInput from "../../components/textinput/ContentTextInput";
 import PostingThemeList from "../../components/PostingThemeList";
 import { PaddingView } from "../../utils/PaddingView";
 import { KeyboardAvoidingView, Platform, ScrollView, View } from "react-native";
-import { createPost } from "../../services/PostApi";
+import { createPost } from "../../services/apis/PostApi";
 
 const PostModal = () => {
     const [ theme, setTheme ] = useState('패션')
