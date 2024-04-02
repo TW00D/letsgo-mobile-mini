@@ -6,7 +6,7 @@ import { LetsgoTextInput } from "../../components/textinput/LetsgoTextInput"
 import { LetsgoButton } from "../../components/button/LetsgoButton"
 import { Background, Spacer } from "../../utils/UtilViews"
 import CheckPoint from "../../components/CheckPoint"
-import { View } from "react-native"
+import { KeyboardAvoidingView, Platform, View } from "react-native"
 
 interface SignupIdScreenProps {
     navigation: any
@@ -18,25 +18,29 @@ const SignupIdScreen: React.FC<SignupIdScreenProps> = ({navigation}) => {
 
     return (
         <Background>
-            <LetsgoTopBar title="" onPress={() => {navigation.goBack()}}/>
-            <Title>희망하는 아이디를 입력해주세요</Title>
-            <LetsgoTextInput 
-                label="아이디" 
-                value={id} 
-                setValue={setId}
-                onChange={text => {
-                    if (text.length >= 8 && text.length <= 20) setOkay(true)
-                    else setOkay(false)
-                }}/>
-            <View style={{height: 8}}/>
-            <CheckPoint title="8 ~ 20 자리" isOkay={isOkay}/>
-            <Spacer/>
-            <LetsgoButton 
-                title="다음" 
-                isAbled={isOkay} 
-                onPress={() => {
-                    navigation.navigate('SignupPassword', {id: id})
-                }}/>
+            <KeyboardAvoidingView
+                behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+                style={{flex: 1}}>
+                <LetsgoTopBar title="" onPress={() => {navigation.goBack()}}/>
+                <Title>희망하는 아이디를 입력해주세요</Title>
+                <LetsgoTextInput 
+                    label="아이디" 
+                    value={id} 
+                    setValue={setId}
+                    onChange={text => {
+                        if (text.length >= 8 && text.length <= 20) setOkay(true)
+                        else setOkay(false)
+                    }}/>
+                <View style={{height: 8}}/>
+                <CheckPoint title="8 ~ 20 자리" isOkay={isOkay}/>
+                <Spacer/>
+                <LetsgoButton 
+                    title="다음" 
+                    isAbled={isOkay} 
+                    onPress={() => {
+                        navigation.navigate('SignupPassword', {id: id})
+                    }}/>
+            </KeyboardAvoidingView>
         </Background>
     );
 }

@@ -12,10 +12,11 @@ type LetsgoTextInputType = {
     value: string,
     setValue: any,
     isSecure?: boolean,
+    isNotLogin?: boolean,
     onChange: (text: string) => void
 }
 
-export const LetsgoTextInput = ({isSecure = false, ...props}: LetsgoTextInputType) => {
+export const LetsgoTextInput = ({isSecure=false, isNotLogin=true, ...props}: LetsgoTextInputType) => {
     const [isFocused, setFocused] = useState(false)
 
     const onChangeText = (inputText: string) => {
@@ -49,6 +50,8 @@ export const LetsgoTextInput = ({isSecure = false, ...props}: LetsgoTextInputTyp
                 iconClass={FontAwesomeIcon}
                 inputPadding={10}
                 labelHeight={20}
+                spellCheck={false}
+                autoFocus={isNotLogin}
                 value={props.value}
                 onChangeText={onChangeText}
                 autoCapitalize={'none'}
