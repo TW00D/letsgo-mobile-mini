@@ -8,6 +8,8 @@ import { NavigationParamList } from "../navigation/NavigationParamList"
 import EncryptedStorage from "react-native-encrypted-storage"
 import { readUser } from "../services/apis/UserApi"
 
+// COMMENT: test
+
 export const ProfileScreen = () => {
     const navigation = useNavigation<StackNavigationProp<NavigationParamList>>(); 
 
