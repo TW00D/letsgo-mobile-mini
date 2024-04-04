@@ -11,6 +11,7 @@ import PostingThemeList from "../../components/PostingThemeList";
 import { PaddingView } from "../../utils/PaddingView";
 import { KeyboardAvoidingView, Platform, ScrollView, View } from "react-native";
 import { createPost } from "../../services/apis/PostApi";
+import GalleryIcon from "../../assets/icons/GalleryIcon";
 
 const PostModal = () => {
     const [ theme, setTheme ] = useState('패션')
@@ -41,7 +42,9 @@ const PostModal = () => {
                 
                 <Spacer/>
                 
-                <ButtonFrame style={{marginBottom: 50}}>
+                {/** Button Frame */}
+                <ButtonFrame style={{marginBottom: 69}}>
+                    <GalleryIcon onPress={() => {}}/>
                     <Spacer/>
                     <PostButton isPostabled={(title.length > 0) && (content.length > 0)} onPress={() => {
                         console.log("click button!");
@@ -68,8 +71,9 @@ const Title = styled.Text`
 const ButtonFrame = styled.View`
     flex-direction: row;
     height: 72px;
-    justify-content: center;
+    align-items: center;
     margin-right: 16px;
+    margin-left: 24px;
 `
 
 const Line = styled.View`
