@@ -12,7 +12,7 @@ axios.interceptors.request.use(
         // 토큰이 존재할 경우 요청 헤더에 토큰을 추가합니다.
         if (accessToken) {
           config.headers.Authorization = `Bearer ${accessToken}`;
-        //   console.log(accessToken)
+          // console.log(accessToken)
         }
       } catch (error) {
         console.error("Error fetching access token:", error);
@@ -176,6 +176,7 @@ export const getCommentList = async (postId : number) : Promise<CommentType[]> =
           liked: 1,
           commented: 0,
           isLike: false,
+          userImg : "https://img.seoul.co.kr/img/upload/2016/01/04/SSI_20160104165944_O2.jpg",
           createdAt: "2024-03-27T02:19:19.557Z",
           updatedAt: "0000-00-00 00:00:00.000"
         },
@@ -188,6 +189,7 @@ export const getCommentList = async (postId : number) : Promise<CommentType[]> =
           liked: 6,
           commented: 0,
           isLike: true,
+          userImg : "https://img.seoul.co.kr/img/upload/2016/01/04/SSI_20160104165944_O2.jpg",
           createdAt: "2024-03-28T02:19:19.557Z", // 한국 11시
           updatedAt: "0000-00-00 00:00:00.000"
         },
@@ -200,6 +202,7 @@ export const getCommentList = async (postId : number) : Promise<CommentType[]> =
           liked: 12,
           commented: 0,
           isLike: false,
+          userImg : "https://img.seoul.co.kr/img/upload/2016/01/04/SSI_20160104165944_O2.jpg",
           createdAt: "2023-03-30T03:02:58.557Z",
           updatedAt: "0000-00-00 00:00:00.000"
         },
@@ -207,6 +210,38 @@ export const getCommentList = async (postId : number) : Promise<CommentType[]> =
 
 }
 
+export const removePost = async (id : number) => {
+
+  try {
+      const response = await axios.delete(`${BASE_URL}/post/${id}`);
+
+      // console.log(response)
+      // console.log(response.data.data)
+
+  } catch (error) {
+      console.error(error)
+
+  }
+}
+
+export const getUserId = async () => {
+
+  try {
+      const response = await axios.get(`${BASE_URL}/user/my-info`);
+
+      // console.log(response)
+      // console.log(response.data.data.id)
+
+      const userId = response.data.data.id
+      // console.log(`uderId  : ${userId}`)
+
+      EncryptedStorage.setItem('userId', userId.toString());
+
+  } catch (error) {
+      console.error(error)
+
+  }
+}
 
 export type CategoryType = {
     created_at : string,
@@ -239,6 +274,7 @@ export type CommentType = {
     liked: number,
     commented: number,
     isLike: boolean,
+    userImg : string,
     createdAt: string,
     updatedAt: string
 }

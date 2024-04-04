@@ -7,6 +7,7 @@ import { colors } from "../../assets/colors/colors";
 import { LetsgoTextInput } from "../../components/textinput/LetsgoTextInput"
 import { LetsgoButton } from "../../components/button/LetsgoButton"
 import { login } from "../../services/AuthApi"
+import { getUserId } from "../../services/CommunityApi"
 
 interface LoginScreenProps {
     navigation : any
@@ -44,7 +45,9 @@ export const LoginScreen : React.FC<LoginScreenProps> = ({navigation}) => {
             <Spacer/>
             <LetsgoButton title="레츠고!" isAbled={isIdFilled && isPwdFilled} onPress={() => {
                 // navigation.navigate('BottomNavigationContainer')
-                login({username: 'nakim3159', password: 'nakim9121'}, navigation)
+                login({username: 'nakim3159', password: 'nakim9121'}, navigation).then(() => {
+                    getUserId()
+                })
                 // login({username: id, password: pwd}, navigation)
                 }}/>
         </Background>

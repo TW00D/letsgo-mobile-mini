@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Dimensions, Image, Modal, Text, TouchableOpacity, View } from "react-native"
+import { Dimensions, Image, Modal, Share, Text, TouchableOpacity, View } from "react-native"
 import { CommunityItemData } from "../types/CommunityItemData";
 import { colors } from "../assets/colors/colors";
 import { CommunityCommentList } from "../components/CommuntityCommentlList";
@@ -7,10 +7,13 @@ import { ScrollView } from "react-native-gesture-handler";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { NavigationParamList } from "../navigation/NavigationParamList";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { CommentType, PostType, getCommentList } from "../services/CommunityApi";
+import { CommentType, PostType, getCommentList, getPostList, getUserId, removePost } from "../services/CommunityApi";
 import { BottomSheetAndroid, ModalSlideFromBottomIOS } from "@react-navigation/stack/lib/typescript/src/TransitionConfigs/TransitionPresets";
 import { CommunityModal, ModalOption } from "./modal/CommunityModal";
 import { BaseTouchableOpacity } from "../components/button/BaseTouchableOpacity";
+import EncryptedStorage from 'react-native-encrypted-storage';
+import { useDispatch } from "react-redux";
+import { setPostList } from "../redux/slices/PostListSlice";
 
 
 const deviceWidth = Dimensions.get('window').width;
@@ -18,9 +21,18 @@ const deviceWidth = Dimensions.get('window').width;
 export const DetailPostScreen = () => {
 
     // const reportOption : ModalOption = { id : 1, text : "신고하기", action : () => {}, img : require('../assets/icon_search.png') }
-    const removeOption : ModalOption = { id : 2, text : "삭제하기", action : () => {}, img : require('../assets/icon_search.png') }
+    const removeOption : ModalOption = { 
+        id : 2, text : "삭제하기", action : () => {
+            removePost(selectedItem.id).then(() => {
+                getPostList(selectedItem.category).then((data) => {
+                    dispatch(setPostList(data))
+                    navigation.pop()
+                })
+            })
+            
+        }, img : require('../assets/icon_search.png') }
     // const shareOption : ModalOption = { id : 3, text : "수정하기", action : () => {}, img : require('../assets/icon_search.png') }
-    const shareOption : ModalOption = { id : 4, text : "공유하기", action : () => {}, img : require('../assets/icon_search.png') }
+    const shareOption : ModalOption = { id : 4, text : "공유하기", action : () => {onShare()}, img : require('../assets/icon_search.png') }
 
 
     const navigation = useNavigation<StackNavigationProp<NavigationParamList>>()
@@ -41,21 +53,21 @@ export const DetailPostScreen = () => {
 
     const [isModalVisible, setModalVisible] = useState(false)
 
-    const modalOptions = [removeOption, shareOption]
+    const [modalOptions, setModalOptions] = useState([shareOption]) 
 
-    const handlePress = () => {
-        if (!pageDisabled) {
-          // 버튼이 활성화된 경우에만 동작
-        //   console.log("Button pressed");
-          
-          // 버튼을 비활성화 상태로 설정
-          setPageDisabled(true);
-    
-          // 1초 후에 버튼을 다시 활성화 상태로 설정
-          setTimeout(() => {
-            setPageDisabled(false);
-          }, 1000)}
-        };
+    const dispatch = useDispatch();
+
+    const onShare = async () => {
+        try {
+            const result = await Share.share(
+                {
+                message: '공유에 보이는 메세지 이거를 복붙할 수도 있엉!',
+                } 
+            );
+        } catch (error) {
+            console.log(error);
+        }
+      };
 
     Image.getSize(selectedItem.picture, (width, height) => {
         setImageWidth(width)
@@ -63,15 +75,22 @@ export const DetailPostScreen = () => {
     }) 
 
     useEffect(() => {
-        
+
+        EncryptedStorage.getItem("userId").then((userId) => {
+
+            if(userId == String(selectedItem.user)) {
+                setModalOptions([shareOption, removeOption])
+            }
+        })
+
         getCommentList(selectedItem.id).then((data : CommentType[]) => {
 
-            console.log(data)
             setCommentList(data)
 
         }).catch((error : any) => {
             console.log(error)
         })
+
     }, [])
 
     return (
@@ -140,11 +159,11 @@ export const DetailPostScreen = () => {
    
             <Modal transparent visible={isModalVisible} style={{width:'100%', height:'100%'}}>
                 <BaseTouchableOpacity onPress={() => {setModalVisible(false)}} style={{ height:'100%', width:'100%', backgroundColor:"rgba(0,0,0,0.5)"}}>
-                    <View style={{bottom:0, position:'absolute', backgroundColor:colors.white, width:'100%',paddingTop:'4%', borderTopLeftRadius:16, borderTopRightRadius:16}}>
+                    <View style={{bottom:0, position:'absolute', backgroundColor:colors.white, width:'100%',paddingVertical:'4%', borderTopLeftRadius:16, borderTopRightRadius:16}}>
                         
                         {
                             modalOptions.map((item : ModalOption) => (
-                                <BaseTouchableOpacity style={{flexDirection:'row', alignItems:'center'}} onPress={() => {console.log("ASDasdasd")}}>
+                                <BaseTouchableOpacity style={{flexDirection:'row', alignItems:'center'}} onPress={() => {item.action()}}>
                                     
                                     <Image 
                                         source={item.img}

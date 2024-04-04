@@ -18,7 +18,7 @@ export const BaseTouchableOpacity : React.FC<BaseTouchableOpacityProps> = ({onPr
             disabled={isDisabled}
             {...rest}
             onPress={() => {
-                console.log("disabled")
+                // console.log("disabled")
                 
                 setDisabled(true);
                 onPress()
