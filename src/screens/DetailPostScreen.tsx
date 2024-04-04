@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Dimensions, Image, Text, TouchableOpacity, View } from "react-native"
+import { Dimensions, Image, Modal, Text, TouchableOpacity, View } from "react-native"
 import { CommunityItemData } from "../types/CommunityItemData";
 import { colors } from "../assets/colors/colors";
 import { CommunityCommentList } from "../components/CommuntityCommentlList";
@@ -8,10 +8,20 @@ import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { NavigationParamList } from "../navigation/NavigationParamList";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { CommentType, PostType, getCommentList } from "../services/CommunityApi";
+import { BottomSheetAndroid, ModalSlideFromBottomIOS } from "@react-navigation/stack/lib/typescript/src/TransitionConfigs/TransitionPresets";
+import { CommunityModal, ModalOption } from "./modal/CommunityModal";
+import { BaseTouchableOpacity } from "../components/button/BaseTouchableOpacity";
+
 
 const deviceWidth = Dimensions.get('window').width;
 
 export const DetailPostScreen = () => {
+
+    // const reportOption : ModalOption = { id : 1, text : "신고하기", action : () => {}, img : require('../assets/icon_search.png') }
+    const removeOption : ModalOption = { id : 2, text : "삭제하기", action : () => {}, img : require('../assets/icon_search.png') }
+    // const shareOption : ModalOption = { id : 3, text : "수정하기", action : () => {}, img : require('../assets/icon_search.png') }
+    const shareOption : ModalOption = { id : 4, text : "공유하기", action : () => {}, img : require('../assets/icon_search.png') }
+
 
     const navigation = useNavigation<StackNavigationProp<NavigationParamList>>()
 
@@ -29,6 +39,9 @@ export const DetailPostScreen = () => {
 
     const [commentList, setCommentList] = useState<CommentType[]>([])
 
+    const [isModalVisible, setModalVisible] = useState(false)
+
+    const modalOptions = [removeOption, shareOption]
 
     const handlePress = () => {
         if (!pageDisabled) {
@@ -53,7 +66,7 @@ export const DetailPostScreen = () => {
         
         getCommentList(selectedItem.id).then((data : CommentType[]) => {
 
-            // console.log(data)
+            console.log(data)
             setCommentList(data)
 
         }).catch((error : any) => {
@@ -62,11 +75,9 @@ export const DetailPostScreen = () => {
     }, [])
 
     return (
-
         <View style={{flex:1,flexDirection : 'column'}}>
-
             <View style={{backgroundColor:colors.white, height:'auto',flexDirection:'row', alignItems:"center", justifyContent:"space-between", paddingHorizontal:'3%', paddingVertical:4}}>
-                <TouchableOpacity disabled={pageDisabled} onPress={() => {handlePress(); navigation.pop()}}>   
+                <BaseTouchableOpacity onPress={() => {navigation.pop()}} >   
                     <Image 
                         source={require('../assets/icon_arrow_left.png')}
                         style={{
@@ -74,7 +85,7 @@ export const DetailPostScreen = () => {
                             width:25
                         }}
                     />
-                </TouchableOpacity>  
+                </BaseTouchableOpacity>  
                 <Text style={{paddingVertical:10, fontFamily:"pretendard_medium", fontSize:16, color:colors.text_gray_900}}>{communityType}</Text>
                 <Text style={{width:25}}></Text>
             </View>
@@ -100,7 +111,7 @@ export const DetailPostScreen = () => {
                     <Text style={{fontFamily:"pretendard_regular", fontSize:16, color:colors.text_gray_900}}>{selectedItem.content}</Text>
 
                     <View style={{flexDirection:'row', justifyContent:'flex-end', marginVertical:10}}>
-                        <TouchableOpacity onPress = {() => {setLikeState(!isLikeState)}} style={{flexDirection:'row', backgroundColor:colors.line_gray_50, paddingHorizontal:16, paddingVertical:9, borderRadius:1000}}>
+                        <BaseTouchableOpacity onPress = {() => {setLikeState(!isLikeState)}} style={{flexDirection:'row', backgroundColor:colors.line_gray_50, paddingHorizontal:16, paddingVertical:9, borderRadius:1000}}>
                             <Image 
                                 source={ isLikeState ? require('../assets/images/icon_heart_filled.png') : require('../assets/images/icon_heart.png')}
                                 style={{
@@ -109,9 +120,9 @@ export const DetailPostScreen = () => {
                                 }}
                             />
                             <Text style={{fontFamily:'pretendard_light', fontSize:14, color:colors.text_gray_900, marginStart:8}}>{selectedItem.liked}</Text>
-                        </TouchableOpacity>
+                        </BaseTouchableOpacity>
 
-                        <TouchableOpacity  onPress = {() => {}} style={{marginStart:8, flexDirection:'row', alignItems:'center', backgroundColor:colors.line_gray_50, paddingHorizontal:10.5, paddingVertical:17.5, borderRadius:1000}}>
+                        <BaseTouchableOpacity onPress = {() => {setModalVisible(!isModalVisible)}} style={{marginStart:8, flexDirection:'row', alignItems:'center', backgroundColor:colors.line_gray_50, paddingHorizontal:10.5, paddingVertical:17.5, borderRadius:1000}}>
                             <Image 
                                 source={ require('../assets/icon_three_dot.png') }
                                 style={{
@@ -119,13 +130,47 @@ export const DetailPostScreen = () => {
                                     width:17
                                 }}
                             />
-                        </TouchableOpacity>
+                        </BaseTouchableOpacity>
                     </View>
                 </View>
 
                 <CommunityCommentList onLikeClick={() => {}} commentList={commentList}></CommunityCommentList>
 
             </ScrollView>
+   
+            <Modal transparent visible={isModalVisible} style={{width:'100%', height:'100%'}}>
+                <BaseTouchableOpacity onPress={() => {setModalVisible(false)}} style={{ height:'100%', width:'100%', backgroundColor:"rgba(0,0,0,0.5)"}}>
+                    <View style={{bottom:0, position:'absolute', backgroundColor:colors.white, width:'100%',paddingTop:'4%', borderTopLeftRadius:16, borderTopRightRadius:16}}>
+                        
+                        {
+                            modalOptions.map((item : ModalOption) => (
+                                <BaseTouchableOpacity style={{flexDirection:'row', alignItems:'center'}} onPress={() => {console.log("ASDasdasd")}}>
+                                    
+                                    <Image 
+                                        source={item.img}
+                                        style={{
+                                            height:25,
+                                            width:25,
+                                            marginHorizontal:'4%',
+                                            marginVertical:'4%'
+                                        }}
+                                    />
+                                    
+                                    <Text style={{fontFamily:'pretendard_medium', fontSize:16,color:colors.text_gray_900}}>{item.text}</Text>
+                                </BaseTouchableOpacity>
+                            ))
+                        }
+
+                    </View>
+                </BaseTouchableOpacity>
+            </Modal>
+
+            {/* <CommunityModal 
+                isModalVisible = {isModalVisible} 
+                setModalVisible={(data : boolean) => {setModalVisible(false)}}
+                modalOptions={[reportOption, removeOption, shareOption]}
+                >
+            </CommunityModal> */}
 
         </View>
     )
