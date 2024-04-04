@@ -9,7 +9,6 @@ import { NavigationParamList } from "../navigation/NavigationParamList";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { CommentType, PostType, getCommentList, getPostList, getUserId, removePost } from "../services/CommunityApi";
 import { BottomSheetAndroid, ModalSlideFromBottomIOS } from "@react-navigation/stack/lib/typescript/src/TransitionConfigs/TransitionPresets";
-import { CommunityModal, ModalOption } from "./modal/CommunityModal";
 import { BaseTouchableOpacity } from "../components/button/BaseTouchableOpacity";
 import EncryptedStorage from 'react-native-encrypted-storage';
 import { useDispatch } from "react-redux";
@@ -17,6 +16,13 @@ import { setPostList } from "../redux/slices/PostListSlice";
 
 
 const deviceWidth = Dimensions.get('window').width;
+
+export type ModalOption = {
+    id : number,
+    text : string,
+    img : any,
+    action : () => void
+}
 
 export const DetailPostScreen = () => {
 
@@ -78,6 +84,7 @@ export const DetailPostScreen = () => {
 
         EncryptedStorage.getItem("userId").then((userId) => {
 
+
             if(userId == String(selectedItem.user)) {
                 setModalOptions([shareOption, removeOption])
             }
@@ -85,6 +92,7 @@ export const DetailPostScreen = () => {
 
         getCommentList(selectedItem.id).then((data : CommentType[]) => {
 
+            // console.log(data)
             setCommentList(data)
 
         }).catch((error : any) => {
