@@ -1,13 +1,13 @@
 import React, { useState } from "react"
-import { View } from "react-native"
+import { Platform, View } from "react-native"
 import styled from "styled-components/native"
 import { Background, Row, Spacer } from "../../utils/UtilViews"
 import LetsgoTopBar from "../../components/topbar/LetsgoTopBar"
 import { colors } from "../../assets/colors/colors";
 import { LetsgoTextInput } from "../../components/textinput/LetsgoTextInput"
 import { LetsgoButton } from "../../components/button/LetsgoButton"
-import { login } from "../../services/AuthApi"
-import { getUserId } from "../../services/CommunityApi"
+import { login } from "../../services/apis/AuthApi"
+import { KeyboardAvoidingView } from "react-native"
 
 interface LoginScreenProps {
     navigation : any
@@ -21,35 +21,37 @@ export const LoginScreen : React.FC<LoginScreenProps> = ({navigation}) => {
 
     return (
         <Background>
-            {/* <Row></Row> */}
-            <LetsgoTopBar title="" onPress={() => {navigation.goBack()}}/>
-            <Title>로그인해주세요</Title>
-            <LetsgoTextInput 
-                label="아이디" 
-                value={id} 
-                setValue={setId} 
-                onChange={text => {
-                    if (text.length > 0) setIsIdFilled(true)
-                    else setIsIdFilled(false)
-                }}/>
-            <View style={{height: 35}}/>
-            <LetsgoTextInput 
-                label="비밀번호" 
-                value={pwd} 
-                setValue={setPwd} 
-                isSecure={true}
-                onChange={text => {
-                    if (text.length > 0) setIsPwdFilled(true)
-                    else setIsPwdFilled(false)
-                }}/>
-            <Spacer/>
-            <LetsgoButton title="레츠고!" isAbled={isIdFilled && isPwdFilled} onPress={() => {
-                // navigation.navigate('BottomNavigationContainer')
-                login({username: 'nakim3159', password: 'nakim9121'}, navigation).then(() => {
-                    getUserId()
-                })
-                // login({username: id, password: pwd}, navigation)
-                }}/>
+            <KeyboardAvoidingView
+                behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+                style={{flex: 1}}>
+                <LetsgoTopBar title="" onPress={() => {navigation.goBack()}}/>
+                <Title>로그인해주세요</Title>
+                <LetsgoTextInput 
+                    label="아이디" 
+                    value={id}
+                    setValue={setId} 
+                    onChange={text => {
+                        if (text.length > 0) setIsIdFilled(true)
+                        else setIsIdFilled(false)
+                    }}/>
+                <View style={{height: 35}}/>
+                <LetsgoTextInput 
+                    label="비밀번호" 
+                    value={pwd} 
+                    isNotLogin={false}
+                    setValue={setPwd} 
+                    isSecure={true}
+                    onChange={text => {
+                        if (text.length > 0) setIsPwdFilled(true)
+                        else setIsPwdFilled(false)
+                    }}/>
+                <Spacer/>
+                <LetsgoButton title="레츠고!" isAbled={isIdFilled && isPwdFilled} onPress={() => {
+                    // navigation.navigate('BottomNavigationContainer')
+                    login({username: 'jakkikki', password: 'asdfqwer1234'}, navigation)
+                    // login({username: id, password: pwd}, navigation)
+                    }}/>
+            </KeyboardAvoidingView>
         </Background>
     );
 }

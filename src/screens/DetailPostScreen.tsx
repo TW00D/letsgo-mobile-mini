@@ -7,13 +7,12 @@ import { ScrollView } from "react-native-gesture-handler";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { NavigationParamList } from "../navigation/NavigationParamList";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { CommentType, PostType, getCommentList, getPostList, getUserId, removePost } from "../services/CommunityApi";
 import { BottomSheetAndroid, ModalSlideFromBottomIOS } from "@react-navigation/stack/lib/typescript/src/TransitionConfigs/TransitionPresets";
 import { BaseTouchableOpacity } from "../components/button/BaseTouchableOpacity";
 import EncryptedStorage from 'react-native-encrypted-storage';
 import { useDispatch } from "react-redux";
 import { setPostList } from "../redux/slices/PostListSlice";
-
+import { CommentType, PostType, getCommentList, getPostList, getUserId, removePost } from "../services/apis/CommunityApi";
 
 const deviceWidth = Dimensions.get('window').width;
 

@@ -12,7 +12,7 @@ import { StackNavigationProp } from "@react-navigation/stack"
 import { NavigationParamList } from "../navigation/NavigationParamList"
 import { RootState } from "../redux/store"
 import { getSampleList } from "../services/getSampleList"
-import { CategoryType, CommentType, PostType, getCategoryList, getPostList } from "../services/CommunityApi"
+import { CategoryType, CommentType, PostType, getCategoryList, getPostList } from "../services/apis/CommunityApi"
 import { CategoryButtonType } from "../components/CategorySelector"
 import { setPostList } from "../redux/slices/PostListSlice"
 

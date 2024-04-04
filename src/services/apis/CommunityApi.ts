@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BASE_URL } from "./urls";
+import { BASE_URL } from "../urls";
 import EncryptedStorage from 'react-native-encrypted-storage';
 
 

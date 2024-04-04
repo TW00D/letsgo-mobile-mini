@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { colors } from "../assets/colors/colors";
 import { setCategory } from "../redux/slices/CategorySlice";
-import { CategoryType, getCategoryList } from "../services/CommunityApi";
+import { CategoryType, getCategoryList } from "../services/apis/CommunityApi";
 import { useEffect, useState } from "react";
 
 const deviceWidth = Dimensions.get('window').width;
