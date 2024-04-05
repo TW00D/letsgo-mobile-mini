@@ -9,9 +9,11 @@ import TitleTextInput from "../../components/textinput/TitleTextInput";
 import ContentTextInput from "../../components/textinput/ContentTextInput";
 import PostingThemeList from "../../components/PostingThemeList";
 import { PaddingView } from "../../utils/PaddingView";
-import { KeyboardAvoidingView, Platform, ScrollView, View } from "react-native";
+import { KeyboardAvoidingView, PermissionsAndroid, Platform, ScrollView, View } from "react-native";
 import { createPost } from "../../services/apis/PostApi";
 import GalleryIcon from "../../assets/icons/GalleryIcon";
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import Permissions from 'react-native-permissions';
 
 const PostModal = () => {
     const [ theme, setTheme ] = useState('패션')
@@ -44,7 +46,23 @@ const PostModal = () => {
                 
                 {/** Button Frame */}
                 <ButtonFrame style={{marginBottom: 69}}>
-                    <GalleryIcon onPress={() => {}}/>
+                    <GalleryIcon onPress={() => {
+                        console.log("onPress : Gallery Icon");
+                        // Permissions.check('camera').then(response => {
+                        //     if (response === 'authorized') {
+                        //         // Permission is already granted
+                        //     } else {
+                        //         Permissions.request('camera').then(response => {
+                        //             if (response === 'authorized') {
+                        //             // Permission is now granted
+                        //             } else {
+                        //             // Permission was denied
+                        //             }
+                        //         });
+                        //     }
+                        // });
+                        // openImagePicker()
+                    }}/>
                     <Spacer/>
                     <PostButton isPostabled={(title.length > 0) && (content.length > 0)} onPress={() => {
                         console.log("click button!");
@@ -55,6 +73,28 @@ const PostModal = () => {
         </Background>
     );
 }
+
+// const openImagePicker = () => {
+//     const options = {
+//         mediaType: 'photo' as any,
+//         includeBase64: false,
+//         maxHeight: 2000,
+//         maxWidth: 2000,
+//     };
+
+//     launchImageLibrary(options, (response) => {
+//         if (response.didCancel) {
+//             console.log('User cancelled image picker');
+//         } else if (response.error) {
+//             console.log('Image picker error: ', response.error);
+//         } else {
+//             // let imageUri = response.uri || response.assets?.[0]?.uri;
+//             // setSelectedImage(imageUri);
+//         }
+//     });
+// };
+
+export default PostModal;
 
 const Background = styled.View`
     flex: 1;
@@ -83,5 +123,3 @@ const Line = styled.View`
     margin-top: 16px;
     margin-left: 16px;
 `
-
-export default PostModal;
