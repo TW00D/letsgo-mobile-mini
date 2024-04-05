@@ -44,6 +44,7 @@ export const refresh = async (data: refreshType) => {
     }
 }
 
+
 const handleApiError = (error: any) => {
     console.error("Error sending data: ", error.response?.data);
     const errorStatus = error.response?.status || 500;

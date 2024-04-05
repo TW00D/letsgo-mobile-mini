@@ -3,7 +3,7 @@ import { CommunityTopbar } from "../components/topbar/CommuntyTopBar"
 import { Modal, Text, TouchableOpacity, View } from "react-native"
 import { colors } from "../assets/colors/colors"
 import React, { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { NavigationContainer, useNavigation } from "@react-navigation/native"
 import { CommunityListView } from "../components/CommunityListView"
@@ -14,6 +14,7 @@ import { RootState } from "../redux/store"
 import { getSampleList } from "../services/getSampleList"
 import { CategoryType, CommentType, PostType, getCategoryList, getPostList } from "../services/apis/CommunityApi"
 import { CategoryButtonType } from "../components/CategorySelector"
+import { setPostList } from "../redux/slices/PostListSlice"
 
 function getImage(isSelected: boolean, name : string) {
     if (name === "패션") {
@@ -47,9 +48,13 @@ export const CommunityScreen = () => {
     const communityType = useSelector((state : RootState ) => state.communityTypeSlice.communityType)
     const viewType = useSelector((state : RootState ) => state.viewTypeSlice.viewType)
     const category = useSelector((state : RootState ) => state.categorySlice.category)
+    const postList = useSelector((state : RootState ) => state.postListSlice.postList)
+
 
     const [listViewState, setListViewState] = useState("Loading");
-    const [dataList, setDataList] = useState<PostType[]>([]) // dataList 상태 추가
+    // const [dataList, setDataList] = useState<PostType[]>([]) // dataList 상태 추가
+    
+    const dispatch = useDispatch();
 
     const [categoryButtonList, setCategoryButtonList] = useState<CategoryButtonType[]>([])
 
@@ -78,8 +83,6 @@ export const CommunityScreen = () => {
             console.log(error)
         })
 
-
-
     }, [])
 
 
@@ -105,7 +108,8 @@ export const CommunityScreen = () => {
 
         getPostList(category.id).then((data) => {
             setListViewState("Loaded"); 
-            setDataList(data)
+            // setDataList(data)
+            dispatch(setPostList(data))
         }).catch((error) => {
             setListViewState("Error"); 
             console.log(error);
@@ -113,6 +117,21 @@ export const CommunityScreen = () => {
         })
 
     }, [category]);
+
+    useEffect(() => {
+
+        setListViewState(() => "Loading")
+
+        getPostList(category.id).then((data) => {
+            setListViewState("Loaded"); 
+            dispatch(setPostList(data))
+        }).catch((error) => {
+            setListViewState("Error"); 
+            console.log(error);
+            
+        })
+
+    },[])
 
     const Background = styled.View`
         background-color: #AAA;
@@ -144,7 +163,7 @@ export const CommunityScreen = () => {
                     (<View>
                         <Text>Loading....</Text>
                     </View>) : 
-                    (<CommunityListView dataList={dataList} communityType={getCommunityType()}/>)
+                    (<CommunityListView dataList={postList} communityType={getCommunityType()}/>)
                 }
             </Container>
         </Background> 
