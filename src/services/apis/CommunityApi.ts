@@ -140,75 +140,75 @@ export const getPostList = async (category : number) : Promise<PostType[]> => {
 // }
 
 
-// export const getCommentList = async (postId : number) : Promise<CommentType[]> => {
-
-//   // console.log("token : " + EncryptedStorage.getItem("accessToken"))
-
-//   try {
-
-//       const params = {
-//           post : postId
-//       }
-
-//       const response = await axios.get(`${BASE_URL}/comment`, {params});
-
-//       // console.log(response)
-//       console.log(response.data.data)
-
-//       return response.data.data
-//   } catch (error) {
-//       console.error(error)
-//       return []
-//   }
-// }
-
-// Ui Text Code
 export const getCommentList = async (postId : number) : Promise<CommentType[]> => {
 
   // console.log("token : " + EncryptedStorage.getItem("accessToken"))
-    return [
-        {
-          id: 0,
-          user: 3,
-          post: 1,
-          comment: 0,
-          content: "This is Test Comment",
-          liked: 1,
-          commented: 0,
-          isLike: false,
-          userImg : "https://img.seoul.co.kr/img/upload/2016/01/04/SSI_20160104165944_O2.jpg",
-          createdAt: "2024-03-27T02:19:19.557Z",
-          updatedAt: "0000-00-00 00:00:00.000"
-        },
-        {
-          id: 1,
-          user: 4,
-          post: 0,
-          comment: 0,
-          content: "와 개쩐다",
-          liked: 6,
-          commented: 0,
-          isLike: true,
-          userImg : "https://img.seoul.co.kr/img/upload/2016/01/04/SSI_20160104165944_O2.jpg",
-          createdAt: "2024-03-28T02:19:19.557Z", // 한국 11시
-          updatedAt: "0000-00-00 00:00:00.000"
-        },
-        {
-          id: 2,
-          user: 5,
-          post: 0,
-          comment: 0,
-          content: "이... 이게 뭐누",
-          liked: 12,
-          commented: 0,
-          isLike: false,
-          userImg : "https://img.seoul.co.kr/img/upload/2016/01/04/SSI_20160104165944_O2.jpg",
-          createdAt: "2023-03-30T03:02:58.557Z",
-          updatedAt: "0000-00-00 00:00:00.000"
-        },
-    ]
 
+  try {
+
+      const params = {
+          post : postId
+      }
+
+      const response = await axios.get(`${BASE_URL}/comment`, {params});
+
+      // console.log(response)
+      console.log(response.data.data)
+
+      return response.data.data
+  } catch (error) {
+      console.error(error)
+      return []
+  }
 }
+
+// Ui Text Code
+// export const getCommentList = async (postId : number) : Promise<CommentType[]> => {
+
+//   // console.log("token : " + EncryptedStorage.getItem("accessToken"))
+//     return [
+//         {
+//           id: 0,
+//           user: 3,
+//           post: 1,
+//           comment: 0,
+//           content: "This is Test Comment",
+//           liked: 1,
+//           commented: 0,
+//           isLike: false,
+//           userImg : "https://img.seoul.co.kr/img/upload/2016/01/04/SSI_20160104165944_O2.jpg",
+//           createdAt: "2024-03-27T02:19:19.557Z",
+//           updatedAt: "0000-00-00 00:00:00.000"
+//         },
+//         {
+//           id: 1,
+//           user: 4,
+//           post: 0,
+//           comment: 0,
+//           content: "와 개쩐다",
+//           liked: 6,
+//           commented: 0,
+//           isLike: true,
+//           userImg : "https://img.seoul.co.kr/img/upload/2016/01/04/SSI_20160104165944_O2.jpg",
+//           createdAt: "2024-03-28T02:19:19.557Z", // 한국 11시
+//           updatedAt: "0000-00-00 00:00:00.000"
+//         },
+//         {
+//           id: 2,
+//           user: 5,
+//           post: 0,
+//           comment: 0,
+//           content: "이... 이게 뭐누",
+//           liked: 12,
+//           commented: 0,
+//           isLike: false,
+//           userImg : "https://img.seoul.co.kr/img/upload/2016/01/04/SSI_20160104165944_O2.jpg",
+//           createdAt: "2023-03-30T03:02:58.557Z",
+//           updatedAt: "0000-00-00 00:00:00.000"
+//         },
+//     ]
+
+// }
 
 export const removePost = async (id : number) => {
 
