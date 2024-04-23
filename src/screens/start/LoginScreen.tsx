@@ -8,6 +8,7 @@ import { LetsgoTextInput } from "../../components/textinput/LetsgoTextInput"
 import { LetsgoButton } from "../../components/button/LetsgoButton"
 import { login } from "../../services/apis/AuthApi"
 import { KeyboardAvoidingView } from "react-native"
+import { readUser } from "../../services/apis/UserApi"
 
 interface LoginScreenProps {
     navigation : any

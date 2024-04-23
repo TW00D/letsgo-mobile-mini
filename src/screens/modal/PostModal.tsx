@@ -66,7 +66,7 @@ const PostModal = () => {
                     <Spacer/>
                     <PostButton isPostabled={(title.length > 0) && (content.length > 0)} onPress={() => {
                         console.log("click button!");
-                        createPost({category: 1, title: "title", content: "content", picture: "picture"})
+                        createPost({category: 1, title: title, content: content, picture: ""})
                     }}/>
                 </ButtonFrame>
             </KeyboardAvoidingView>
