@@ -18,8 +18,8 @@ import Permissions from 'react-native-permissions';
 
 
 const PostModal = () => {
-    const [ theme, setTheme ] = useState('패션')
-    const [ category, setCategory ] = useState(2)
+    const [ theme, setTheme ] = useState('전체')
+    const [ category, setCategory ] = useState(1)
     const [ title, setTitle ] = useState('')
     const [ content, setContent ] = useState('')
 
