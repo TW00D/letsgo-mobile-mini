@@ -48,7 +48,7 @@ export const CommunityTopbar = (props : CommunityTopbarProps) => {
                 alignItems: 'center',
                 marginTop:10
             }}>                
-                <TouchableOpacity style={{flexDirection:"row", alignItems:"center"}} onPress={() => {onPress()}} >
+                <TouchableOpacity style={{flexDirection:"row", alignItems:"center"}} onPress={() => {/*onPress()*/}} >
                     <Text style={{fontSize:16, fontFamily:"pretendard_semibold", color:colors.text_gray_900}}>{getText()}</Text>
                     <Image 
                         source={require(switchIcon)}

@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { PostType } from "../../services/CommunityApi"
+import { PostType } from "../../services/apis/CommunityApi"
 
 
 
