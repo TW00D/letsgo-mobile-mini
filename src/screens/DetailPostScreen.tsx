@@ -10,9 +10,10 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { BottomSheetAndroid, ModalSlideFromBottomIOS } from "@react-navigation/stack/lib/typescript/src/TransitionConfigs/TransitionPresets";
 import { BaseTouchableOpacity } from "../components/button/BaseTouchableOpacity";
 import EncryptedStorage from 'react-native-encrypted-storage';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setPostList } from "../redux/slices/PostListSlice";
-import { CommentType, PostType, getCommentList, getPostList, getUserId, removePost } from "../services/apis/CommunityApi";
+import { CommentType, PostType, deleteLike, getCommentList, getPostList, getUserId, postLike, removePost } from "../services/apis/CommunityApi";
+import { RootState } from "../redux/store";
 
 const deviceWidth = Dimensions.get('window').width;
 
@@ -24,6 +25,8 @@ export type ModalOption = {
 }
 
 export const DetailPostScreen = () => {
+
+    // const category = useSelector((state : RootState ) => state.categorySlice.category)
 
     // const reportOption : ModalOption = { id : 1, text : "신고하기", action : () => {}, img : require('../assets/icon_search.png') }
     const removeOption : ModalOption = { 
@@ -47,6 +50,8 @@ export const DetailPostScreen = () => {
     const data = route.params
     const selectedItem : PostType = data.selectedItem
     const communityType : string = data.communityType
+
+    const [liked, setLiked] = useState(selectedItem.liked)
 
     const [imageWidth, setImageWidth] = useState(0);
     const [imageHeight, setImageHeight] = useState(0);
@@ -79,10 +84,31 @@ export const DetailPostScreen = () => {
         setImageHeight(height)
     }) 
 
+    const handlePostLike = () => {
+
+        setLiked((value) => isLikeState ? value-1 : value+1)
+        setLikeState(!isLikeState)
+
+        if(isLikeState) deleteLike(selectedItem.id)
+        else postLike(selectedItem.id)
+    }
+
+    // const handlePost = () => {
+
+    //     getPostList(category.id).then((data) => {
+            
+    //         // setDataList(data)
+    //         dispatch(setPostList(data))
+    //     }).catch((error) => {
+            
+    //         console.log(error);
+            
+    //     })
+    // }
+
     useEffect(() => {
 
         EncryptedStorage.getItem("userId").then((userId) => {
-
 
             if(userId == String(selectedItem.user)) {
                 setModalOptions([shareOption, removeOption])
@@ -137,7 +163,7 @@ export const DetailPostScreen = () => {
                     <Text style={{fontFamily:"pretendard_regular", fontSize:16, color:colors.text_gray_900}}>{selectedItem.content}</Text>
 
                     <View style={{flexDirection:'row', justifyContent:'flex-end', marginVertical:10}}>
-                        <BaseTouchableOpacity onPress = {() => {setLikeState(!isLikeState)}} style={{flexDirection:'row', backgroundColor:colors.line_gray_50, paddingHorizontal:16, paddingVertical:9, borderRadius:1000}}>
+                        <BaseTouchableOpacity onPress = {() => {handlePostLike()}} style={{flexDirection:'row', backgroundColor:colors.line_gray_50, paddingHorizontal:16, paddingVertical:9, borderRadius:1000}}>
                             <Image 
                                 source={ isLikeState ? require('../assets/images/icon_heart_filled.png') : require('../assets/images/icon_heart.png')}
                                 style={{
@@ -145,7 +171,7 @@ export const DetailPostScreen = () => {
                                     width:20
                                 }}
                             />
-                            <Text style={{fontFamily:'pretendard_light', fontSize:14, color:colors.text_gray_900, marginStart:8}}>{selectedItem.liked}</Text>
+                            <Text style={{fontFamily:'pretendard_light', fontSize:14, color:colors.text_gray_900, marginStart:8}}>{liked}</Text>
                         </BaseTouchableOpacity>
 
                         <BaseTouchableOpacity onPress = {() => {setModalVisible(!isModalVisible)}} style={{marginStart:8, flexDirection:'row', alignItems:'center', backgroundColor:colors.line_gray_50, paddingHorizontal:10.5, paddingVertical:17.5, borderRadius:1000}}>
@@ -160,7 +186,7 @@ export const DetailPostScreen = () => {
                     </View>
                 </View>
 
-                <CommunityCommentList onLikeClick={() => {}} commentList={commentList}></CommunityCommentList>
+                <CommunityCommentList commentList={commentList}></CommunityCommentList>
 
             </ScrollView>
    
