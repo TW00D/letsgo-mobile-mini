@@ -16,7 +16,7 @@ export const TopBarButton = () => {
     const dispatch = useDispatch();
 
     const SelectButton = styled.TouchableOpacity<SelectButtonProps>`
-        background-color: ${props => props.type === viewType ? colors.violet : colors.gray_50};
+        background-color: ${props => props.type === viewType ? colors.violet : colors.line_gray_50};
         flex:14;
         height: auto;
         justify-content: center;

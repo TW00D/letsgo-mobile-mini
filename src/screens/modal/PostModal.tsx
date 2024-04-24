@@ -9,11 +9,17 @@ import TitleTextInput from "../../components/textinput/TitleTextInput";
 import ContentTextInput from "../../components/textinput/ContentTextInput";
 import PostingThemeList from "../../components/PostingThemeList";
 import { PaddingView } from "../../utils/PaddingView";
-import { KeyboardAvoidingView, Platform, ScrollView, View } from "react-native";
+import { KeyboardAvoidingView, PermissionsAndroid, Platform, ScrollView, View } from "react-native";
 import { createPost } from "../../services/apis/PostApi";
+import GalleryIcon from "../../assets/icons/GalleryIcon";
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import Permissions from 'react-native-permissions';
+
+
 
 const PostModal = () => {
-    const [ theme, setTheme ] = useState('패션')
+    const [ theme, setTheme ] = useState('전체')
+    const [ category, setCategory ] = useState(1)
     const [ title, setTitle ] = useState('')
     const [ content, setContent ] = useState('')
 
@@ -38,20 +44,67 @@ const PostModal = () => {
                             placeholder="욕설, 비방 등 상대방을 불쾌하게 하는 게시물은 게시하지 말아주세요. 신고를 당하면 커뮤니티 이용이 제한될 수 있어요."/>
                     </PaddingView>
                 </ScrollView>
-                
+
                 <Spacer/>
                 
-                <ButtonFrame style={{marginBottom: 50}}>
+                {/** Button Frame */}
+                <ButtonFrame style={{marginBottom: 69}}>
+                    <GalleryIcon onPress={() => {
+                        console.log("onPress : Gallery Icon");
+                        // Permissions.check('camera').then(response => {
+                        //     if (response === 'authorized') {
+                        //         // Permission is already granted
+                        //     } else {
+                        //         Permissions.request('camera').then(response => {
+                        //             if (response === 'authorized') {
+                        //             // Permission is now granted
+                        //             } else {
+                        //             // Permission was denied
+                        //             }
+                        //         });
+                        //     }
+                        // });
+                        // openImagePicker()
+                    }}/>
                     <Spacer/>
                     <PostButton isPostabled={(title.length > 0) && (content.length > 0)} onPress={() => {
                         console.log("click button!");
-                        createPost({category: 1, title: "title", content: "content", picture: "picture"})
+                        if (theme == "패션") setCategory(2)
+                        else if (theme == "공부") setCategory(3)
+                        else if (theme == "덕질") setCategory(4)
+                        else if (theme == "애니") setCategory(5)
+                        else if (theme == "게임") setCategory(6)
+                        else if (theme == "연애") setCategory(7)
+                        else if (theme == "운동") setCategory(8)
+                        createPost({category: category, title: title, content: content, picture: ""})
                     }}/>
                 </ButtonFrame>
             </KeyboardAvoidingView>
         </Background>
     );
 }
+
+// const openImagePicker = () => {
+//     const options = {
+//         mediaType: 'photo' as any,
+//         includeBase64: false,
+//         maxHeight: 2000,
+//         maxWidth: 2000,
+//     };
+
+//     launchImageLibrary(options, (response) => {
+//         if (response.didCancel) {
+//             console.log('User cancelled image picker');
+//         } else if (response.error) {
+//             console.log('Image picker error: ', response.error);
+//         } else {
+//             // let imageUri = response.uri || response.assets?.[0]?.uri;
+//             // setSelectedImage(imageUri);
+//         }
+//     });
+// };
+
+export default PostModal;
 
 const Background = styled.View`
     flex: 1;
@@ -68,8 +121,9 @@ const Title = styled.Text`
 const ButtonFrame = styled.View`
     flex-direction: row;
     height: 72px;
-    justify-content: center;
+    align-items: center;
     margin-right: 16px;
+    margin-left: 24px;
 `
 
 const Line = styled.View`
@@ -79,5 +133,3 @@ const Line = styled.View`
     margin-top: 16px;
     margin-left: 16px;
 `
-
-export default PostModal;
