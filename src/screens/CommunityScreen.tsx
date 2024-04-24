@@ -12,7 +12,7 @@ import { StackNavigationProp } from "@react-navigation/stack"
 import { NavigationParamList } from "../navigation/NavigationParamList"
 import { RootState } from "../redux/store"
 import { getSampleList } from "../services/getSampleList"
-import { CategoryType, CommentType, PostType, getCategoryList, getPostList } from "../services/apis/CommunityApi"
+import { CategoryType, CommentType, PostType, getCategoryList, getPostList, getUserId } from "../services/apis/CommunityApi"
 import { CategoryButtonType } from "../components/CategorySelector"
 import { setPostList } from "../redux/slices/PostListSlice"
 
@@ -46,7 +46,7 @@ function getImage(isSelected: boolean, name : string) {
 export const CommunityScreen = () => {
 
     const communityType = useSelector((state : RootState ) => state.communityTypeSlice.communityType)
-    const viewType = useSelector((state : RootState ) => state.viewTypeSlice.viewType)
+    // const viewType = useSelector((state : RootState ) => state.viewTypeSlice.viewType)
     const category = useSelector((state : RootState ) => state.categorySlice.category)
     const postList = useSelector((state : RootState ) => state.postListSlice.postList)
 
@@ -82,6 +82,8 @@ export const CommunityScreen = () => {
         }).catch((error : any) => {
             console.log(error)
         })
+
+        getUserId()
 
     }, [])
 

@@ -5,7 +5,7 @@ interface CommunityTypeState {
 }
 
 const initialState : CommunityTypeState = {
-    communityType : "Total"
+    communityType : "Category"
 }
 
 export const communityTypeSlice = createSlice({

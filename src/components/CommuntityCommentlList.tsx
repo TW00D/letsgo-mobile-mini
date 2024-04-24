@@ -10,12 +10,11 @@ import CommentTextInput from "./textinput/CommentTextInput"
 import { useNavigation } from "@react-navigation/native"
 import { StackNavigationProp } from "@react-navigation/stack"
 import { NavigationParamList } from "../navigation/NavigationParamList"
-import { CommentType } from "../services/apis/CommunityApi"
+import { CommentType, deleteCommentLike, postCommentLike } from "../services/apis/CommunityApi"
 import { getDateDiff } from "../utils/getDateDiff"
 
 interface CommunityCommentListProps {
-    commentList : CommentType[],
-    onLikeClick : () => void,
+    commentList : CommentType[]
 }
 
 export const CommunityCommentList = (props : CommunityCommentListProps) => {
@@ -32,6 +31,16 @@ export const CommunityCommentList = (props : CommunityCommentListProps) => {
         const data = itemProps.item
 
         const [isLike, setLike] = useState(data.isLike)
+        const [liked, setLiked] = useState(data.liked)
+
+        const handleCommentLike = () => {
+
+            setLiked((value) => isLike ? value-1 : value+1)
+            setLike(!isLike)
+    
+            if(isLike) deleteCommentLike(data.id)
+            else postCommentLike(data.id)
+        }
 
         return <View style={{flex:1,flexDirection:'row', paddingVertical:10}}>
             <Image 
@@ -62,8 +71,7 @@ export const CommunityCommentList = (props : CommunityCommentListProps) => {
                 </View>
                 <Text style={{fontFamily:'pretendard_regular', fontSize:14, color:colors.text_gray_900}}>{data.content}</Text>
                 <TouchableOpacity onPress={() => {
-                    setLike(!isLike)
-                    props.onLikeClick()
+                    handleCommentLike()
                 }} style={{flexDirection:'row', marginTop:14}}>
                     <Image 
                         source={ isLike ? require('../assets/images/icon_heart_filled.png') : require('../assets/images/icon_heart.png')}
@@ -72,7 +80,7 @@ export const CommunityCommentList = (props : CommunityCommentListProps) => {
                             width:20
                         }}
                     />
-                    <Text style={{fontFamily:'pretendard_medium', fontSize:12, color:colors.text_gray_900, marginStart:7}}>{data.liked}</Text>
+                    <Text style={{fontFamily:'pretendard_medium', fontSize:12, color:colors.text_gray_900, marginStart:7}}>{liked}</Text>
                 </TouchableOpacity>
             </View>
         </View>
