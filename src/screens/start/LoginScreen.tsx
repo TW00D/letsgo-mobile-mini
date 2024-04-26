@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../../redux/store"
 import { setProfile } from "../../redux/slices/ProfileSlice"
 import { getUserId } from "../../services/apis/CommunityApi"
+import { readUser } from "../../services/apis/UserApi"
 
 interface LoginScreenProps {
     navigation : any
