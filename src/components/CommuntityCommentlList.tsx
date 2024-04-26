@@ -43,17 +43,19 @@ export const CommunityCommentList = (props : CommunityCommentListProps) => {
         }
 
         return <View style={{flex:1,flexDirection:'row', paddingVertical:10}}>
-            <Image 
-                source={{uri : /*data.profileUrl*/"asd"}}
-                style={{
-                    width:37,
-                    height:37,
-                    borderRadius:100
-                }}
-            />
+            {data.userImg && (
+                <Image 
+                    source={{uri : data.userImg}}
+                    style={{
+                        width:37,
+                        height:37,
+                        borderRadius:100
+                    }}
+                />
+            )}
             <View style={{flexDirection:'column',flex:1,marginStart:10}}> 
                 <View style={{flexDirection:'row', justifyContent:'space-between'}}>
-                    <Text style={{fontFamily:'pretendard_semibold', fontSize:16, color:colors.text_gray_900}}>{data.user} </Text>
+                    <Text style={{fontFamily:'pretendard_semibold', fontSize:16, color:colors.text_gray_900}}>{data.username} </Text>
                     <View style={{flexDirection:'row', alignItems:'center'}}>
                         <Text style={{fontFamily:'pretendard_light', fontSize:12, color:colors.hint_gray_300, marginEnd: 10}}>{getDateDiff(data.createdAt)}</Text>
                         <TouchableOpacity onPress={() => {}}> 

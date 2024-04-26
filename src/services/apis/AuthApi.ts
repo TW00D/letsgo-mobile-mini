@@ -4,26 +4,20 @@ import {Alert} from 'react-native';
 import EncryptedStorage from 'react-native-encrypted-storage';
 
 export const login = async (data: loginType, navigation: any) => {
-  await axios
-    .post(`${BASE_URL}/auth/login`, data)
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  //   try {
-  //     // GEUSS :
-  //     const response = await axios.post(`${BASE_URL}/auth/login`, data); // <-- ERROR : 애초에 서버에 전송 되지도 않음..
-  //     console.log('result : ' + response.data.data);
-  //     const {access_token, refresh_token} = response.data.data;
-  //     EncryptedStorage.setItem('accessToken', access_token);
-  //     EncryptedStorage.setItem('refreshToken', refresh_token);
-  //     navigation.navigate('BottomNavigationContainer');
-  //   } catch (error) {
-  //     handleApiError(error);
-  //   }
-};
+    try {
+        const response = await axios.post(`${BASE_URL}/auth/login`, data);
+        // console.log(response)
+        const { access_token, refresh_token } = response.data.data;
+        EncryptedStorage.setItem('accessToken', access_token);
+        EncryptedStorage.setItem('refreshToken', refresh_token);
+
+        navigation.navigate('BottomNavigationContainer');
+
+        // console.log(EncryptedStorage.getItem("accessToken"))
+    } catch (error) {
+        handleApiError(error);
+    }
+}
 
 export const register = async (data: registerType, navigation: any) => {
   try {

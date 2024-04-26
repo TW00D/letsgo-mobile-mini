@@ -5,11 +5,13 @@ import { useNavigation } from '@react-navigation/native';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import { err } from 'react-native-svg';
 
-export const readUser = async (data: readUserType) => {
+export const readUser = async (id: number) => {
     try {
         const token = await EncryptedStorage.getItem('accessToken')
-        const response = await axios.get(`${BASE_URL}/user/${data.username}`, {headers: {Authorization: "Bearer" + token}});
+        const response = await axios.get(`${BASE_URL}/user/${id}`, {headers: {Authorization: "Bearer" + token}});
         console.log(response.data);
+
+        return response.data
     } catch (error) {
         handleApiError(error);
     }
@@ -17,8 +19,4 @@ export const readUser = async (data: readUserType) => {
 
 const handleApiError = (error: any) => {
     console.error("Error sending data: ", error.response.data);
-}
-
-interface readUserType {
-  username: string,
 }

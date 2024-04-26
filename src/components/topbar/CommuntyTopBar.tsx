@@ -15,6 +15,7 @@ const TopBar = styled.View`
     background-color: #fff;
     padding-left: 4%;
     padding-right: 4%;
+    padding-bottom: 4%;
     z-index: 1;
 `
 
@@ -63,8 +64,8 @@ export const CommunityTopbar = (props : CommunityTopbarProps) => {
                 <Image 
                     source={require('../../assets/icon_search.png')}
                     style={{
-                        height:20,
-                        width:20
+                        height:0,
+                        width:0
                     }}
                 />
 
@@ -72,7 +73,8 @@ export const CommunityTopbar = (props : CommunityTopbarProps) => {
 
             {communityType === "Category" ? <CategorySelector categoryList={props.categoryList} /> : <View/>}
 
-            <TopBarButton/>          
+            {/* <TopBarButton/>           */}
+            
 
         </TopBar>
     )
