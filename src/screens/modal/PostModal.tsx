@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components/native";
 import ModalTopBar from "../../components/topbar/ModalTopBar";
 import { colors } from "../../assets/colors/colors";
@@ -12,16 +12,24 @@ import { PaddingView } from "../../utils/PaddingView";
 import { KeyboardAvoidingView, PermissionsAndroid, Platform, ScrollView, View } from "react-native";
 import { createPost } from "../../services/apis/PostApi";
 import GalleryIcon from "../../assets/icons/GalleryIcon";
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
-import Permissions from 'react-native-permissions';
+import { CategoryType, getCategoryList } from "../../services/apis/CommunityApi";
+import { CategoryButtonType } from "../../components/CategorySelector";
+import { getImage } from "../CommunityScreen";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
+import { setCategory } from "../../redux/slices/CategorySlice";
 
 
 
 const PostModal = () => {
-    const [ theme, setTheme ] = useState('전체')
-    const [ category, setCategory ] = useState(1)
+
+    const category = useSelector((state : RootState ) => state.categorySlice.category)
+
+    const [ theme, setTheme ] = useState(category.name)
     const [ title, setTitle ] = useState('')
     const [ content, setContent ] = useState('')
+
+    console.log("category : "+category.id);
 
     return (
         <Background>
@@ -29,8 +37,8 @@ const PostModal = () => {
                 behavior={Platform.OS === 'ios' ? 'padding' : undefined}
                 style={{flex: 1}}>
                 <ModalTopBar title="게시물 작성"/>
-                <ScrollView>
-                    <PostingThemeList selected={theme} setSelect={setTheme}/>
+                <ScrollView style={{ flex: 1 }}>
+
                     <TitleTextInput 
                         value={title}
                         setValue={setTitle} 
@@ -69,14 +77,14 @@ const PostModal = () => {
                     <Spacer/>
                     <PostButton isPostabled={(title.length > 0) && (content.length > 0)} onPress={() => {
                         console.log("click button!");
-                        if (theme == "패션") setCategory(2)
-                        else if (theme == "공부") setCategory(3)
-                        else if (theme == "덕질") setCategory(4)
-                        else if (theme == "애니") setCategory(5)
-                        else if (theme == "게임") setCategory(6)
-                        else if (theme == "연애") setCategory(7)
-                        else if (theme == "운동") setCategory(8)
-                        createPost({category: category, title: title, content: content, picture: ""})
+                        // if (theme == "패션") setCategory(2)
+                        // else if (theme == "공부") setCategory(3)
+                        // else if (theme == "덕질") setCategory(4)
+                        // else if (theme == "애니") setCategory(5)
+                        // else if (theme == "게임") setCategory(6)
+                        // else if (theme == "연애") setCategory(7)
+                        // else if (theme == "운동") setCategory(8)
+                        createPost({category: category.id, title: title, content: content, picture: ""})
                     }}/>
                 </ButtonFrame>
             </KeyboardAvoidingView>

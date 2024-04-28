@@ -26,8 +26,6 @@ interface CommunityTopbarProps {
 export const CommunityTopbar = (props : CommunityTopbarProps) => {
     const switchIcon = "../../assets/images/switch.svg"
 
-    
-
     const communityType = useSelector((state : RootState) => state.communityTypeSlice.communityType)
     const dispatch = useDispatch();
 
