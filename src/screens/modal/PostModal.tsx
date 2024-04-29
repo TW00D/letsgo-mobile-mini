@@ -9,19 +9,36 @@ import TitleTextInput from "../../components/textinput/TitleTextInput";
 import ContentTextInput from "../../components/textinput/ContentTextInput";
 import PostingThemeList from "../../components/PostingThemeList";
 import { PaddingView } from "../../utils/PaddingView";
-import { KeyboardAvoidingView, PermissionsAndroid, Platform, ScrollView, View } from "react-native";
+import { Image, KeyboardAvoidingView, PermissionsAndroid, Platform, ScrollView, View } from "react-native";
 import { createPost } from "../../services/apis/PostApi";
 import GalleryIcon from "../../assets/icons/GalleryIcon";
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import Permissions from 'react-native-permissions';
-
-
+import ImageCropPicker from 'react-native-image-crop-picker';
 
 const PostModal = () => {
     const [ theme, setTheme ] = useState('전체')
     const [ category, setCategory ] = useState(1)
     const [ title, setTitle ] = useState('')
     const [ content, setContent ] = useState('')
+    const [ imageSource, setImageSource ] = useState<string | undefined>('')
+    
+    // 갤러리 접근 코드
+    const getPhotos = async () => {
+        ImageCropPicker.openPicker({
+            multiple: false,
+            mediaType: 'photo',
+            includeBase64: true,
+            includeExif: true,
+        }).then(res => {
+            console.log("success : " + res.sourceURL);
+            setImageSource(res.sourceURL?.toString())
+        }).catch(err => {
+            console.error("failed : " + err);
+        })
+    };
+
+    // const path = 'file:///Users/stev3j/Library/Developer/CoreSimulator/Devices/00551580-CEB7-4407-9D96-8E53649032BC/data/Media/DCIM/100APPLE/IMG_0001.JPG'
 
     return (
         <Background>
@@ -29,6 +46,7 @@ const PostModal = () => {
                 behavior={Platform.OS === 'ios' ? 'padding' : undefined}
                 style={{flex: 1}}>
                 <ModalTopBar title="게시물 작성"/>
+                <Image source={{uri : imageSource}} />
                 <ScrollView>
                     <PostingThemeList selected={theme} setSelect={setTheme}/>
                     <TitleTextInput 
@@ -51,20 +69,7 @@ const PostModal = () => {
                 <ButtonFrame style={{marginBottom: 69}}>
                     <GalleryIcon onPress={() => {
                         console.log("onPress : Gallery Icon");
-                        // Permissions.check('camera').then(response => {
-                        //     if (response === 'authorized') {
-                        //         // Permission is already granted
-                        //     } else {
-                        //         Permissions.request('camera').then(response => {
-                        //             if (response === 'authorized') {
-                        //             // Permission is now granted
-                        //             } else {
-                        //             // Permission was denied
-                        //             }
-                        //         });
-                        //     }
-                        // });
-                        // openImagePicker()
+                        getPhotos()
                     }}/>
                     <Spacer/>
                     <PostButton isPostabled={(title.length > 0) && (content.length > 0)} onPress={() => {
@@ -76,13 +81,14 @@ const PostModal = () => {
                         else if (theme == "게임") setCategory(6)
                         else if (theme == "연애") setCategory(7)
                         else if (theme == "운동") setCategory(8)
-                        createPost({category: category, title: title, content: content, picture: ""})
+                        createPost({category: category, title: title, content: content, picture: imageSource})
                     }}/>
                 </ButtonFrame>
             </KeyboardAvoidingView>
         </Background>
     );
 }
+
 
 // const openImagePicker = () => {
 //     const options = {
