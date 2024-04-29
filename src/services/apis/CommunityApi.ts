@@ -28,7 +28,7 @@ export const getCategoryList = async () : Promise<CategoryType[]> => {
     try {
         const response = await axios.get(`${BASE_URL}/category`);
         // console.log(response)
-        console.log(response.data.data)
+        // console.log(response.data.data)
 
         return response.data.data
     } catch (error) {
@@ -50,7 +50,7 @@ export const getPostList = async (category : number) : Promise<PostType[]> => {
         const response = await axios.get(`${BASE_URL}/post`, {params});
 
         // console.log(response)
-        console.log(response.data.data)
+        // console.log(response.data.data)
 
         return response.data.data
     } catch (error) {
@@ -72,7 +72,7 @@ export const getCommentList = async (postId : number) : Promise<CommentType[]> =
       const response = await axios.get(`${BASE_URL}/comment`, {params});
 
       // console.log(response)
-      console.log(response.data.data)
+      // console.log(response.data.data)
 
       return response.data.data
   } catch (error) {
@@ -101,7 +101,7 @@ export const getUserId = async () => {
       const response = await axios.get(`${BASE_URL}/user/my-info`);
 
       // console.log(response)
-      console.log(response.data.data)
+      // console.log(response.data.data)
 
       return response.data.data
 
@@ -130,7 +130,7 @@ export const deleteLike = async (id : number) => {
   try {
       const response = await axios.delete(`${BASE_URL}/post/${id}/like`);
 
-      console.log(response)
+      // console.log(response)
 
   } catch (error) {
       console.error(error)
@@ -156,7 +156,7 @@ export const deleteCommentLike = async (id : number) => {
   try {
       const response = await axios.delete(`${BASE_URL}/comment/${id}/like`);
 
-      console.log(response)
+      // console.log(response)
 
   } catch (error) {
       console.error(error)

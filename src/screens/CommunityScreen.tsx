@@ -19,7 +19,7 @@ import { setCommunityType } from "../redux/slices/CommunityTypeSlice"
 import { setCategory } from "../redux/slices/CategorySlice"
 import { setProfile } from "../redux/slices/ProfileSlice"
 
-function getImage(isSelected: boolean, name : string) {
+export function getImage(isSelected: boolean, name : string) {
     if (name === "패션") {
         if (isSelected) return require('../assets/images/button_fashion_selected.png')
         else return require('../assets/images/button_fashion.png')
@@ -63,11 +63,13 @@ export const CommunityScreen = () => {
     const [categoryButtonList, setCategoryButtonList] = useState<CategoryButtonType[]>([])
 
     useEffect(() => {
+
+        console.log("category 1 : "+category.id);
         
         getCategoryList().then((data : CategoryType[]) => {
 
             // console.log(data)
-
+            
             let tempList : CategoryButtonType[] = []
 
             data.map((item) => {
@@ -135,11 +137,14 @@ export const CommunityScreen = () => {
     useFocusEffect(
         React.useCallback(() => {
 
+            console.log("category 2 : "+category.id);
+
             setListViewState(() => "Loading")
     
             getPostList(category.id).then((data) => {
                 setListViewState("Loaded"); 
                 dispatch(setPostList(data))
+                
             }).catch((error) => {
                 setListViewState("Error"); 
                 console.log(error);
