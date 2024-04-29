@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setPostList } from "../redux/slices/PostListSlice";
 import { CommentType, PostType, deleteLike, getCommentList, getPostList, getUserId, postLike, removePost } from "../services/apis/CommunityApi";
 import { RootState } from "../redux/store";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const deviceWidth = Dimensions.get('window').width;
 
@@ -139,9 +140,9 @@ export const DetailPostScreen = () => {
     }, [])
 
     return (
-        <View style={{flex:1,flexDirection : 'column'}}>
+        <SafeAreaView style={{flex:1, flexDirection : 'column', backgroundColor: 'white'}}>
             <View style={{backgroundColor:colors.white, height:'auto',flexDirection:'row', alignItems:"center", justifyContent:"space-between", paddingHorizontal:'3%', paddingVertical:4}}>
-                <BaseTouchableOpacity onPress={() => {navigation.pop()}} >   
+                <BaseTouchableOpacity onPress={() => {navigation.pop()}} >
                     <Image 
                         source={require('../assets/icon_arrow_left.png')}
                         style={{
@@ -236,6 +237,6 @@ export const DetailPostScreen = () => {
                 >
             </CommunityModal> */}
 
-        </View>
+        </SafeAreaView>
     )
 }

@@ -154,8 +154,8 @@ export const CommunityScreen = () => {
         },[])
     )
 
-    const Background = styled.View`
-        background-color: ${colors.line_gray_50};
+    const Background = styled.SafeAreaView`
+        background-color: #FFFFFF;
         flex : 1;
         
     `
