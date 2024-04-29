@@ -130,7 +130,7 @@ export const DetailPostScreen = () => {
     return (
         <SafeAreaView style={{flex:1, flexDirection : 'column', backgroundColor: 'white'}}>
             <View style={{backgroundColor:colors.white, height:'auto',flexDirection:'row', alignItems:"center", justifyContent:"space-between", paddingHorizontal:'3%', paddingVertical:4}}>
-                <BaseTouchableOpacity onPress={() => {navigation.pop()}} >   
+                <BaseTouchableOpacity onPress={() => {navigation.pop()}} >
                     <Image 
                         source={require('../assets/icon_arrow_left.png')}
                         style={{

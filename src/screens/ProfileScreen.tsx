@@ -43,7 +43,7 @@ export const ProfileScreen = () => {
 const logoutAlert = (navigation: any) => {
     Alert.alert(
         "정말 로그아웃 하시겠어요?",
-        "임시", [{
+        "", [{
             text: "아니요",
             style: "cancel"
         }, {
