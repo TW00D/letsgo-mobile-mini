@@ -43,6 +43,8 @@ export const DetailPostScreen = () => {
     // const shareOption : ModalOption = { id : 3, text : "수정하기", action : () => {}, img : require('../assets/icon_search.png') }
     const shareOption : ModalOption = { id : 4, text : "공유하기", action : () => {onShare()}, img : require('../assets/icon_search.png') }
 
+    const postList = useSelector((state : RootState ) => state.postListSlice.postList)
+    const profile = useSelector((state : RootState ) => state.profileSlice.profile)
 
     const navigation = useNavigation<StackNavigationProp<NavigationParamList>>()
 
@@ -90,6 +92,18 @@ export const DetailPostScreen = () => {
         setLiked((value) => isLikeState ? value-1 : value+1)
         setLikeState(!isLikeState)
 
+            
+        // const newList = postList.map((post : PostType) => {
+        //     if (post.id === id){
+        //         return {...post, liked : liked, isLike : isLikeState}
+        //     }
+        //     else {
+        //         return post
+        //     }
+        // })
+
+        // dispatch(setPostList(newList))
+
         if(isLikeState) deleteLike(selectedItem.id)
         else postLike(selectedItem.id)
     }
@@ -109,12 +123,10 @@ export const DetailPostScreen = () => {
 
     useEffect(() => {
 
-        EncryptedStorage.getItem("userId").then((userId) => {
-
-            if(userId == String(selectedItem.user)) {
-                setModalOptions([shareOption, removeOption])
-            }
-        })
+        
+        if(profile.id == selectedItem.user) {
+            setModalOptions([shareOption, removeOption])
+        }
 
         getCommentList(selectedItem.id).then((data : CommentType[]) => {
 

@@ -5,7 +5,7 @@ import { colors } from "../assets/colors/colors"
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
-import { NavigationContainer, useNavigation } from "@react-navigation/native"
+import { NavigationContainer, useFocusEffect, useNavigation } from "@react-navigation/native"
 import { CommunityListView } from "../components/CommunityListView"
 import { CommunityItemData } from "../types/CommunityItemData"
 import { StackNavigationProp } from "@react-navigation/stack"
@@ -15,8 +15,11 @@ import { getSampleList } from "../services/getSampleList"
 import { CategoryType, CommentType, PostType, getCategoryList, getPostList, getUserId } from "../services/apis/CommunityApi"
 import { CategoryButtonType } from "../components/CategorySelector"
 import { setPostList } from "../redux/slices/PostListSlice"
+import { setCommunityType } from "../redux/slices/CommunityTypeSlice"
+import { setCategory } from "../redux/slices/CategorySlice"
+import { setProfile } from "../redux/slices/ProfileSlice"
 
-function getImage(isSelected: boolean, name : string) {
+export function getImage(isSelected: boolean, name : string) {
     if (name === "패션") {
         if (isSelected) return require('../assets/images/button_fashion_selected.png')
         else return require('../assets/images/button_fashion.png')
@@ -49,6 +52,7 @@ export const CommunityScreen = () => {
     // const viewType = useSelector((state : RootState ) => state.viewTypeSlice.viewType)
     const category = useSelector((state : RootState ) => state.categorySlice.category)
     const postList = useSelector((state : RootState ) => state.postListSlice.postList)
+    const profile = useSelector((state : RootState ) => state.profileSlice.profile)
 
 
     const [listViewState, setListViewState] = useState("Loading");
@@ -59,11 +63,13 @@ export const CommunityScreen = () => {
     const [categoryButtonList, setCategoryButtonList] = useState<CategoryButtonType[]>([])
 
     useEffect(() => {
+
+        console.log("category 1 : "+category.id);
         
         getCategoryList().then((data : CategoryType[]) => {
 
             // console.log(data)
-
+            
             let tempList : CategoryButtonType[] = []
 
             data.map((item) => {
@@ -75,15 +81,23 @@ export const CommunityScreen = () => {
                 })
             })
 
-            // console.log(tempList)
-
             setCategoryButtonList(tempList)
+            dispatch(setCategory({name:tempList[0].name, id :tempList[0].id}))
 
         }).catch((error : any) => {
             console.log(error)
         })
 
-        getUserId()
+        
+        getUserId().then((profile) => {
+            dispatch(setProfile({
+                id : profile.id,
+                image : profile.image,
+                nickname : profile.nickname,
+                username : profile.username
+            }))
+        })
+
 
     }, [])
 
@@ -120,20 +134,25 @@ export const CommunityScreen = () => {
 
     }, [category]);
 
-    useEffect(() => {
+    useFocusEffect(
+        React.useCallback(() => {
 
-        setListViewState(() => "Loading")
+            console.log("category 2 : "+category.id);
 
-        getPostList(category.id).then((data) => {
-            setListViewState("Loaded"); 
-            dispatch(setPostList(data))
-        }).catch((error) => {
-            setListViewState("Error"); 
-            console.log(error);
-            
-        })
-
-    },[])
+            setListViewState(() => "Loading")
+    
+            getPostList(category.id).then((data) => {
+                setListViewState("Loaded"); 
+                dispatch(setPostList(data))
+                
+            }).catch((error) => {
+                setListViewState("Error"); 
+                console.log(error);
+                
+            })
+    
+        },[])
+    )
 
     const Background = styled.SafeAreaView`
         background-color: #FFFFFF;
@@ -142,7 +161,7 @@ export const CommunityScreen = () => {
     `
 
     const Container = styled.View`
-        background-color: #AAA;
+        background-color: ${colors.line_gray_50};
         flex : 15;
     `
 
@@ -162,9 +181,11 @@ export const CommunityScreen = () => {
             <Container>
 
                 { listViewState === "Loading" ? 
-                    (<View>
-                        <Text>Loading....</Text>
-                    </View>) : 
+                    (
+                        <View style={{flex:1,height:'100%', width:'100%', justifyContent:'center', alignItems:'center'}}>
+                            <Text style={{fontFamily:'pretendard_medium', fontSize:18}}>Loading....</Text>
+                        </View>
+                    ) : 
                     (<CommunityListView dataList={postList} communityType={getCommunityType()}/>)
                 }
             </Container>

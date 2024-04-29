@@ -7,6 +7,10 @@ import { StackNavigationProp } from "@react-navigation/stack"
 import { NavigationParamList } from "../navigation/NavigationParamList"
 import EncryptedStorage from "react-native-encrypted-storage"
 import { readUser } from "../services/apis/UserApi"
+import { useEffect, useState } from "react"
+import { getUserId } from "../services/apis/CommunityApi"
+import { useSelector } from "react-redux"
+import { RootState } from "../redux/store"
 
 // COMMENT: test
 
@@ -15,6 +19,8 @@ export const ProfileScreen = () => {
 
     const profileImagePath = '../assets/images/img_profile.png'
     const cautionIconPath = '../assets/images/img_caution.png'
+
+    const profile = useSelector((state : RootState ) => state.profileSlice.profile)
 
     return (
         <Background>
@@ -26,8 +32,8 @@ export const ProfileScreen = () => {
             </TopbarContainer>
             <ProfileContainer>
                 <ProfileImage source={require(profileImagePath)}/>
-                <TouchableOpacity onPress={() => {readUser({username: "jakkikki"})}}>
-                    <UserName>장충동왕족발보쌈</UserName>
+                <TouchableOpacity onPress={() => {}}>
+                    <UserName>{profile.nickname}</UserName>
                 </TouchableOpacity>
                 
             </ProfileContainer>
