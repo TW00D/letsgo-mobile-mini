@@ -135,8 +135,8 @@ export const CommunityScreen = () => {
 
     },[])
 
-    const Background = styled.View`
-        background-color: #AAA;
+    const Background = styled.SafeAreaView`
+        background-color: #FFFFFF;
         flex : 1;
         
     `
