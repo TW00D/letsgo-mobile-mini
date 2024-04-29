@@ -44,6 +44,7 @@ function getImage(isSelected: boolean, name : string) {
 }
 
 export const CommunityScreen = () => {
+    const navigation = useNavigation<StackNavigationProp<NavigationParamList>>(); 
 
     const communityType = useSelector((state : RootState ) => state.communityTypeSlice.communityType)
     // const viewType = useSelector((state : RootState ) => state.viewTypeSlice.viewType)
@@ -157,7 +158,11 @@ export const CommunityScreen = () => {
 
     return (
         <Background>
-            <CommunityTopbar categoryList={categoryButtonList}/>
+            <CommunityTopbar categoryList={categoryButtonList} onPress={() => {
+                // TODO : 실시간 트렌드 화면으로 이동
+                console.log("click");
+                navigation.navigate('Trand')
+            }}/>
 
             <Container>
 

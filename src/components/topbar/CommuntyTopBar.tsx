@@ -8,6 +8,8 @@ import { RootState } from "../../redux/store";
 import { setCommunityType } from "../../redux/slices/CommunityTypeSlice";
 import { CategoryButtonType, CategorySelector } from "../CategorySelector";
 import { CategoryType, getCategoryList } from "../../services/apis/CommunityApi";
+import StarIcon from "../../assets/icons/StarIcon";
+import { Spacer } from "../../utils/UtilViews";
 
 const TopBar = styled.View`
     flex-direction: column;
@@ -20,6 +22,7 @@ const TopBar = styled.View`
 
 interface CommunityTopbarProps {
     categoryList : CategoryButtonType[]
+    onPress: () => void
 } 
 
 export const CommunityTopbar = (props : CommunityTopbarProps) => {
@@ -44,7 +47,6 @@ export const CommunityTopbar = (props : CommunityTopbarProps) => {
         <TopBar>
             <View style={{
                 flexDirection:"row", 
-                justifyContent: "space-between",
                 alignItems: 'center',
                 marginTop:10
             }}>                
@@ -59,12 +61,16 @@ export const CommunityTopbar = (props : CommunityTopbarProps) => {
                         }}
                     />
                 </TouchableOpacity>
-                    
-                <Image 
+                
+                <Spacer/>
+
+                <StarIcon onPress={props.onPress}/>
+                <Image
                     source={require('../../assets/icon_search.png')}
                     style={{
                         height:20,
-                        width:20
+                        width:20,
+                        marginStart: 16
                     }}
                 />
 

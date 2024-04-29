@@ -12,6 +12,7 @@ import SignupPasswordScreen from './screens/signup/SignupPasswordScreen';
 import { DetailPostScreen } from './screens/DetailPostScreen';
 import PostModal from './screens/modal/PostModal';
 import CommentModal from './screens/modal/CommentModal';
+import TrandScreen from './screens/TrandScreen';
 
 
 const Container = styled.View`
@@ -39,6 +40,7 @@ const App = () => {
             <Stack.Screen name="DetailPost" component={DetailPostScreen} />
             <Stack.Screen name="PostModal" component={PostModal} options={{ presentation: 'modal' }}/>
             <Stack.Screen name="CommentModal" component={CommentModal} options={{ presentation: 'modal' }}/>
+            <Stack.Screen name='Trand' component={TrandScreen}/>
           </Stack.Navigator>
         </NavigationContainer>
       </Container>

@@ -10,4 +10,5 @@ export type NavigationParamList = {
     Community: undefined,
     BottomNavigationContainer: undefined,
     CommentModal: undefined,
+    Trand: undefined
 }
