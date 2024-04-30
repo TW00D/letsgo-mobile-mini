@@ -3,16 +3,19 @@ import { Spacer } from "../utils/UtilViews";
 import { colors } from "../assets/colors/colors";
 
 interface CharItemType {
-    item: any
+    item: any,
 }
 
 const ChartItem = ({item}: CharItemType) => {
+
+    // PROBLEM : 순위처리를 프론트에서 해야하는 건가?
+    
     return (
         <Frame>
-            <RankText>{item.rank}</RankText>
-            <Title>{item.keyword}</Title>
+            <RankText>1</RankText>  
+            <Title>{item.word}</Title>
             <Spacer/>
-            <AmountText>{item.amount}</AmountText>
+            <AmountText>{item.count}</AmountText>
         </Frame>
     );
 }

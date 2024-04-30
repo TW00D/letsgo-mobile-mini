@@ -1,4 +1,4 @@
-import { FlatList, SafeAreaView, Text, View } from "react-native";
+import { FlatList, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
 import LetsgoTopBar from "../components/topbar/LetsgoTopBar";
 import { Background } from "../utils/UtilViews";
 import { useNavigation } from "@react-navigation/native";
@@ -6,9 +6,22 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { NavigationParamList } from "../navigation/NavigationParamList";
 import styled from "styled-components/native";
 import ChartItem from "../components/ChartItem";
+import { getTrands } from "../services/apis/CommunityApi";
+import { useEffect, useState } from "react";
 
-const TrandScreen = () => {
+const TrandScreen =  () => {
     const navigation = useNavigation<StackNavigationProp<NavigationParamList>>(); 
+    const [ list, setList ] = useState([])
+    const [ rank, setRank ] = useState(1)
+
+    // PROBLEM : 렌더링이 여러번 되는 탓인지, 함수가 계속 사용됨.
+
+    useEffect(() => {
+        async function a() {
+            setList(await getTrands())
+        }
+        a();
+    })
 
     return (
         <Background>
@@ -16,9 +29,8 @@ const TrandScreen = () => {
             <Title>실시간 트렌드 차트</Title>
             <FlatList
                 style={{marginTop: 20}}
-                data={TEST_DATA}
+                data={list}
                 renderItem={(item) => renderItem(item)}
-                keyExtractor={item => item.rank}
             />
         </Background>
     );
@@ -35,33 +47,5 @@ const renderItem = ({item}: any) => {
         <ChartItem item={item}/>
     )
 }
-
-const TEST_DATA = [
-    {
-        rank: '1',
-        keyword: 'test',
-        amount: '1000'
-    },
-    {
-        rank: '2',
-        keyword: 'test',
-        amount: '1000'
-    },
-    {
-        rank: '3',
-        keyword: 'test',
-        amount: '1000'
-    },
-    {
-        rank: '4',
-        keyword: 'test',
-        amount: '1000'
-    },
-    {
-        rank: '5',
-        keyword: 'test',
-        amount: '1000'
-    }
-]
 
 export default TrandScreen;
