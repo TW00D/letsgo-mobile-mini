@@ -2,6 +2,16 @@ import axios from "axios";
 import { BASE_URL } from "../urls";
 import EncryptedStorage from 'react-native-encrypted-storage';
 
+export const getTrands = async () => {
+  try {
+    const response = await axios.get(`http://49.50.175.242:8082/v1/api/rank`);
+    console.log(response.data.top_words);
+    return response.data.top_words;
+  } catch (error) {
+    console.error(error);
+  }
+};
+// ''
 
 axios.interceptors.request.use(
     async (config) => {

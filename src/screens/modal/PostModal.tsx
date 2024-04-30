@@ -84,13 +84,13 @@ const PostModal = () => {
                     <Spacer/>
                     <PostButton isPostabled={(title.length > 0) && (content.length > 0)} onPress={() => {
                         console.log("click button!");
-                        if (theme == "패션") setCategory(2)
-                        else if (theme == "공부") setCategory(3)
-                        else if (theme == "덕질") setCategory(4)
-                        else if (theme == "애니") setCategory(5)
+                        if (theme == "애니") setCategory(2)
+                        else if (theme == "연애") setCategory(3)
+                        else if (theme == "운동") setCategory(4)
+                        else if (theme == "패션") setCategory(5)
                         else if (theme == "게임") setCategory(6)
-                        else if (theme == "연애") setCategory(7)
-                        else if (theme == "운동") setCategory(8)
+                        else if (theme == "공부") setCategory(7)
+                        else if (theme == "덕질") setCategory(8)
                         createPost({category: category, title: title, content: content, picture: imageSource})
                     }}/>
                 </ButtonFrame>
