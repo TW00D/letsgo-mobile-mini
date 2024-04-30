@@ -8,6 +8,10 @@ import { LetsgoTextInput } from "../../components/textinput/LetsgoTextInput"
 import { LetsgoButton } from "../../components/button/LetsgoButton"
 import { login } from "../../services/apis/AuthApi"
 import { KeyboardAvoidingView } from "react-native"
+import { useDispatch, useSelector } from "react-redux"
+import { RootState } from "../../redux/store"
+import { setProfile } from "../../redux/slices/ProfileSlice"
+import { getUserId } from "../../services/apis/CommunityApi"
 import { readUser } from "../../services/apis/UserApi"
 
 interface LoginScreenProps {
@@ -19,6 +23,8 @@ export const LoginScreen : React.FC<LoginScreenProps> = ({navigation}) => {
     const [ isPwdFilled, setIsPwdFilled ] = useState(false) // 임시
     const [ id, setId ] = useState('')
     const [ pwd, setPwd ] = useState('')
+
+    
 
     return (
         <Background>

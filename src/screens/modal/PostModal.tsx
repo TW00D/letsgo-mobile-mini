@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components/native";
 import ModalTopBar from "../../components/topbar/ModalTopBar";
 import { colors } from "../../assets/colors/colors";
@@ -12,13 +12,21 @@ import { PaddingView } from "../../utils/PaddingView";
 import { Image, KeyboardAvoidingView, PermissionsAndroid, Platform, ScrollView, View } from "react-native";
 import { createPost } from "../../services/apis/PostApi";
 import GalleryIcon from "../../assets/icons/GalleryIcon";
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import Permissions from 'react-native-permissions';
 import ImageCropPicker from 'react-native-image-crop-picker';
+import { CategoryType, getCategoryList } from "../../services/apis/CommunityApi";
+import { CategoryButtonType } from "../../components/CategorySelector";
+import { getImage } from "../CommunityScreen";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
+import { setCategory } from "../../redux/slices/CategorySlice";
+
 
 const PostModal = () => {
-    const [ theme, setTheme ] = useState('전체')
-    const [ category, setCategory ] = useState(1)
+
+    const category = useSelector((state : RootState ) => state.categorySlice.category)
+
+    const [ theme, setTheme ] = useState(category.name)
     const [ title, setTitle ] = useState('')
     const [ content, setContent ] = useState('')
     const [ imageSource, setImageSource ] = useState<string | undefined>('')
@@ -39,6 +47,8 @@ const PostModal = () => {
     };
 
     // const path = 'file:///Users/stev3j/Library/Developer/CoreSimulator/Devices/00551580-CEB7-4407-9D96-8E53649032BC/data/Media/DCIM/100APPLE/IMG_0001.JPG'
+
+    console.log("category : "+category.id);
 
     return (
         <Background>
@@ -88,27 +98,6 @@ const PostModal = () => {
         </Background>
     );
 }
-
-
-// const openImagePicker = () => {
-//     const options = {
-//         mediaType: 'photo' as any,
-//         includeBase64: false,
-//         maxHeight: 2000,
-//         maxWidth: 2000,
-//     };
-
-//     launchImageLibrary(options, (response) => {
-//         if (response.didCancel) {
-//             console.log('User cancelled image picker');
-//         } else if (response.error) {
-//             console.log('Image picker error: ', response.error);
-//         } else {
-//             // let imageUri = response.uri || response.assets?.[0]?.uri;
-//             // setSelectedImage(imageUri);
-//         }
-//     });
-// };
 
 export default PostModal;
 

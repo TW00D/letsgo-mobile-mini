@@ -17,6 +17,7 @@ const TopBar = styled.View`
     background-color: #fff;
     padding-left: 4%;
     padding-right: 4%;
+    padding-bottom: 4%;
     z-index: 1;
 `
 
@@ -27,8 +28,6 @@ interface CommunityTopbarProps {
 
 export const CommunityTopbar = (props : CommunityTopbarProps) => {
     const switchIcon = "../../assets/images/switch.svg"
-
-    
 
     const communityType = useSelector((state : RootState) => state.communityTypeSlice.communityType)
     const dispatch = useDispatch();
@@ -71,6 +70,8 @@ export const CommunityTopbar = (props : CommunityTopbarProps) => {
                         height:20,
                         width:20,
                         marginStart: 16
+                        height:0,
+                        width:0
                     }}
                 />
 
@@ -78,7 +79,8 @@ export const CommunityTopbar = (props : CommunityTopbarProps) => {
 
             {communityType === "Category" ? <CategorySelector categoryList={props.categoryList} /> : <View/>}
 
-            <TopBarButton/>          
+            {/* <TopBarButton/>           */}
+            
 
         </TopBar>
     )

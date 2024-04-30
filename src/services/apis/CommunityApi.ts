@@ -60,7 +60,7 @@ export const getPostList = async (category : number) : Promise<PostType[]> => {
         const response = await axios.get(`${BASE_URL}/post`, {params});
 
         // console.log(response)
-        console.log(response.data.data)
+        // console.log(response.data.data)
 
         return response.data.data
     } catch (error) {
@@ -111,12 +111,10 @@ export const getUserId = async () => {
       const response = await axios.get(`${BASE_URL}/user/my-info`);
 
       // console.log(response)
-      // console.log(response.data.data.id)
+      // console.log(response.data.data)
 
-      const userId = response.data.data.id
-      console.log(`userId  : ${userId}`)
+      return response.data.data
 
-      EncryptedStorage.setItem('userId', userId.toString());
 
   } catch (error) {
       console.error(error)
@@ -142,7 +140,7 @@ export const deleteLike = async (id : number) => {
   try {
       const response = await axios.delete(`${BASE_URL}/post/${id}/like`);
 
-      console.log(response)
+      // console.log(response)
 
   } catch (error) {
       console.error(error)
@@ -168,7 +166,7 @@ export const deleteCommentLike = async (id : number) => {
   try {
       const response = await axios.delete(`${BASE_URL}/comment/${id}/like`);
 
-      console.log(response)
+      // console.log(response)
 
   } catch (error) {
       console.error(error)
@@ -200,6 +198,7 @@ export type PostType = {
 
 export type CommentType = {
     id: number,
+    username : string,
     user: number,
     post: number,
     comment: number,

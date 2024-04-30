@@ -12,6 +12,8 @@ export const StartScreen = () => {
     const navigation = useNavigation<StackNavigationProp<NavigationParamList>>(); 
 
     useEffect(() => {
+
+
         EncryptedStorage.getItem('accessToken')
             .then(_accessToken => {
                 if (_accessToken != null) {

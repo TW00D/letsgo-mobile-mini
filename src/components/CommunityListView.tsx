@@ -63,15 +63,17 @@ export const CommunityListView = (props : CommunityListViewProps) => {
                     <Text style={{fontFamily:'pretendard_light', fontSize:12, color:colors.hint_gray_300}}>{item.user}</Text>
                 </View>
             </View>
-            <Image 
-                source={{uri : item.picture}}
-                style={{
-                    height:50,
-                    width:50,
-                    marginBottom:4,
-                    borderRadius:5
-                }}
-            />
+            {item.picture && (
+                <Image 
+                    source={{uri : item.picture}}
+                    style={{
+                        height:50,
+                        width:50,
+                        marginBottom:4,
+                        borderRadius:5
+                    }}
+                />
+            )}
             
         </TouchableOpacity>
     )
