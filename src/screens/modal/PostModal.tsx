@@ -20,35 +20,40 @@ import { getImage } from "../CommunityScreen";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { setCategory } from "../../redux/slices/CategorySlice";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { NavigationParamList } from "../../navigation/NavigationParamList";
 
 
-const PostModal = () => {
+const PostModal = () => {ImageCropPicker
+    const navigation = useNavigation<StackNavigationProp<NavigationParamList>>(); 
 
-    const category = useSelector((state : RootState ) => state.categorySlice.category)
+    // const category = useSelector((state : RootState ) => state.categorySlice.category)
 
-    const [ theme, setTheme ] = useState(category.name)
+    // const [ theme, setTheme ] = useState(category.name)
+    const [ theme, setTheme ] = useState('전체')
+    const [ category, setCategory ] = useState(1)
     const [ title, setTitle ] = useState('')
     const [ content, setContent ] = useState('')
     const [ imageSource, setImageSource ] = useState<string | undefined>('')
     
-    // 갤러리 접근 코드
+    // 갤러리 접근 코드 -> PROBLEM : 앱이 꺼짐 (근데 왜 꺼지는 지 모르겠음..)
     const getPhotos = async () => {
-        // ImageCropPicker.openPicker({
-        //     multiple: false,
-        //     mediaType: 'photo',
-        //     includeBase64: true,
-        //     includeExif: true,
-        // }).then(res => {
-        //     console.log("success : " + res.sourceURL);
-        //     setImageSource(res.sourceURL?.toString())
-        // }).catch(err => {
-        //     console.error("failed : " + err);
-        // })
+        ImageCropPicker.openPicker({
+            multiple: false,
+            mediaType: 'photo',
+            includeBase64: true,
+            includeExif: true,
+        }).then(res => {
+            console.log("success : " + res.sourceURL);
+            setImageSource(res.sourceURL?.toString())
+        }).catch(err => {
+            console.error("failed : " + err);
+        })
     };
 
     // const path = 'file:///Users/stev3j/Library/Developer/CoreSimulator/Devices/00551580-CEB7-4407-9D96-8E53649032BC/data/Media/DCIM/100APPLE/IMG_0001.JPG'
 
-    console.log("category : "+category.id);
+    // console.log("category : "+category.id);
 
     return (
         <Background>
@@ -84,14 +89,14 @@ const PostModal = () => {
                     <Spacer/>
                     <PostButton isPostabled={(title.length > 0) && (content.length > 0)} onPress={() => {
                         console.log("click button!");
-                        // if (theme == "애니") setCategory(2)
-                        // else if (theme == "연애") setCategory(3)
-                        // else if (theme == "운동") setCategory(4)
-                        // else if (theme == "패션") setCategory(5)
-                        // else if (theme == "게임") setCategory(6)
-                        // else if (theme == "공부") setCategory(7)
-                        // else if (theme == "덕질") setCategory(8)
-                        createPost({category: category, title: title, content: content, picture: imageSource})
+                        if (theme == "애니") setCategory(2)
+                        else if (theme == "연애") setCategory(3)
+                        else if (theme == "운동") setCategory(4)
+                        else if (theme == "패션") setCategory(5)
+                        else if (theme == "게임") setCategory(6)
+                        else if (theme == "공부") setCategory(7)
+                        else if (theme == "덕질") setCategory(8)
+                        createPost({category: category, title: title, content: content, picture: imageSource}, navigation)
                     }}/>
                 </ButtonFrame>
             </KeyboardAvoidingView>
