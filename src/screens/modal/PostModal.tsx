@@ -33,17 +33,17 @@ const PostModal = () => {
     
     // 갤러리 접근 코드
     const getPhotos = async () => {
-        ImageCropPicker.openPicker({
-            multiple: false,
-            mediaType: 'photo',
-            includeBase64: true,
-            includeExif: true,
-        }).then(res => {
-            console.log("success : " + res.sourceURL);
-            setImageSource(res.sourceURL?.toString())
-        }).catch(err => {
-            console.error("failed : " + err);
-        })
+        // ImageCropPicker.openPicker({
+        //     multiple: false,
+        //     mediaType: 'photo',
+        //     includeBase64: true,
+        //     includeExif: true,
+        // }).then(res => {
+        //     console.log("success : " + res.sourceURL);
+        //     setImageSource(res.sourceURL?.toString())
+        // }).catch(err => {
+        //     console.error("failed : " + err);
+        // })
     };
 
     // const path = 'file:///Users/stev3j/Library/Developer/CoreSimulator/Devices/00551580-CEB7-4407-9D96-8E53649032BC/data/Media/DCIM/100APPLE/IMG_0001.JPG'
@@ -84,13 +84,13 @@ const PostModal = () => {
                     <Spacer/>
                     <PostButton isPostabled={(title.length > 0) && (content.length > 0)} onPress={() => {
                         console.log("click button!");
-                        if (theme == "애니") setCategory(2)
-                        else if (theme == "연애") setCategory(3)
-                        else if (theme == "운동") setCategory(4)
-                        else if (theme == "패션") setCategory(5)
-                        else if (theme == "게임") setCategory(6)
-                        else if (theme == "공부") setCategory(7)
-                        else if (theme == "덕질") setCategory(8)
+                        // if (theme == "애니") setCategory(2)
+                        // else if (theme == "연애") setCategory(3)
+                        // else if (theme == "운동") setCategory(4)
+                        // else if (theme == "패션") setCategory(5)
+                        // else if (theme == "게임") setCategory(6)
+                        // else if (theme == "공부") setCategory(7)
+                        // else if (theme == "덕질") setCategory(8)
                         createPost({category: category, title: title, content: content, picture: imageSource})
                     }}/>
                 </ButtonFrame>
