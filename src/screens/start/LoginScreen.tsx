@@ -55,8 +55,8 @@ export const LoginScreen : React.FC<LoginScreenProps> = ({navigation}) => {
                 <Spacer/>
                 <LetsgoButton title="레츠고!" isAbled={isIdFilled && isPwdFilled} onPress={() => {
                     // navigation.navigate('BottomNavigationContainer')
-                    login({username: 'jakkikki', password: 'asdfqwer1234'}, navigation)
-                    // login({username: id, password: pwd}, navigation)
+                    // login({username: 'jsw613613', password: 'jsw613613'}, navigation)
+                    login({username: id, password: pwd}, navigation)
                     }}/>
             </KeyboardAvoidingView>
         </Background>

@@ -20,20 +20,25 @@ import { getImage } from "../CommunityScreen";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { setCategory } from "../../redux/slices/CategorySlice";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { NavigationParamList } from "../../navigation/NavigationParamList";
 
 
-const PostModal = () => {
+const PostModal = () => {ImageCropPicker
+    const navigation = useNavigation<StackNavigationProp<NavigationParamList>>(); 
 
-    const category = useSelector((state : RootState ) => state.categorySlice.category)
+    // const category = useSelector((state : RootState ) => state.categorySlice.category)
 
-    const [ theme, setTheme ] = useState(category.name)
+    // const [ theme, setTheme ] = useState(category.name)
+    const [ theme, setTheme ] = useState('전체')
+    const [ category, setCategory ] = useState(1)
     const [ title, setTitle ] = useState('')
     const [ content, setContent ] = useState('')
     const [ imageSource, setImageSource ] = useState<string | undefined>('')
     
-    // 갤러리 접근 코드
+    // 갤러리 접근 코드 -> PROBLEM : 앱이 꺼짐 (근데 왜 꺼지는 지 모르겠음..)
     const getPhotos = async () => {
-        ImageCropPicker.openPicker({
+        await ImageCropPicker.openPicker({
             multiple: false,
             mediaType: 'photo',
             includeBase64: true,
@@ -48,7 +53,7 @@ const PostModal = () => {
 
     // const path = 'file:///Users/stev3j/Library/Developer/CoreSimulator/Devices/00551580-CEB7-4407-9D96-8E53649032BC/data/Media/DCIM/100APPLE/IMG_0001.JPG'
 
-    console.log("category : "+category.id);
+    // console.log("category : "+category.id);
 
     return (
         <Background>
@@ -56,7 +61,6 @@ const PostModal = () => {
                 behavior={Platform.OS === 'ios' ? 'padding' : undefined}
                 style={{flex: 1}}>
                 <ModalTopBar title="게시물 작성"/>
-                <Image source={{uri : imageSource}} />
                 <ScrollView>
                     <PostingThemeList selected={theme} setSelect={setTheme}/>
                     <TitleTextInput 
@@ -65,6 +69,11 @@ const PostModal = () => {
                         placeholder={`(${theme}) 제목을 입력하세요`}/>
                     <Line/>
                     <View style={{height: 8}}/>
+
+                    <PaddingView>
+                        <MyImage source={{uri:imageSource}} imageSource={imageSource} />
+                    </PaddingView>
+
                     <PaddingView>
                         <ContentTextInput 
                             value={content}
@@ -75,7 +84,6 @@ const PostModal = () => {
 
                 <Spacer/>
                 
-                {/** Button Frame */}
                 <ButtonFrame style={{marginBottom: 69}}>
                     <GalleryIcon onPress={() => {
                         console.log("onPress : Gallery Icon");
@@ -91,7 +99,7 @@ const PostModal = () => {
                         else if (theme == "게임") setCategory(6)
                         else if (theme == "공부") setCategory(7)
                         else if (theme == "덕질") setCategory(8)
-                        createPost({category: category, title: title, content: content, picture: imageSource})
+                        createPost({category: category, title: title, content: content, picture: imageSource}, navigation)
                     }}/>
                 </ButtonFrame>
             </KeyboardAvoidingView>
@@ -100,6 +108,19 @@ const PostModal = () => {
 }
 
 export default PostModal;
+
+const Name = styled.Text<{isNewMessage: boolean}>`
+    font-size: 16px;
+    font-family: ${({isNewMessage}) => isNewMessage ? 'pretendard-semibold' : 'pretendard-regular'};
+`
+
+const MyImage = styled.Image<{imageSource: string | undefined}>`
+    margin-top: ${({imageSource}) => imageSource == '' ? 0 : 8};
+    margin-bottom: ${({imageSource}) => imageSource == '' ? 0 : 8};
+    width: 100%;
+    height: ${({imageSource}) => imageSource == '' ? 0 : 300};
+    border-radius: 8px;
+`
 
 const Background = styled.View`
     flex: 1;

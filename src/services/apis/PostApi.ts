@@ -5,11 +5,12 @@ import { useNavigation } from '@react-navigation/native';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import { err } from 'react-native-svg';
 
-export const createPost = async (data: createPostType) => {
+export const createPost = async (data: createPostType, navigation: any) => {
     try {
         const token = await EncryptedStorage.getItem('accessToken')
         const response = await axios.post(`${BASE_URL}/post`, data, {headers: {Authorization: "Bearer" + token}});
         console.log(response.data);
+        navigation.goBack()
     } catch (error) {
         handleApiError(error);
     }

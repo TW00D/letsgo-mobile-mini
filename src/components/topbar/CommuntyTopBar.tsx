@@ -69,9 +69,9 @@ export const CommunityTopbar = (props : CommunityTopbarProps) => {
                     style={{
                         height:20,
                         width:20,
-                        marginStart: 16
-                        height:0,
-                        width:0
+                        marginStart: 16,
+                        // height:0,
+                        // width:0
                     }}
                 />
 
