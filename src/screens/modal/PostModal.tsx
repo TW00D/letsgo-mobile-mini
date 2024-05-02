@@ -38,7 +38,7 @@ const PostModal = () => {ImageCropPicker
     
     // 갤러리 접근 코드 -> PROBLEM : 앱이 꺼짐 (근데 왜 꺼지는 지 모르겠음..)
     const getPhotos = async () => {
-        ImageCropPicker.openPicker({
+        await ImageCropPicker.openPicker({
             multiple: false,
             mediaType: 'photo',
             includeBase64: true,
@@ -61,7 +61,6 @@ const PostModal = () => {ImageCropPicker
                 behavior={Platform.OS === 'ios' ? 'padding' : undefined}
                 style={{flex: 1}}>
                 <ModalTopBar title="게시물 작성"/>
-                <Image source={{uri : imageSource}} />
                 <ScrollView>
                     <PostingThemeList selected={theme} setSelect={setTheme}/>
                     <TitleTextInput 
@@ -70,6 +69,11 @@ const PostModal = () => {ImageCropPicker
                         placeholder={`(${theme}) 제목을 입력하세요`}/>
                     <Line/>
                     <View style={{height: 8}}/>
+
+                    <PaddingView>
+                        <MyImage source={{uri:imageSource}} imageSource={imageSource} />
+                    </PaddingView>
+
                     <PaddingView>
                         <ContentTextInput 
                             value={content}
@@ -80,7 +84,6 @@ const PostModal = () => {ImageCropPicker
 
                 <Spacer/>
                 
-                {/** Button Frame */}
                 <ButtonFrame style={{marginBottom: 69}}>
                     <GalleryIcon onPress={() => {
                         console.log("onPress : Gallery Icon");
@@ -105,6 +108,19 @@ const PostModal = () => {ImageCropPicker
 }
 
 export default PostModal;
+
+const Name = styled.Text<{isNewMessage: boolean}>`
+    font-size: 16px;
+    font-family: ${({isNewMessage}) => isNewMessage ? 'pretendard-semibold' : 'pretendard-regular'};
+`
+
+const MyImage = styled.Image<{imageSource: string | undefined}>`
+    margin-top: ${({imageSource}) => imageSource == '' ? 0 : 8};
+    margin-bottom: ${({imageSource}) => imageSource == '' ? 0 : 8};
+    width: 100%;
+    height: ${({imageSource}) => imageSource == '' ? 0 : 300};
+    border-radius: 8px;
+`
 
 const Background = styled.View`
     flex: 1;
