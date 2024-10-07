@@ -1,2 +1,2 @@
 
-# Letsgo Mobile 버전입니다.
+# 레츠고 Mobile 입니다.
